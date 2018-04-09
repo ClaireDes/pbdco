@@ -9,6 +9,8 @@ package pbdco;
  *
  * @author milcenan
  */
-public class Modele {
+public interface Modele {
+    public void majBD();
+    public void chargementDepuisBd(int code);
     
 }
