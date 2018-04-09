@@ -10,15 +10,28 @@ package pbdco.partie;
  * @author belinbr
  */
 public class Position {
-    int x,y;
+    public final int x,y;
     
     /*vérifie que les coordonnées des positions sont comprises entre 1 et 8*/
-    int verifyPosition(Position position){
+    public int verifyPosition(Position position){
         if ((((1 <= position.x) && (position.x <= 8)) && (1 <= position.y)) && (position.y <= 8)){
             return 1;
         }
         else{
             return 0;
         }
+    }
+    
+    public Position(int x, int y){
+        this.x=x;
+        this.y=y;
+    }
+    
+    public int getX(){
+        return this.x;
+    }
+    
+    public int getY(){
+        return this.y;
     }
 }

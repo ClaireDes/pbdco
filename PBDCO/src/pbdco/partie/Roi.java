@@ -9,13 +9,10 @@ package pbdco.partie;
  *
  * @author belinbr
  */
-public class PBDCO {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+public class Roi extends Piece{
+    public String nomPiece = "roi";
     
+    public Roi(){
+        this.nomPiece="roi";
+    }
 }
