@@ -1,4 +1,9 @@
 //Lucas
+DROP TABLE Joueur;
+DROP TABLE Rencontre;
+DROP TABLE Tour;
+DROP TABLE Piece;
+DROP TABLE Coup;
 
 CREATE TABLE Joueur (
   codeJoueur INT NOT NULL PRIMARY KEY,
@@ -41,13 +46,13 @@ CREATE TABLE Piece(
   codeTour CHAR(20) NOT NULL,
   PRIMARY KEY (codePiece, codeRencontre, codeTour),
   FOREIGN KEY (codeRencontre, codeTour)  REFERENCES Rencontre(codeRencontre, codeTour),
-  CHECK ((couleur='blanc' AND typePiece='pion')AND (ligneFin=ligneInit+1)),
-  CHECK ((couleur='noir' AND typePiece='pion')AND (ligneFin=ligneInit-1)),
-  CONSTRAINT Ktour CHECK ((typePiece='tour') AND ((ligneFin!=ligneInit AND colonneFin=colonneInit) OR ( ligneFin=ligneInit AND colonneFin!=colonneInit))),
-  CONSTRAINT Kfou CHECK ((typePiece='fou') AND (ABS(ligneFin-ligneInit)=ABS(colonneFin-colonneInit))),
-  CHECK ((typePiece='cavalier') AND ((ABS(ligneFin-ligneInit)=1 AND ABS(colonneFin-colonneInit)=2) OR (ABS(ligneFin-ligneInit)=2 AND ABS(colonneFin-colonneInit)=1))),
-  CHECK ((typePiece='roi') AND ((ABS(ligneFin-ligneInit)<2 AND ABS(colonneFin-colonneInit)<2))),
-  CHECK ((typePiece='reine') AND (Ktour OR Kfou))
+  CONSTRAINT Kuniq UNIQUE (ligneInit,colonneInit),
+  CONSTRAINT Kpion CHECK ((typePiece!='pion') OR ((couleur='blanc' AND (ligneFin=ligneInit+1)) OR ((couleur='noir' AND (ligneFin=ligneInit-1))))),
+  CONSTRAINT Ktour CHECK ((typePiece!='tour') OR ((ligneFin!=ligneInit AND colonneFin=colonneInit) OR ( ligneFin=ligneInit AND colonneFin!=colonneInit))),
+  CONSTRAINT Kfou CHECK ((typePiece!='fou') OR (ABS(ligneFin-ligneInit)=ABS(colonneFin-colonneInit))),
+  CONSTRAINT Kcavalier CHECK ((typePiece!='cavalier') OR ((ABS(ligneFin-ligneInit)=1 AND ABS(colonneFin-colonneInit)=2) OR (ABS(ligneFin-ligneInit)=2 AND ABS(colonneFin-colonneInit)=1))),
+  CONSTRAINT Kroi CHECK ((typePiece!='roi') OR ((ABS(ligneFin-ligneInit)<2 AND ABS(colonneFin-colonneInit)<2))),
+  CONSTRAINT Kreine CHECK ((typePiece!='reine') OR (((ligneFin!=ligneInit AND colonneFin=colonneInit) OR ( ligneFin=ligneInit AND colonneFin!=colonneInit)) OR (ABS(ligneFin-ligneInit)=ABS(colonneFin-colonneInit))))
 );
 
 CREATE TABLE Coup (
@@ -61,3 +66,12 @@ CREATE TABLE Coup (
   PRIMARY KEY (codeCoup, codeRencontre, codeTour),
   FOREIGN KEY (codeRencontre, codeTour) REFERENCES Rencontre(codeRencontre, codeTour)
 );
+
+
+tests :
+INSERT INTO Tour VALUES('qualif');
+insert into Joueur values(1,'Lucas','GRELLIER','lucas@gmail.com');
+  insert into Joueur values(2,'Quentin','RAVENET','quentin@gmail.com');
+    UPDATE Rencontre SET blanc=1, noir=2;
+    insert into Piece values(1,2,1,null,null,'pion','blanc',1,'qualif')
+      insert into Piece values(2,7,1,null,null,'pion','noir',1,'qualif')
