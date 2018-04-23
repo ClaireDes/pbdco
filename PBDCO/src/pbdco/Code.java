@@ -9,8 +9,18 @@ package pbdco;
  *
  * @author milcenan
  */
-public interface Modele {
-    public void majBD();
-    public void chargementDepuisBd(int code);
+public class Code {
+    private int value;
+    
+    public Code(int i){
+        this.value = i;
+    }
+    public int getValue(){
+        return value;
+    }
+    public void setValue(int i){
+        this.value=i;
+    }
+    
     
 }

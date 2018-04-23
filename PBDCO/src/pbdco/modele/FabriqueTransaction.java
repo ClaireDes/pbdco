@@ -9,8 +9,8 @@ package pbdco;
  *
  * @author milcenan
  */
-public interface Modele {
-    public void majBD();
-    public void chargementDepuisBd(int code);
-    
+public abstract class FabriqueTransaction {
+        public abstract void fabriqueTransaction(String operation,Modele param);
+        
+        public abstract void fabriqueRequete();
 }

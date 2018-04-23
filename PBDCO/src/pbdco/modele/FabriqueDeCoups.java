@@ -3,23 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pbdco.partie;
+package pbdco;
 
 /**
  *
- * @author belinbr
+ * @author milcenan
  */
-public class Roi extends Piece{
-    private String nomPiece = "roi";
-    
-    public Roi(Position position, Boolean c){
-        this.nomPiece="roi";
-        this.updatePosition(position);
-        this.setCouleur(c);
-    }
+public class FabriqueDeCoups/* extends FabriqueTransaction*/{
+  
+   
+    public  void fabriqueRequete(){
+        throw new UnsupportedOperationException("Not supported yet.");
+    };    
 
-    @Override
-    public Boolean verifySituation() {
+
+    public void fabriqueTransaction(String operation, Object param) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }
+
