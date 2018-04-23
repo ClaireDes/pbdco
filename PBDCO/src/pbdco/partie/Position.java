@@ -10,22 +10,9 @@ package pbdco.partie;
  * @author belinbr
  */
 public class Position {
-    public int x,y;
-    
-    /*vérifie que les coordonnées des positions sont comprises entre 1 et 8*/
-    public int verifyPosition(Position position){
-        if ((((1 <= position.x) && (position.x <= 8)) && (1 <= position.y)) && (position.y <= 8)){
-            return 1;
-        }
-        else{
-            return 0;
-        }
-    }
-    
-    public Position(int x, int y){
-        this.x=x;
-        this.y=y;
-    }
+    private int x=1;
+    private int y=1;
+    private Boolean state; //true pour case occupée, false sinon
     
     public int getX(){
         return this.x;
@@ -33,5 +20,37 @@ public class Position {
     
     public int getY(){
         return this.y;
+    }
+ 
+    public Boolean getState(){
+        return this.state;
+    }
+    
+    public void setPosition(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
+    
+    public void setPositionX(int x){
+        this.x = x;
+    }
+    
+    public void setPositionY(int y){
+        this.y = y;
+    }
+    
+    public void setState(Boolean state){
+        this.state = state;
+    }
+    
+    public Position(int x, int y, Boolean state){
+        this.x = x;
+        this.y = y;
+        this.state = state;
+    }
+    
+    public Position(int x, int y){
+        this.x = x;
+        this.y = y;
     }
 }
