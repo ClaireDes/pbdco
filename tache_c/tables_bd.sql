@@ -1,10 +1,63 @@
 //Lucas
 
-//Quentin
-CREATE TABLE Coups (
-  CodeCoup NUMBER PRIMARY KEY,
-  LigneCour NUMBER,
-  ColonneCoup NUMBER,
-  LignePrec NUMBER,
-  ColonnePrec NUMBER
+CREATE TABLE Joueur (
+  codeJoueur INT NOT NULL PRIMARY KEY,
+  prenom CHAR(30) NOT NULL,
+  nom CHAR(30) NOT NULL,
+  adresse CHAR(50) NOT NULL
+);
+
+CREATE TABLE Rencontre(
+  codeRencontre INT NOT NULL,
+  codeTour CHAR(20) NOT NULL,
+  joueur1 INT NOT NULL,
+  joueur2 INT NOT NULL,
+  blanc INT,
+  noir INT,
+  vainqueur INT,
+  PRIMARY KEY (codeRencontre, codeTour),
+  FOREIGN KEY (codeTour) REFERENCES Tour(codeTour),
+  FOREIGN KEY (joueur1) REFERENCES Joueur(codeJoueur),
+  FOREIGN KEY (joueur2) REFERENCES Joueur(codeJoueur),
+  FOREIGN KEY (blanc) REFERENCES Joueur(codeJoueur),
+  FOREIGN KEY (noir) REFERENCES Joueur(codeJoueur),
+  FOREIGN KEY (vainqueur) REFERENCES Joueur(codeJoueur)
+);
+
+CREATE TABLE Tour(
+  codeTour CHAR(20) NOT NULL CHECK(codeTour IN('qualif','quart','demi','finale')),
+  PRIMARY KEY (codeTour)
+);
+
+CREATE TABLE Piece(
+  codePiece INT NOT NULL,
+  ligneInit INT NOT NULL CHECK(ligneInit>0 AND ligneInit<9),
+  colonneInit INT NOT NULL CHECK(colonneInit>0 AND colonneInit<9),
+  ligneFin INT CHECK(ligneFin>0 AND ligneFin<9),
+  colonneFin INT CHECK(colonneFin>0 AND colonneFin<9),
+  typePiece CHAR(10) NOT NULL CHECK(typePiece IN ('pion','tour','fou', 'cavalier', 'roi', 'reine')),
+  couleur CHAR(5) NOT NULL CHECK(couleur IN('blanc', 'noir', 'rose')),
+  codeRencontre INT NOT NULL,
+  codeTour CHAR(20) NOT NULL,
+  PRIMARY KEY (codePiece, codeRencontre, codeTour),
+  FOREIGN KEY (codeRencontre, codeTour)  REFERENCES Rencontre(codeRencontre, codeTour),
+  CHECK ((couleur='blanc' AND typePiece='pion')AND (ligneFin=ligneInit+1)),
+  CHECK ((couleur='noir' AND typePiece='pion')AND (ligneFin=ligneInit-1)),
+  CONSTRAINT Ktour CHECK ((typePiece='tour') AND ((ligneFin!=ligneInit AND colonneFin=colonneInit) OR ( ligneFin=ligneInit AND colonneFin!=colonneInit))),
+  CONSTRAINT Kfou CHECK ((typePiece='fou') AND (ABS(ligneFin-ligneInit)=ABS(colonneFin-colonneInit))),
+  CHECK ((typePiece='cavalier') AND ((ABS(ligneFin-ligneInit)=1 AND ABS(colonneFin-colonneInit)=2) OR (ABS(ligneFin-ligneInit)=2 AND ABS(colonneFin-colonneInit)=1))),
+  CHECK ((typePiece='roi') AND ((ABS(ligneFin-ligneInit)<2 AND ABS(colonneFin-colonneInit)<2))),
+  CHECK ((typePiece='reine') AND (Ktour OR Kfou))
+);
+
+CREATE TABLE Coup (
+  codeCoup INT NOT NULL,
+  ligneCour INT NOT NULL CHECK(ligneCour>0 AND ligneCour<9),
+  ColonneCour INT NOT NULL CHECK(colonneCour>0 AND colonneCour<9),
+  lignePrec INT NOT NULL CHECK(lignePrec>0 AND lignePrec<9),
+  colonnePrec INT NOT NULL CHECK(colonnePrec>0 AND colonnePrec<9),
+  codeRencontre INT NOT NULL,
+  codeTour CHAR(20) NOT NULL,
+  PRIMARY KEY (codeCoup, codeRencontre, codeTour),
+  FOREIGN KEY (codeRencontre, codeTour) REFERENCES Rencontre(codeRencontre, codeTour)
 );
