@@ -10,11 +10,16 @@ package pbdco.partie;
  * @author belinbr
  */
 public class Cavalier extends Piece{
-    public String nomPiece = "cavalier";
+    private String nomPiece = "cavalier";
     
-    public Cavalier(int x, int y, Boolean c){
+    public Cavalier(Position position, Boolean c){
         this.nomPiece="cavalier";
-        this.setPosition(x,y);
+        this.updatePosition(position);
         this.setCouleur(c);
+    }
+
+    @Override
+    public Boolean verifySituation() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

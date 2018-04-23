@@ -10,11 +10,16 @@ package pbdco.partie;
  * @author belinbr
  */
 public class Roi extends Piece{
-    public String nomPiece = "roi";
+    private String nomPiece = "roi";
     
-    public Roi(int x, int y, Boolean c){
+    public Roi(Position position, Boolean c){
         this.nomPiece="roi";
-        this.setPosition(x,y);
+        this.updatePosition(position);
         this.setCouleur(c);
+    }
+
+    @Override
+    public Boolean verifySituation() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -10,9 +10,16 @@ package pbdco.partie;
  * @author belinbr
  */
 public class Tour extends Piece {
-    public Tour(int x, int y, Boolean c){
+    private String nomPiece = "tour";
+    
+    public Tour(Position position, Boolean c){
         this.nomPiece="tour";
-        this.setPosition(x,y);
+        this.updatePosition(position);
         this.setCouleur(c);
+    }
+
+    @Override
+    public Boolean verifySituation() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
