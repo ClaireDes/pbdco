@@ -19,9 +19,11 @@ public class Main {
         
        
         System.out.println("test");
-        init();
+        initialize();
         
         //TESTS MARCHENT
+        
+        
         
         
     }
@@ -29,7 +31,9 @@ public class Main {
     /**
      *
      */
-    public static void init(){
+    public static void initialize(){
+        //Pièces noires
+        //---Pions----
         Pion p1 = new Pion(2,1,false);
         System.out.println(p1.toString());
         Pion p2 = new Pion(2,2,false);
@@ -47,6 +51,8 @@ public class Main {
         Pion p8 = new Pion(2,8,false);
         System.out.println(p8.toString());
         
+        //Pièces blanches
+        //---Pions----
         Pion p9 = new Pion(7,1,true);
         System.out.println(p9.toString());
         Pion p10 = new Pion(7,2,true);
@@ -63,6 +69,8 @@ public class Main {
         System.out.println(p15.toString());
         Pion p16 = new Pion(7,8,true);
         System.out.println(p16.toString());
+        
+        
     }
     
 }
