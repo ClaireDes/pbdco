@@ -12,7 +12,9 @@ package pbdco.partie;
 public class Fou extends Piece{
     public String nomPiece = "fou";
     
-    public Fou(){
+    public Fou(int x, int y, Boolean c){
         this.nomPiece="fou";
+        this.setPosition(x,y);
+        this.setCouleur(c);
     }
 }

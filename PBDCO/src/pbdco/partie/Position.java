@@ -10,7 +10,7 @@ package pbdco.partie;
  * @author belinbr
  */
 public class Position {
-    public final int x,y;
+    public int x,y;
     
     /*vérifie que les coordonnées des positions sont comprises entre 1 et 8*/
     public int verifyPosition(Position position){

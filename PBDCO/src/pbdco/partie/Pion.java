@@ -12,8 +12,10 @@ package pbdco.partie;
 public class Pion extends Piece{
     public String nomPiece;
 
-    public Pion() {
+    public Pion(int x, int y, Boolean c) {
         super();
         this.setNom("pion");
+        this.setPosition(x,y);
+        this.setCouleur(c);
     }
 }

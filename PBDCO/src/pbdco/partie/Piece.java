@@ -12,6 +12,7 @@ package pbdco.partie;
 abstract public class Piece {
     public String nomPiece;
     public Position positionPiece;
+    public Boolean couleur;
     
     public String getNom(){
         return this.nomPiece;
@@ -21,17 +22,31 @@ abstract public class Piece {
         return this.positionPiece;
     }
     
-    @Override
-    public String toString(){
-        return ("C'est un(e) "+this.getNom()+" situé(e) à la position : "+this.getPosition().x+";"+this.getPosition().y);
+    public String getCouleur(){
+        if(!this.couleur){
+            return "noir";
+        }
+        else{
+            return "blanc";
+        }
     }
     
-    public void setPosition(Position position){
-        this.positionPiece=position;
+    @Override
+    public String toString(){
+        return ("C'est un(e) "+this.getNom()+" de couleur "+this.getCouleur()+" situé(e) à la position : "+this.getPosition().x+";"+this.getPosition().y);
+    }
+    
+    public void setPosition(int x, int y){
+        this.positionPiece.x=x;
+        this.positionPiece.y=y;
     }
     
     public void setNom(String nom){
         this.nomPiece=nom;
+    }
+    
+    public void setCouleur(Boolean couleur){
+        this.couleur=couleur;
     }
    
 }

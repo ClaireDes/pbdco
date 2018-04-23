@@ -12,7 +12,9 @@ package pbdco.partie;
 public class Cavalier extends Piece{
     public String nomPiece = "cavalier";
     
-    public Cavalier(){
+    public Cavalier(int x, int y, Boolean c){
         this.nomPiece="cavalier";
+        this.setPosition(x,y);
+        this.setCouleur(c);
     }
 }
