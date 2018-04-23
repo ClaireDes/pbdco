@@ -9,18 +9,22 @@ package pbdco;
 
 /**
  *
- * @author belinbr
+ * @author milcenan
  */
 public class PBDCO {
 
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        //test création joueur
-        Joueur J = new Joueur();
+        //test création joueur + déclaration dans la BD
+        Joueur J = new Joueur("Jean","Michel");
+        J.enregistreNouveauJoueur();
         
+        
+   
            
         
         
@@ -43,6 +47,6 @@ public class PBDCO {
         
         
         
-    }
+}
     
 }
