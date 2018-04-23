@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pbdco;
+package pbdco.modele;
 
 /**
  *
  * @author milcenan
  */
-public class Joueur extends Modele{
+public class Joueur {
     
 }
