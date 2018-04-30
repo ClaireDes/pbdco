@@ -58,16 +58,17 @@ public class Joueur implements Modele{
      * 
      * @param nom
      * @param prenom 
+     * @param adresse
      Constructeur utilisé pour la création d'un nouveau joueur, l'ensemble des parties en cours est vide 
      * Aucune partie n'a encore été jouée
      
      */
     public Joueur (String nom,
-                String prenom){
+                String prenom, String adresse){
         
         this.nom = nom;
         this.prenom =prenom ;
-        
+        this.adresse = adresse;
   
         this.victoiresTournoisCourant = 0;
         this.defaitesTournoisCourant = 0;

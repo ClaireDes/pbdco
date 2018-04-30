@@ -22,7 +22,7 @@ public class PBDCO {
     public static void main(String[] args) {
         // TODO code application logic here
         //test création joueur + déclaration dans la BD
-        Joueur J = new Joueur("Jean","Michel");
+        Joueur J = new Joueur("Jean","Michel","jean.michel@gmail.com");
         J.enregistreNouveauJoueur();
         
         
