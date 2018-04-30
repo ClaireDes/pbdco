@@ -9,14 +9,12 @@ package pbdco.partie;
  *
  * @author belinbr
  */
-public class Cavalier extends Piece{
-    private String nomPiece = "cavalier";
+public class Tour extends Piece{
+    private String nomPiece = "tour";
     
-    public Cavalier(Position position, Boolean c){
-        this.nomPiece="cavalier";
+    public Tour(Position position, Boolean c){
+        this.nomPiece="tour";
         this.updatePosition(position);
         this.setCouleur(c);
     }
-
-    
 }

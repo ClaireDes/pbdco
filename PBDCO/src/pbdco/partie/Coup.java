@@ -37,7 +37,7 @@ public class Coup {
                 updatePositionPiece(piece, newPosition); //la pièce est déplacée
                 break;
             case "roi":
-                if(piece.verifySituation()){//on vérifie que le roi ne se met pas en échec
+                if(!newPosition.getEchec()){//on vérifie que le roi ne se met pas sur une case en échec
                     if(newPosition.getState()){//si la case est occupée
                         // On enlève la pièce qui était à cette position --> manger(newPosition);
                     }

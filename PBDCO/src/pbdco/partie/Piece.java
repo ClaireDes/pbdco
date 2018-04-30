@@ -53,6 +53,5 @@ abstract public class Piece {
         this.couleur=couleur;
     }
 
-    public abstract Boolean verifySituation();
    
 }
