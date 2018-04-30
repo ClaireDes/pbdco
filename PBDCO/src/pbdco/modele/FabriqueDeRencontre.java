@@ -24,7 +24,7 @@ public class FabriqueDeRencontre extends FabriqueTransaction{
     };    
 
     @Override
-    public void fabriqueTransaction(String operation, Modele param) {
+    public void fabriqueTransaction(String operation, Rencontre renc) {
     
         try {
             // Chargement driver
@@ -41,17 +41,33 @@ public class FabriqueDeRencontre extends FabriqueTransaction{
             conn.setAutoCommit(false);
             conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
             
-            PreparedStatement pstmt = conn.prepareStatement("");
+            PreparedStatement pstmt;
                     switch (operation) {
-                        case "new":// création d'une nouvelle rencontre
+                        
+                        // création d'une nouvelle rencontre
+                        case "new":
+                            pstmt = conn.prepareStatement("INSERT INTO Rencontres(codeTour, codeRencontre, JoueurBlanc, JoueurNoir) VALUES (?,?,?,?)");
+                            pstmt.setInt(1,renc.codeTour.getValue());
+                            pstmt.setInt(2, renc.codeRencontre.getValue());
+                            pstmt.setInt(3, renc.joueurs[0].codeJoueur.getValue());
+                            pstmt.setInt(4, renc.joueurs[1].codeJoueur.getValue());  
+                            
+                            pstmt.executeUpdate();
+                            // chargement d'une rencontre avec la base de données
+                            break;
+                        
+                        // enregistrement du résultat d'une rencontre    
+                        case "fini":
                             
                             break;
-                        case "fini":// enregistrement du résultat d'une rencontre
-                            
+                          
+                        // chargement d'une rencontre avec la base de données    
+                        case "load":
+                            //a recuperer : les deux joueurs, terminee?, la grille
+                            pstmt =  conn.prepareStatement("SELECT ");
+                            //A COMPLETER                                                        
                             break;
-                        case "load":// chargement d'une rencontre avec la base de données
                             
-                            break;
                         case "lastCodeRencontre":// le dernier code rencontre utilisé (pour en generer un nouveau)
                             
                             break;
