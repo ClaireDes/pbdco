@@ -13,6 +13,7 @@ public class Position {
     private int x=1;
     private int y=1;
     private Boolean state; //true pour case occupée, false sinon
+    private Boolean echec = false;
     
     public int getX(){
         return this.x;
@@ -24,6 +25,10 @@ public class Position {
  
     public Boolean getState(){
         return this.state;
+    }
+    
+    public Boolean getEchec(){
+        return this.echec;
     }
     
     public void setPosition(int x, int y){
@@ -41,6 +46,10 @@ public class Position {
     
     public void setState(Boolean state){
         this.state = state;
+    }
+    
+    public void setEchec(Boolean echec){
+        this.echec = echec;
     }
     
     public Position(int x, int y, Boolean state){

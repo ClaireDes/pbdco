@@ -19,8 +19,5 @@ public class Pion extends Piece{
         this.setCouleur(c);
     }
     
-    @Override
-    public Boolean verifySituation(){
-        return true;
-    }
+    
 }

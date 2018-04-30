@@ -11,6 +11,7 @@ package pbdco.partie;
  */
 public class Roi extends Piece{
     private String nomPiece = "roi";
+    private Boolean echec = false;
     
     public Roi(Position position, Boolean c){
         this.nomPiece="roi";
@@ -18,8 +19,7 @@ public class Roi extends Piece{
         this.setCouleur(c);
     }
 
-    @Override
-    public Boolean verifySituation() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Boolean getEchec(){
+        return this.echec;
     }
 }
