@@ -5,6 +5,8 @@
  */
 package pbdco.modele;
 
+import pbdco.Code;
+
 /**
  *
  * @author milcenan
@@ -12,7 +14,8 @@ package pbdco.modele;
 public class Rencontre implements Modele{
 
     Joueur[] joueurs;
-    int code;
+    Code codeTour;
+    Code codeRencontre;
     int terminee; //0 = partie pas terminée,1= joueur[0] a gagné, 2= joueur[1]a gagné, 3=personne n'a gagné
     int grille[][];
     FabriqueDeRencontre fabRencontre;
@@ -23,11 +26,12 @@ public class Rencontre implements Modele{
         
     }
     
-    public Rencontre(Joueur joueur1, Joueur joueur2){//pour creer une nouvelle rencontre
+    public Rencontre(Joueur joueur1, Joueur joueur2, Code codeTour){//pour creer une nouvelle rencontre
    
         this.joueurs[0]=joueur1;
         this.joueurs[1]=joueur2;
-        this.code = genereCodeRencontre();
+        this.codeTour = codeTour;
+        this.codeRencontre = genereCodeRencontre();
         this.grille= new int[8][8];
         this.terminee = 0;
         this.fabRencontre = new FabriqueDeRencontre();
@@ -38,7 +42,7 @@ public class Rencontre implements Modele{
            //fabRencontre.fabriqueTransaction("new", this);
     }
     
-    private int genereCodeRencontre(){
+    private Code genereCodeRencontre(){
         
        // Genere un nouveau code supeireur au dernier enrgistré dans la base de données
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
