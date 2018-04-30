@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pbdco;
+package pbdco.modele;
 
 /**
  *
@@ -35,7 +35,7 @@ public class Rencontre implements Modele{
     }
     
     void enregistreNouvelleRencontre(){
-           fabRencontre.fabriqueTransaction("new", this);
+           //fabRencontre.fabriqueTransaction("new", this);
     }
     
     private int genereCodeRencontre(){
@@ -47,15 +47,13 @@ public class Rencontre implements Modele{
     
     
     
-    @Override
     public void majBD() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
     public void chargementDepuisBd(int code) {
         
-        fabRencontre.fabriqueTransaction("load",null);
+       // fabRencontre.fabriqueTransaction("load",null);
         
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
