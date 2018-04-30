@@ -14,6 +14,7 @@ abstract public class Piece {
     private Boolean couleur;
     
     private Position currentPosition = new Position(1,1,true);
+    private Position previousPosition = new Position(1,1,false);
     
     public String getNom(){
         return this.nomPiece;
@@ -21,6 +22,10 @@ abstract public class Piece {
     
     public Position getCurrentPosition(){
         return this.currentPosition;
+    }
+    
+    public Position getPreviousPosition(){
+        return this.previousPosition;
     }
     
     public String getCouleur(){
@@ -42,7 +47,14 @@ abstract public class Piece {
     }
     
     public void updatePosition(Position position){
+        //on met à jour l'ancienne position
+        this.getPreviousPosition().setPosition(this.getCurrentPosition().getX(), this.getCurrentPosition().getY());
+        //on indique que la case n'est plus occupée
+        this.getPreviousPosition().setState(false);
+        //on met à jour la nouvelle position
         this.getCurrentPosition().setPosition(position.getX(), position.getY());
+        //on indique que la case est occupée
+        this.getCurrentPosition().setState(true);
     }
     
     public void setNom(String nom){
