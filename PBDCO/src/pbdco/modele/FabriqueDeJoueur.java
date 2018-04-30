@@ -44,6 +44,7 @@ public class FabriqueDeJoueur /*extends FabriqueTransaction*/{
     
     
     public  void fabriqueRequete(){
+        
         throw new UnsupportedOperationException("Not supported yet.");
     };    
 

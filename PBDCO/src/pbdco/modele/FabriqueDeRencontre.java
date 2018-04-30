@@ -12,11 +12,12 @@ package pbdco.modele;
 public class FabriqueDeRencontre/* extends FabriqueTransaction*/{
     
     
-    public  void fabriqueTransaction(String operation,Object name){
+    public  void fabriqueTransaction(String operation,Rencontre rencontre){
         
    
         switch (operation) {
-            case "new":// création d'une nouvelle rencontre
+            case "new":// création d'une nouvelle rencontre dans la BD
+                //création de toutes les pièces de la grille avec 
                 
                 break;
             case "fini":// enregistrement du résultat d'une rencontre
