@@ -96,7 +96,7 @@ public class Joueur implements Modele{
         this.codeJoueur.setValue(i);
     }
     
-    void enregistreNouveauJoueur(){
+    public void enregistreNouveauJoueur(){
         fabJoueur.fabriqueTransaction("new", this);
     }
     
