@@ -39,7 +39,7 @@ public class Rencontre implements Modele{
     }
     
     void enregistreNouvelleRencontre(){
-           //fabRencontre.fabriqueTransaction("new", this);
+        fabRencontre.fabriqueTransaction("new", this);
     }
     
     private Code genereCodeRencontre(){
@@ -57,9 +57,8 @@ public class Rencontre implements Modele{
 
     public void chargementDepuisBd(int code) {
         
-       // fabRencontre.fabriqueTransaction("load",null);
+       fabRencontre.fabriqueTransaction("load",null);
         
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
