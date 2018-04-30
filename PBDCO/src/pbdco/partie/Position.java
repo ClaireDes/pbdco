@@ -31,6 +31,19 @@ public class Position {
         return this.echec;
     }
     
+    public Boolean getColor(){
+        // A FAIRE
+        // requete pour avoir couleur a partir de position
+        return true; //à enlever ensuite une fois que c'est complété au dessus
+    }
+    
+    public Piece getPiece(){
+        // A FAIRE 
+        // requete pour avoir piece a une position
+        Tour tour = new Tour(new Position(1,1,true),true);//à enlever ensuite une fois que c'est complété au dessus
+        return tour;//à enlever ensuite une fois que c'est complété au dessus
+    }
+    
     public void setPosition(int x, int y){
         this.x = x;
         this.y = y;

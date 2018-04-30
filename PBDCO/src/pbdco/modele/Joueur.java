@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pbdco;
+package pbdco.modele;
+
+import pbdco.Code;
 
 /**
  *
@@ -96,7 +98,7 @@ public class Joueur implements Modele{
         this.codeJoueur.setValue(i);
     }
     
-    void enregistreNouveauJoueur(){
+    public void enregistreNouveauJoueur(){
         fabJoueur.fabriqueTransaction("new", this);
     }
     

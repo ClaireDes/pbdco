@@ -7,6 +7,8 @@
 
 package pbdco;
 
+import pbdco.modele.Joueur;
+
 /**
  *
  * @author milcenan
