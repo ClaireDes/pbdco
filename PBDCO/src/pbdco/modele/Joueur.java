@@ -14,6 +14,7 @@ import pbdco.Code;
 public class Joueur implements Modele{
     String nom;
     String prenom;
+    String adresse;
     Code codeJoueur;
     int[] rencontresCourantes;
     int victoiresTournoisCourant;
@@ -35,13 +36,14 @@ public class Joueur implements Modele{
      * */
     public Joueur (String nom,
             String prenom,
-            Code codeJoueur,
+            Code codeJoueur, String adresse,
             int[] rencontresCourantes,
             int victoiresTournoisCourant,
             int defaitesTournoisCourant){
         
         this.nom = nom;
         this.prenom =prenom ;
+        this.adresse=adresse;
         this.codeJoueur = codeJoueur;
         this.rencontresCourantes=rencontresCourantes;
         this.victoiresTournoisCourant=victoiresTournoisCourant;
@@ -74,13 +76,11 @@ public class Joueur implements Modele{
         genereCodeJoueur();//genere code joueur doit etre aappelé après la création de la fabrique
     }
 
-    @Override
     public void majBD() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         //fabJoueur.fabriqueTransaction("");
     }
 
-    @Override
     public void chargementDepuisBd(int code) {
         
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -88,7 +88,7 @@ public class Joueur implements Modele{
     
     void genereCodeJoueur(){
 
-        fabJoueur.fabriqueTransaction("lastCodeJoueur",this);
+        //fabJoueur.fabriqueTransaction("lastCodeJoueur",this);
         this.codeJoueur.setValue(this.codeJoueur.getValue()+1);
         
     }
@@ -96,6 +96,7 @@ public class Joueur implements Modele{
         this.codeJoueur.setValue(i);
     }
     
+
     public void enregistreNouveauJoueur(){
         fabJoueur.fabriqueTransaction("new", this);
     }
