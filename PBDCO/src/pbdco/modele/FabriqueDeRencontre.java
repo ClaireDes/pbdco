@@ -29,7 +29,7 @@ public class FabriqueDeRencontre extends FabriqueTransaction{
         try {
             // Chargement driver
             System.out.print("Loading Oracle driver... "); 
-            //DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
             System.out.println("loaded");
 
             

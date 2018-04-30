@@ -14,9 +14,9 @@ import java.sql.*;
 public abstract class FabriqueTransaction {
     
     //A COMPLETER
-    static String URL = "jdbc:oracle:thin@nomdelabase";
-    static String USER = "barbault";
-    static String PASSWD = "barbault";
+    static String URL = "jdbc:oracle:thin@ensioracle1";
+    static String USER = "grelliel";
+    static String PASSWD = "grelliel";
     
     
         public abstract void fabriqueTransaction(String operation,Modele param);
