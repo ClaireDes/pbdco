@@ -7,6 +7,9 @@ package pbdco.modele;
 
 import pbdco.*;
 import pbdco.partie.*;
+import java.sql.*;
+import javax.sql.*;
+
 
 /**
  *

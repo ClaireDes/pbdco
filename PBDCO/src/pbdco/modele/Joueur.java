@@ -5,6 +5,8 @@
  */
 package pbdco.modele;
 
+import java.util.ArrayList;
+import java.util.List;
 import pbdco.Code;
 
 /**
@@ -16,9 +18,8 @@ public class Joueur implements Modele{
     String prenom;
     String adresse;
     Code codeJoueur;
-    int[] rencontresCourantes;
+    List rencontresCourantes;
     int victoiresTournoisCourant;
-    int defaitesTournoisCourant;
     FabriqueDeJoueur fabJoueur;
     
     
@@ -37,9 +38,8 @@ public class Joueur implements Modele{
     public Joueur (String nom,
             String prenom,
             Code codeJoueur, String adresse,
-            int[] rencontresCourantes,
-            int victoiresTournoisCourant,
-            int defaitesTournoisCourant){
+            List rencontresCourantes,
+            int victoiresTournoisCourant ){
         
         this.nom = nom;
         this.prenom =prenom ;
@@ -47,10 +47,7 @@ public class Joueur implements Modele{
         this.codeJoueur = codeJoueur;
         this.rencontresCourantes=rencontresCourantes;
         this.victoiresTournoisCourant=victoiresTournoisCourant;
-        this.defaitesTournoisCourant=defaitesTournoisCourant;
         this.fabJoueur = new FabriqueDeJoueur();
- 
-       
     }
     
 
@@ -69,13 +66,15 @@ public class Joueur implements Modele{
         this.nom = nom;
         this.prenom =prenom ;
         this.adresse = adresse;
-  
+        this.rencontresCourantes = new ArrayList();
         this.victoiresTournoisCourant = 0;
-        this.defaitesTournoisCourant = 0;
+
         this.fabJoueur = new FabriqueDeJoueur();//
         this.codeJoueur=new Code(0);//
         genereCodeJoueur();//genere code joueur doit etre aappelé après la création de la fabrique
     }
+    
+    
 
     public void majBD() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
