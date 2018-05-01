@@ -7,6 +7,9 @@ package pbdco.modele;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import pbdco.BDAccessEx;
 import pbdco.Code;
 
 /**
@@ -50,7 +53,6 @@ public class Joueur implements Modele{
         this.fabJoueur = new FabriqueDeJoueur();
     }
     
-
     /**
      * 
      * @param nom
@@ -81,7 +83,7 @@ public class Joueur implements Modele{
         //fabJoueur.fabriqueTransaction("");
     }
 
-    public void chargementDepuisBd(int code) {
+    public  void chargementDepuisBd(int code) {
         
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

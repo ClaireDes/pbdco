@@ -29,9 +29,9 @@ import pbdco.partie.*;
  */
 public class FabriqueDeJoueur extends FabriqueTransaction{
 
-    @Override
-    public  void fabriqueTransaction(String operation,Modele joueur){
-        /*
+    //@Override
+    /*public  void fabriqueTransaction(String operation,Modele joueur){
+        
         try {
             // Chargement driver
             System.out.print("Loading Oracle driver... ");
@@ -52,7 +52,7 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
             pstmt.setString(2, joueur.prenom);
             pstmt.setString(3, joueur.nom);
             pstmt.setString(4, joueur.adresse);
-                    */
+                    
                     
                     switch (operation) {
                         case "new"://création d'un joueur (uniquement dans inscription)
@@ -73,10 +73,11 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
                     }
        /* } catch (SQLException ex) {
             Logger.getLogger(FabriqueDeJoueur.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-         }
+        }
+         }*/
     
-    public void creerJoueur(Joueur joueur) throws BDAccessEx{
+    
+    public void creerBD(Joueur joueur) throws BDAccessEx{
          try{// Chragement du Driver
             Class.forName("postgresql.Driver"); 
         }catch( java.lang.ClassNotFoundException ex){
@@ -106,7 +107,7 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
         }
     }
     
-        public void MAJJoueur(Joueur joueur) throws BDAccessEx{//remplace les données du joueur de code joueur.codeJoueur par celles de joueur
+        public void MAJBD(Joueur joueur) throws BDAccessEx{//remplace les données du joueur de code joueur.codeJoueur par celles de joueur
             
          int codeJoueur = joueur.codeJoueur.getValue();
          String requete = "UPDATE joueurs Set nom = ?, prenom = ?, adresse = ? WHERE codeJoueur = ?;";
@@ -230,7 +231,7 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
   
   
   
-    public Code lastCodeJoueur() throws BDAccessEx{//renvoie le dernier code joueur utilisé dans la base pour pouvoiren creer un nouveau
+    public Code lastCodeBD() throws BDAccessEx{//renvoie le dernier code joueur utilisé dans la base pour pouvoiren creer un nouveau
         Code code; 
         ResultSet resultat;
         String requete="SELECT MAX(codeJoueur) FROM Joueurs;" ;
@@ -279,8 +280,8 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
         throw new UnsupportedOperationException("Not supported yet.");
     };    */
 
-    @Override
+    /*@Override
     public void fabriqueRequete() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    }*/
 }
