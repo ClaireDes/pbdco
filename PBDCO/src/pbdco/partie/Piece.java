@@ -10,21 +10,22 @@ package pbdco.partie;
  * @author belinbr
  */
 abstract public class Piece {
-    public String nomPiece;
-    public Boolean couleur;
-    public int xPos;
-    public int yPos;
+    private String nomPiece;
+    private Boolean couleur;
+    
+    private Position currentPosition = new Position(1,1,true);
+    private Position previousPosition = new Position(1,1,false);
     
     public String getNom(){
         return this.nomPiece;
     }
     
-    public int getPositionX(){
-        return (this.xPos);
+    public Position getCurrentPosition(){
+        return this.currentPosition;
     }
     
-    public int getPositionY(){
-        return(this.yPos);
+    public Position getPreviousPosition(){
+        return this.previousPosition;
     }
     
     public String getCouleur(){
@@ -36,14 +37,24 @@ abstract public class Piece {
         }
     }
     
-    @Override
-    public String toString(){
-        return ("C'est un(e) "+this.getNom()+" de couleur "+this.getCouleur()+" situé(e) à la position : "+this.getPositionX()+";"+this.getPositionY());
+    public Boolean getColorBool(){
+        return this.couleur;
     }
     
-    public void setPosition(int x, int y){
-        this.xPos=x;
-        this.yPos=y;
+    @Override
+    public String toString(){
+        return ("C'est un(e) "+this.getNom()+" de couleur "+this.getCouleur()+" situé(e) à la position : "+this.getCurrentPosition().getX()+";"+this.getCurrentPosition().getY());
+    }
+    
+    public void updatePosition(Position position){
+        //on met à jour l'ancienne position
+        this.getPreviousPosition().setPosition(this.getCurrentPosition().getX(), this.getCurrentPosition().getY());
+        //on indique que la case n'est plus occupée
+        this.getPreviousPosition().setState(false);
+        //on met à jour la nouvelle position
+        this.getCurrentPosition().setPosition(position.getX(), position.getY());
+        //on indique que la case est occupée
+        this.getCurrentPosition().setState(true);
     }
     
     public void setNom(String nom){
@@ -53,5 +64,6 @@ abstract public class Piece {
     public void setCouleur(Boolean couleur){
         this.couleur=couleur;
     }
+
    
 }

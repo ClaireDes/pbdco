@@ -4,18 +4,22 @@
  * and open the template in the editor.
  */
 package pbdco.tournois;
+
 /**
  *
  * @author milcenan
  */
-public class Inscription extends Organisation{
-
-    public Inscription(String tour){
+public class PreparationTour extends Organisation{
+    
+    
+    public PreparationTour(String tour){
         super(tour);
     }
     
-    public void inscrit(String nom, String prenom, String adresse){
-        Joueur nouvJoueur;
-        this.nouvJoueur = new Joueur(nom, prenom, adresse);
+    public void creeRencontre(){
+        switch(this.getTour()){
+            case "Qualif": 
+                
+        }
     }
 }

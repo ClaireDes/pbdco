@@ -9,6 +9,6 @@ package pbdco.tournois;
  *
  * @author milcenan
  */
-public class Preparation_rencontre {
+public class LancePartie {
     
 }

@@ -10,22 +10,10 @@ package pbdco.partie;
  * @author belinbr
  */
 public class Position {
-    public int x,y;
-    
-    /*vérifie que les coordonnées des positions sont comprises entre 1 et 8*/
-    public int verifyPosition(Position position){
-        if ((((1 <= position.x) && (position.x <= 8)) && (1 <= position.y)) && (position.y <= 8)){
-            return 1;
-        }
-        else{
-            return 0;
-        }
-    }
-    
-    public Position(int x, int y){
-        this.x=x;
-        this.y=y;
-    }
+    private int x=1;
+    private int y=1;
+    private Boolean state; //true pour case occupée, false sinon
+    private Boolean echec = false;
     
     public int getX(){
         return this.x;
@@ -33,5 +21,58 @@ public class Position {
     
     public int getY(){
         return this.y;
+    }
+ 
+    public Boolean getState(){
+        return this.state;
+    }
+    
+    public Boolean getEchec(){
+        return this.echec;
+    }
+    
+    public Boolean getColor(){
+        // A FAIRE
+        // requete pour avoir couleur a partir de position
+        return true; //à enlever ensuite une fois que c'est complété au dessus
+    }
+    
+    public Piece getPiece(){
+        // A FAIRE 
+        // requete pour avoir piece a une position
+        Tour tour = new Tour(new Position(1,1,true),true);//à enlever ensuite une fois que c'est complété au dessus
+        return tour;//à enlever ensuite une fois que c'est complété au dessus
+    }
+    
+    public void setPosition(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
+    
+    public void setPositionX(int x){
+        this.x = x;
+    }
+    
+    public void setPositionY(int y){
+        this.y = y;
+    }
+    
+    public void setState(Boolean state){
+        this.state = state;
+    }
+    
+    public void setEchec(Boolean echec){
+        this.echec = echec;
+    }
+    
+    public Position(int x, int y, Boolean state){
+        this.x = x;
+        this.y = y;
+        this.state = state;
+    }
+    
+    public Position(int x, int y){
+        this.x = x;
+        this.y = y;
     }
 }

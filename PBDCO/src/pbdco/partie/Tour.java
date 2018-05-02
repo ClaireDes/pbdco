@@ -9,10 +9,12 @@ package pbdco.partie;
  *
  * @author belinbr
  */
-public class Tour extends Piece {
-    public Tour(int x, int y, Boolean c){
+public class Tour extends Piece{
+    private String nomPiece = "tour";
+    
+    public Tour(Position position, Boolean c){
         this.nomPiece="tour";
-        this.setPosition(x,y);
+        this.updatePosition(position);
         this.setCouleur(c);
     }
 }

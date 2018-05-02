@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pbdco;
+package pbdco.modele;
 
 /**
  *
  * @author milcenan
  */
-public class Modele {
+public interface Modele {
+    public void majBD();
+    
+    //public void chargementDepuisBd(int code);
     
 }

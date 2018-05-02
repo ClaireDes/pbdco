@@ -10,11 +10,13 @@ package pbdco.partie;
  * @author belinbr
  */
 public class Fou extends Piece{
-    public String nomPiece = "fou";
+    private String nomPiece = "fou";
     
-    public Fou(int x, int y, Boolean c){
+    public Fou(Position position, Boolean c){
         this.nomPiece="fou";
-        this.setPosition(x,y);
+        this.updatePosition(position);
         this.setCouleur(c);
     }
+
+    
 }

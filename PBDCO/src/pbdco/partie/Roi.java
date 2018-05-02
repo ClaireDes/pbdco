@@ -10,11 +10,16 @@ package pbdco.partie;
  * @author belinbr
  */
 public class Roi extends Piece{
-    public String nomPiece = "roi";
+    private String nomPiece = "roi";
+    private Boolean echec = false;
     
-    public Roi(int x, int y, Boolean c){
+    public Roi(Position position, Boolean c){
         this.nomPiece="roi";
-        this.setPosition(x,y);
+        this.updatePosition(position);
         this.setCouleur(c);
+    }
+
+    public Boolean getEchec(){
+        return this.echec;
     }
 }

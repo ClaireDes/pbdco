@@ -10,11 +10,13 @@ package pbdco.partie;
  * @author belinbr
  */
 public class Dame extends Piece{
-    public String nomPiece = "dame";
+    private String nomPiece = "dame";
     
-    public Dame(int x, int y, Boolean c){
+    public Dame(Position position, Boolean c){
         this.nomPiece="dame";
-        this.setPosition(x,y);
+        this.updatePosition(position);
         this.setCouleur(c);
     }
+
+    
 }
