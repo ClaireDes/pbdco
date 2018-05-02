@@ -41,7 +41,7 @@ public class FabriqueDeOrganisation {
         //normalement  le code tournois est égal à "qualif à la création du tournois "
         
         //insert ...
-        
+        return codeTournois;
     } 
             
     public void setCodeTour(String codeTour){

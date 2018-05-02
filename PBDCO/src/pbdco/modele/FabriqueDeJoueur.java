@@ -30,7 +30,7 @@ import pbdco.partie.*;
 public class FabriqueDeJoueur extends FabriqueTransaction{
 
     //@Override
-    /*public  void fabriqueTransaction(String operation,Modele joueur){
+   /* public  void fabriqueTransaction(String operation,Joueur joueur){
         
         try {
             // Chargement driver
@@ -47,16 +47,21 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
             conn.setAutoCommit(false);
             conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
             
-            PreparedStatement pstmt = conn.prepareStatement("insert into Joueurs(codeJoueur, Prenom, Nom, Adresse) VALUES(?,?,?,?)");
-            pstmt.setInt(1, joueur.codeJoueur.getValue());
-            pstmt.setString(2, joueur.prenom);
-            pstmt.setString(3, joueur.nom);
-            pstmt.setString(4, joueur.adresse);
+
                     
                     
                     switch (operation) {
                         case "new"://création d'un joueur (uniquement dans inscription)
+                            
+                            
                             System.out.println("enregistrement d'un nouveau joueur dans la base");
+                            
+                                        PreparedStatement pstmt = conn.prepareStatement("insert into Joueurs(codeJoueur, Prenom, Nom, Adresse) VALUES(?,?,?,?)");
+            pstmt.setInt(1, joueur.codeJoueur.getValue());
+            pstmt.setString(2, joueur.prenom);
+            pstmt.setString(3, joueur.nom);
+            pstmt.setString(4, joueur.adresse);
+                      
                             break;
                         case "nom"://modification du nom d'un joueur (existant)
                             System.out.println("modification du nom d'un joueur");
@@ -71,21 +76,26 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
                             System.out.println("chargement d'un joueur depuis la base de donnees");
                             break;
                     }
-       /* } catch (SQLException ex) {
+          conn.commit();
+          conn.close();
+          
+        } catch (SQLException ex) {
             Logger.getLogger(FabriqueDeJoueur.class.getName()).log(Level.SEVERE, null, ex);
         }
          }*/
     
     
-    public void creerBD(Joueur joueur) throws BDAccessEx{
+    public void creerDansBD(Joueur joueur) throws BDAccessEx{
          try{// Chragement du Driver
-            Class.forName("postgresql.Driver"); 
-        }catch( java.lang.ClassNotFoundException ex){
-            throw new BDAccessEx("creerJoueur Raised classNotFound exception during the driver loading");
+            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+        }catch( SQLException ex){
+            throw new BDAccessEx("creerJoueur Raised classNotFound exception during the driver loading"+ex.getMessage());
         }
+         System.out.println("Driver ok");
          // Connexion à la BD
          try{
             Connection conn = DriverManager.getConnection(URL, USER, PASSWD);
+            System.out.println("Connection ok");
              try{
             conn.setAutoCommit(false);
             conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
@@ -98,12 +108,13 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
 
             conn.commit();
             conn.close();
-           System.out.println("Enregistrement du joueur " +joueur.codeJoueur.getValue() + "éfféctué");         
+           System.out.println("Enregistrement du joueur " +joueur.codeJoueur.getValue() + "effectué");         
              }catch(  SQLException ex){//si la transaction echoue
                 conn.close();
+                 System.err.println(ex.getMessage());
              }
         }catch(  SQLException ex){
-            throw new BDAccessEx("creerJoueur Raised SQLException during the connection");
+            throw new BDAccessEx("creerJoueur Raised SQLException during the connection\n"+ ex.getMessage());
         }
     }
     
@@ -112,10 +123,10 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
          int codeJoueur = joueur.codeJoueur.getValue();
          String requete = "UPDATE joueurs Set nom = ?, prenom = ?, adresse = ? WHERE codeJoueur = ?;";
          
-         try{// Chargement du Driver
-            Class.forName("postgresql.Driver"); //A changer evidemment
-        }catch( java.lang.ClassNotFoundException ex){
-            throw new BDAccessEx("MAJJoueur Raised classNotFound exception during the driver loading");
+         try{// Chragement du Driver
+            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+        }catch( SQLException ex){
+            throw new BDAccessEx("creerJoueur Raised classNotFound exception during the driver loading");
         }
          // Connexion à la BD
          try{
@@ -155,14 +166,14 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
          
          String requete = "SELECT * FROM  joueurs  WHERE codeJoueur = ?;";
          String requete2 = "SELECT codeRencontre From rencontres WHERE joueur1 = ? OR joueur2 = ? AND etat = ? ;";
-         String requete3 = "SELECT COUNT(vainqueur) FROM rencontres where vainqueur= ? ;";
+         String requete3 = "SELECT COUNT(vainqueur) FROM rencontres where vainqueur= ?;";
          
          ResultSet resultat;
          
-         try{// Chargement du Driver
-            Class.forName("postgresql.Driver"); //A changer evidemment
-        }catch( java.lang.ClassNotFoundException ex){
-            throw new BDAccessEx("LoadFromBD Joueur Raised classNotFound exception during the driver loading");
+         try{// Chragement du Driver
+            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+        }catch( SQLException ex){
+            throw new BDAccessEx("creerJoueur Raised classNotFound exception during the driver loading"+ex.getMessage());
         }
          // Connexion à la BD
          try{
@@ -211,7 +222,7 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
             pstmt.close();
             resultat.close();
             
-            J = new Joueur(nom,prenom,code,adresse,rencontres,nbVictoires);
+            J = new Joueur(nom ,prenom ,code,adresse,rencontres,nbVictoires,this);
             
             conn.commit();
             conn.close();
@@ -221,10 +232,10 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
            
              }catch(  SQLException ex){//si la transaction echoue
                 conn.close();
-                 throw new BDAccessEx("LoadFromBD Joueur Raised SQLException during the transaction");
+                 throw new BDAccessEx("LoadFromBD Joueur Raised SQLException during the transaction" + ex.getMessage());
              }
         }catch(  SQLException ex){
-            throw new BDAccessEx("LoadFromBD Joueur Raised SQLException during the connection");
+            throw new BDAccessEx("LoadFromBD Joueur Raised SQLException during the connection"+ex.getMessage());
         }
     }
         
@@ -239,9 +250,9 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
         
         
         try{// Chragement du Driver
-            Class.forName("postgresql.Driver"); //driver
-        }catch( java.lang.ClassNotFoundException ex){
-            throw new BDAccessEx("lastCodeJoueur() Raised classNotFound exception during the driver loading");
+            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+        }catch( SQLException ex){
+            throw new BDAccessEx("creerJoueur Raised classNotFound exception during the driver loading" + ex.getMessage());
         }
          // Connexion à la BD
          try{
@@ -251,9 +262,16 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
             conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
      
             
-           Statement stmt = conn.createStatement();     
-            resultat= stmt.executeQuery(requete);
-            
+           //Statement stmt = conn.createStatement();   
+           PreparedStatement pstmt;
+           
+           System.out.println("statement  ok : " + requete);
+           
+           pstmt = conn.prepareStatement(requete); 
+           resultat = pstmt.executeQuery();
+           
+           //resultat= stmt.executeQuery(requete);
+                 System.out.println("requete ok");
             code =new Code();
             code.setValue(resultat.getInt(1));
             
@@ -265,23 +283,10 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
              }catch(  SQLException ex){//si la transaction echoue
                  conn.rollback();
                  conn.close();
-                  throw new BDAccessEx("lastCodeJoueur() Raised SQLException during the transaction");
+                  throw new BDAccessEx("lastCodeJoueur() Raised SQLException during the transaction"+ ex.getMessage());
              }
         }catch(  SQLException ex){
-            throw new BDAccessEx("lastCodeJoueur() Raised SQLException during the connection");
+            throw new BDAccessEx("lastCodeJoueur() Raised SQLException during the connection"+ex.getMessage());
          }
     }
-    
-    
-    /*
-    @Override
-    public  void fabriqueRequete(){
-        
-        throw new UnsupportedOperationException("Not supported yet.");
-    };    */
-
-    /*@Override
-    public void fabriqueRequete() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }*/
 }

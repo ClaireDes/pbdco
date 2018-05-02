@@ -11,6 +11,7 @@ package pbdco.modele;
  */
 public interface Modele {
     public void majBD();
-    public void chargementDepuisBd(int code);
+    
+    //public void chargementDepuisBd(int code);
     
 }
