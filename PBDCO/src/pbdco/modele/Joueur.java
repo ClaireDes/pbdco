@@ -1,3 +1,17 @@
+<<<<<<< HEAD
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package pbdco.modele;
+
+/**
+ *
+ * @author milcenan
+ */
+public class Joueur {
+=======
 package pbdco.modele;
 
 import java.util.ArrayList;
@@ -93,6 +107,7 @@ public class Joueur implements Modele{
             System.out.println("tentative de modification du code du joueur " + this.codeJoueur.getValue());
         }
     }
+>>>>>>> acd19520c094ff944dcb62db212c82f1f24a8e9e
     
     public void enregistreNouveauJoueur() throws BDAccessEx{
       
