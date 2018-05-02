@@ -10,6 +10,8 @@ public class ControleurPartie {
     private Joueur adversaire;
     private Joueur joueur;
 
+    private EtatPartie etat;
+
     public void procedureAbandon() {
         //Fait recommencer le joueur qui utilise cette vue : "joueur"
     }
