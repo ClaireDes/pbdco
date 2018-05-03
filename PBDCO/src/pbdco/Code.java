@@ -10,8 +10,25 @@ package pbdco;
  * @author milcenan
  */
 public class Code {
-    private int value;
+    private int value; // Utiliser name pour les codes sous forme d'entier
+    private String name; //Utiliser name pour les codes sous forme de Strings 
     
+    public Code(String name){
+        this.name= name;
+    }
+
+    public Code() {
+       super();
+        this.value=0;
+        this.name=null;
+    }
+    public String getName(){
+        return name;
+    }
+    public void setName(String i){
+        this.name=name;
+    }
+
     public Code(int i){
         this.value = i;
     }
@@ -20,7 +37,5 @@ public class Code {
     }
     public void setValue(int i){
         this.value=i;
-    }
-    
-    
+    } 
 }

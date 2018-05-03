@@ -5,6 +5,12 @@
  */
 package pbdco.modele;
 
+import pbdco.*;
+import pbdco.partie.*;
+import java.sql.*;
+import javax.sql.*;
+
+
 /**
  *
  * @author milcenan
@@ -12,13 +18,21 @@ package pbdco.modele;
 public class FabriqueDeCoups/* extends FabriqueTransaction*/{
   
    
-    public  void fabriqueRequete(){
+    public  void fabriqueRequete(String operation, Coup coup){
+        
         throw new UnsupportedOperationException("Not supported yet.");
     };    
 
 
-    public void fabriqueTransaction(String operation, Object param) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void fabriqueTransaction(String operation, Coup coup) {
+         switch (operation) {
+            case "new"://création d'un coup 
+                    System.out.println("enregistrement d'un nouveau joueur dans la base");
+                break;
+                
+         
+         }
+         
     }
     
 }

@@ -32,10 +32,21 @@ public class FabriqueDeOrganisation {
         
           renvoie le tour correspondant au code courant*/
         throw new UnsupportedOperationException("Not supported yet.");  
+        
     }
+        
+    public Code creerTournois(){
+        Code codeTournois = new Code("");
+         //crée un nouveau tournois et renvois le code associé 
+        //normalement  le code tournois est égal à "qualif à la création du tournois "
+        
+        //insert ...
+        return codeTournois;
+    } 
             
-            
-            
+    public void setCodeTour(String codeTour){
+        
+    }        
             
             //Pour l'instanciation dans organisation
     /*fabrique = new fabriqueDeOrganisation()

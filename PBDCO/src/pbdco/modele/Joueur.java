@@ -1,24 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package pbdco.modele;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import pbdco.BDAccessEx;
 import pbdco.Code;
 
-/**
- *
- * @author milcenan
- */
+
 public class Joueur implements Modele{
     String nom;
     String prenom;
     String adresse;
     Code codeJoueur;
-    int[] rencontresCourantes;
+    List rencontresCourantes;
     int victoiresTournoisCourant;
-    int defaitesTournoisCourant;
     FabriqueDeJoueur fabJoueur;
     
     
@@ -28,7 +25,6 @@ public class Joueur implements Modele{
      * @param prenom
      * @param rencontresCourantes
      * @param victoiresTournoisCourant
-     * @param defaitesTournoisCourant 
      *
      * Constructeur utilisé pour le chargement d'un joueur depuis la base de données à partir d'un code
      * 
@@ -36,10 +32,11 @@ public class Joueur implements Modele{
      * */
     public Joueur (String nom,
             String prenom,
-            Code codeJoueur, String adresse,
-            int[] rencontresCourantes,
+            Code codeJoueur, 
+            String adresse,
+            List rencontresCourantes,
             int victoiresTournoisCourant,
-            int defaitesTournoisCourant){
+            FabriqueDeJoueur fab){
         
         this.nom = nom;
         this.prenom =prenom ;
@@ -47,58 +44,63 @@ public class Joueur implements Modele{
         this.codeJoueur = codeJoueur;
         this.rencontresCourantes=rencontresCourantes;
         this.victoiresTournoisCourant=victoiresTournoisCourant;
-        this.defaitesTournoisCourant=defaitesTournoisCourant;
-        this.fabJoueur = new FabriqueDeJoueur();
- 
-       
+        this.fabJoueur = fab;
     }
     
-
     /**
      * 
      * @param nom
      * @param prenom 
+     * @param adresse
      Constructeur utilisé pour la création d'un nouveau joueur, l'ensemble des parties en cours est vide 
      * Aucune partie n'a encore été jouée
-     
      */
     public Joueur (String nom,
-                String prenom){
+                String prenom, String adresse, FabriqueDeJoueur fab) throws BDAccessEx{
         
         this.nom = nom;
         this.prenom =prenom ;
-        
-  
+        this.adresse = adresse;
+        this.rencontresCourantes = new ArrayList();
         this.victoiresTournoisCourant = 0;
-        this.defaitesTournoisCourant = 0;
-        this.fabJoueur = new FabriqueDeJoueur();//
+
+        this.fabJoueur = fab;//
         this.codeJoueur=new Code(0);//
-        genereCodeJoueur();//genere code joueur doit etre aappelé après la création de la fabrique
+        try {
+            genereCodeJoueur();
+        } catch (BDAccessEx ex) {
+            System.err.println("erreur lors de la génération du code joueur de "+ this.nom + this.prenom + ex.getMessage());
+        }
+        enregistreNouveauJoueur();
+        //this.fabJoueur.fabriqueTransaction("new",this);
     }
+    
+    
 
     public void majBD() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        //fabJoueur.fabriqueTransaction("");
+        try {
+            fabJoueur.MAJBD(this);
+        } catch (BDAccessEx ex) {
+            System.err.println("Erreur lors de la mise à jour de la BD pour le joueur numero " + this.codeJoueur.getValue());
+        }
     }
 
-    public void chargementDepuisBd(int code) {
+    private void genereCodeJoueur() throws BDAccessEx {//génère un code joueur si le precedent code était 0 un nouveau code joueur est toujours supérieur au plus grand code joueur de la base
         
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (this.codeJoueur.getValue() == 0){
+            this.codeJoueur = fabJoueur.lastCodeBD();
+            this.codeJoueur.setValue(this.codeJoueur.getValue()+1);  
+        }else{
+            System.out.println("tentative de modification du code du joueur " + this.codeJoueur.getValue());
+        }
     }
-    
-    void genereCodeJoueur(){
 
-        //fabJoueur.fabriqueTransaction("lastCodeJoueur",this);
-        this.codeJoueur.setValue(this.codeJoueur.getValue()+1);
+    
+    public void enregistreNouveauJoueur() throws BDAccessEx{
+      
+            fabJoueur.creerDansBD(this);
+       
+            //System.err.println("erreur lors de la création dans la BD de "+ this.nom + this.prenom);
         
     }
-    void setCodeJoueur(int i){
-        this.codeJoueur.setValue(i);
-    }
-    
-
-    public void enregistreNouveauJoueur(){
-        fabJoueur.fabriqueTransaction("new", this);
-    }
-    
 }

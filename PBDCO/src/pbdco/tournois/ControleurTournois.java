@@ -9,6 +9,6 @@ package pbdco.tournois;
  *
  * @author milcenan
  */
-public class Lance_Tournois {
+public interface ControleurTournois {
     
 }
