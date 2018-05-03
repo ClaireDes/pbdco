@@ -66,9 +66,49 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
     }
     
     public Rencontre LoadFromBD(Code code) throws BDAccessEx{
-            return null;
-           
         
+        String requete1 = "SELECT * from Rencontre Where codeRencontre = ?";
+        String requete2 = "SELECT * from Joueur Where codeJoueur = ?";
+        ResultSet resultat;
+        Rencontre rencontre;
+        Joueur joueur1, joueur2;
+        Code codeTour;
+        // Chragement du Driver
+        try{
+            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+        }catch( SQLException ex){
+            throw new BDAccessEx("loadFromBD-Rencontre Raised classNotFound exception during the driver loading");
+        }
+         // Connexion à la BD
+         try{
+            Connection conn = DriverManager.getConnection(URL, USER, PASSWD);
+            try{
+                conn.setAutoCommit(false);
+                conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+
+
+                PreparedStatement stmt = conn.prepareStatement(requete);
+                resultat= stmt.executeQuery(requete);
+                int codejoueur1 = resultat.getInt("Joueur1");
+                int codejoueur2 = resultat.getInt("Joueur2");
+                
+                //joueur1 = 
+                //joueur2=
+                //Code codeTour = ;
+                rencontre = new Rencontre(joueur1, joueur2,codeTour,this);
+
+                conn.close();
+           
+             }catch(  SQLException ex){//si la transaction echoue
+                 conn.rollback();
+                 conn.close();
+                 throw new BDAccessEx("loadFromBD Raised SQLException during the transaction");
+             }
+        }catch(  SQLException ex){
+            throw new BDAccessEx("loadFromBD Raised SQLException during the connection");
+         }
+           
+        return rencontre;
     }
     
     public void MAJBD(Rencontre rencontre) throws BDAccessEx{
@@ -99,6 +139,7 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
                             pstmt.setInt(2,rencontre.codeTour.getValue());
                             pstmt.setInt(3, rencontre.codeRencontre.getValue());
                             pstmt.executeUpdate();
+                            conn.commit();
                             
                 
             }catch(  SQLException ex){//si la transaction echoue
@@ -112,6 +153,8 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
     }
     
     public void creerDansBD(Joueur joueur) throws BDAccessEx{
+        
+        String requete = "INSERT INTO Rencontre"
     
     }
 
