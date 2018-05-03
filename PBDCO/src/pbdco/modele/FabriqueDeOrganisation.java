@@ -35,13 +35,10 @@ public class FabriqueDeOrganisation {
         
     }
         
-    public Code creerTournois(){
+    public void creerTournois(){
         Code codeTournois = new Code("qualif");
-         //crée un nouveau tournois et renvois le code associé 
-        //normalement  le code tournois est égal à "qualif à la création du tournois "
         
-        //insert ...
-        return codeTournois;
+        //insert ... crée un tour qualif
     } 
             
     public void setCodeTour(String codeTour){

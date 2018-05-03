@@ -12,26 +12,26 @@ import pbdco.modele.FabriqueDeOrganisation;
  *
  * @author milcenan
  */
-public class Organisation {
+public abstract class Organisation {
     private String tour;
     private int nbrParticipants;
     private Code codeTournoi;
     private FabriqueDeOrganisation fabriqueOrga;
     
-    public Organisation(Code codeTournoi){
-        this.codeTournoi = codeTournoi;
-        this.fabriqueOrga = new FabriqueDeOrganisation();
-        this.tour = this.fabriqueOrga.quelTour(codeTournoi);
-        if(this.tour == null){
-            //Relever une erreur
-        }
-        this.nbrParticipants = this.fabriqueOrga.nbrDeJoueurs(codeTournoi);
-    }
+//    public Organisation(Code codeTournoi){
+//        this.codeTournoi = codeTournoi;
+//        this.fabriqueOrga = new FabriqueDeOrganisation();
+//        this.tour = this.fabriqueOrga.quelTour(codeTournoi);
+//        if(this.tour == null){
+//            //Relever une erreur
+//        }
+//        this.nbrParticipants = this.fabriqueOrga.nbrDeJoueurs(codeTournoi);
+//    }
     
     public Organisation(){
         this.fabriqueOrga = new FabriqueDeOrganisation();
         this.tour = "qualif";
-        this.codeTournoi = this.fabriqueOrga.creerTournois();
+        this.fabriqueOrga.creerTournois();
         this.nbrParticipants = this.fabriqueOrga.nbrDeJoueurs(codeTournoi);
     }
     

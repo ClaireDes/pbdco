@@ -14,8 +14,8 @@ import pbdco.Code;
 public class PreparationTour extends Organisation{
     
     
-    public PreparationTour(Code tour){
-        super(tour);
+    public PreparationTour(){
+        super();
     }
     
     public void creeRencontre(){
