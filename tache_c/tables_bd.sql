@@ -5,14 +5,13 @@ DROP TABLE Coup;
 DROP TABLE Piece;
 DROP TABLE Rencontre;
 DROP TABLE Joueur;
-DROP TABLE Tournoi;
+DROP TABLE Tour;
 
 
 // Pour recreer les tables vides
-CREATE TABLE Tournoi(
-  codeTournoi INT NOT NULL,
+CREATE TABLE Tour(
   codeTour CHAR(20) NOT NULL CHECK(codeTour IN('qualif','quart','demi','finale')),
-  PRIMARY KEY (codeTournoi, codeTour)
+  PRIMARY KEY (codeTour)
 );
 
 CREATE TABLE Joueur (
@@ -24,15 +23,14 @@ CREATE TABLE Joueur (
 
 CREATE TABLE Rencontre(
   codeRencontre INT NOT NULL,
-  codeTournoi INT NOT NULL,
   codeTour CHAR(20) NOT NULL,
   joueur1 INT NOT NULL,
   joueur2 INT NOT NULL,
   blanc INT,
   noir INT,
   vainqueur INT,
-  PRIMARY KEY (codeRencontre, codeTour, codeTournoi),
-  FOREIGN KEY (codeTournoi, codeTour) REFERENCES Tournoi(codeTournoi, codeTour),
+  PRIMARY KEY (codeRencontre, codeTour),
+  FOREIGN KEY (codeTour) REFERENCES Tour(codeTour),
   FOREIGN KEY (joueur1) REFERENCES Joueur(codeJoueur),
   FOREIGN KEY (joueur2) REFERENCES Joueur(codeJoueur),
   FOREIGN KEY (blanc) REFERENCES Joueur(codeJoueur),
@@ -50,9 +48,8 @@ CREATE TABLE Piece(
   couleur CHAR(5) NOT NULL CHECK(couleur IN('blanc', 'noir', 'rose')),
   codeRencontre INT NOT NULL,
   codeTour CHAR(20) NOT NULL,
-  codeTournoi INT NOT NULL,
-  PRIMARY KEY (codePiece, codeRencontre, codeTour, codeTournoi),
-  FOREIGN KEY (codeRencontre, codeTour, codeTournoi)  REFERENCES Rencontre(codeRencontre, codeTour, codeTournoi),
+  PRIMARY KEY (codePiece, codeRencontre, codeTour),
+  FOREIGN KEY (codeRencontre, codeTour)  REFERENCES Rencontre(codeRencontre, codeTour),
   CONSTRAINT Kuniq UNIQUE (ligneInit,colonneInit),
   CONSTRAINT Kpion CHECK ((typePiece!='pion') OR ((couleur='blanc' AND (ligneFin=ligneInit+1)) OR ((couleur='noir' AND (ligneFin=ligneInit-1))))),
   CONSTRAINT Ktour CHECK ((typePiece!='tour') OR ((ligneFin!=ligneInit AND colonneFin=colonneInit) OR ( ligneFin=ligneInit AND colonneFin!=colonneInit))),
@@ -70,9 +67,8 @@ CREATE TABLE Coup (
   colonnePrec INT NOT NULL CHECK(colonnePrec>0 AND colonnePrec<9),
   codeRencontre INT NOT NULL,
   codeTour CHAR(20) NOT NULL,
-  codeTournoi INT NOT NULL,
-  PRIMARY KEY (codeCoup, codeRencontre, codeTour, codeTournoi),
-  FOREIGN KEY (codeRencontre, codeTour, codeTournoi) REFERENCES Rencontre(codeRencontre, codeTour, codeTournoi)
+  PRIMARY KEY (codeCoup, codeRencontre, codeTour),
+  FOREIGN KEY (codeRencontre, codeTour) REFERENCES Rencontre(codeRencontre, codeTour)
 );
 
 

@@ -5,7 +5,9 @@
  */
 package pbdco.tournois;
 
+import pbdco.BDAccessEx;
 import pbdco.Code;
+import pbdco.modele.FabriqueDeJoueur;
 import pbdco.modele.Joueur;
 
 /**
@@ -13,13 +15,14 @@ import pbdco.modele.Joueur;
  * @author milcenan
  */
 public class Inscription extends Organisation{
-
-    public Inscription(Code tournoi){
-        super(tournoi);
+    private FabriqueDeJoueur fabJoueur = new FabriqueDeJoueur();
+    
+    public Inscription(){
+        super();
     }
     
-    public void inscrit(String nom, String prenom, String adresse){
+    public void inscrit(String nom, String prenom, String adresse) throws BDAccessEx{
         Joueur nouvJoueur;
-        nouvJoueur = new Joueur(nom, prenom, adresse);
+        nouvJoueur = new Joueur(nom, prenom, adresse, fabJoueur);
     }
 }
