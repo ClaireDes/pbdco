@@ -22,7 +22,9 @@ import static pbdco.modele.FabriqueTransaction.*;
 
 public class FabriqueDeRencontre  extends FabriqueTransaction{
 
-
+        FabriqueDeJoueur fabDeJoueur;
+        FabriqueDePiece fabDePiece;
+        FabriqueDeCoups fabDeCoups;
         public Code lastCodeBD() throws BDAccessEx{//renvoie le dernier code rencontre utilisé dans la base pour pouvoir en creer un nouveau
         Code code; 
         ResultSet resultat;
@@ -30,11 +32,11 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
         System.out.println("Recherche du dernier code rencontre");
         
         
-        try{// Chragement du Driver
-            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-        }catch( SQLException ex){
-            throw new BDAccessEx("creerJoueur Raised classNotFound exception during the driver loading");
-        }
+//        try{// Chragement du Driver
+//            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+//        }catch( SQLException ex){
+//            throw new BDAccessEx("creerJoueur Raised classNotFound exception during the driver loading");
+//        }
          // Connexion à la BD
          try{
             Connection conn = DriverManager.getConnection(URL, USER, PASSWD);
@@ -66,15 +68,130 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
     }
     
     public Rencontre LoadFromBD(Code code) throws BDAccessEx{
-            return null;
         
+        String requete1 = "SELECT * from Rencontre Where codeRencontre = ?";
+        ResultSet resultat;
+        Rencontre rencontre;
+        Code codeJoueur1, codeJoueur2, codeTour;
+        // Chragement du Driver
+        try{
+            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+        }catch( SQLException ex){
+            throw new BDAccessEx("loadFromBD-Rencontre Raised classNotFound exception during the driver loading");
+        }
+         // Connexion à la BD
+         try{
+            Connection conn = DriverManager.getConnection(URL, USER, PASSWD);
+            try{
+                conn.setAutoCommit(false);
+                conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+
+
+                PreparedStatement stmt = conn.prepareStatement(requete1);
+                stmt.setInt(1, code.getValue());
+                resultat= stmt.executeQuery(requete1);
+                
+
+                codeJoueur1 = new Code();
+                codeJoueur1.setValue(resultat.getInt("Joueur1"));
+                codeJoueur2 = new Code();
+                codeJoueur2.setValue(resultat.getInt("Joueur2"));
+
+                codeTour = new Code();
+                codeTour.setValue(resultat.getInt("codeTour"));
+                
+                rencontre = new Rencontre(fabDeJoueur.LoadFromBD(codeJoueur1), fabDeJoueur.LoadFromBD(codeJoueur2),codeTour,this);
+
+
+                conn.close();
+           
+             }catch(  SQLException ex){//si la transaction echoue
+                 conn.rollback();
+                 conn.close();
+                 throw new BDAccessEx("loadFromBD Raised SQLException during the transaction");
+             }
+        }catch(  SQLException ex){
+            throw new BDAccessEx("loadFromBD Raised SQLException during the connection");
+         }
+          return null; 
+        //return rencontre;
     }
     
     public void MAJBD(Rencontre rencontre) throws BDAccessEx{
-    
+        
+        String requete = "UPDATE Rencontre SET Vainqueur=? WHERE codeTour=?, codeRencontre=?";
+        
+        //Chargement du driver
+        try{
+            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+        }catch( SQLException ex){
+            throw new BDAccessEx("MajBD Raised classNotFound exception during the driver loading");
+        }
+        
+        //Connexion bd
+        try{
+            Connection conn = DriverManager.getConnection(URL, USER, PASSWD);
+            try{
+                conn.setAutoCommit(false);
+                conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+                PreparedStatement pstmt = conn.prepareStatement(requete);
+                            if(rencontre.terminee==1){
+                                pstmt.setInt(1,rencontre.joueurs[0].codeJoueur.getValue());
+                            }
+                            if(rencontre.terminee==2){
+                                pstmt.setInt(1, rencontre.joueurs[1].codeJoueur.getValue());
+                            }
+                            
+                            pstmt.setInt(2,rencontre.codeTour.getValue());
+                            pstmt.setInt(3, rencontre.codeRencontre.getValue());
+                            pstmt.executeUpdate();
+                            conn.commit();
+                            
+                
+            }catch(  SQLException ex){//si la transaction echoue
+                 conn.rollback();
+                 conn.close();
+                 throw new BDAccessEx("majBD() Raised SQLException during the transaction");
+            } 
+        }catch(  SQLException ex){
+            throw new BDAccessEx("majBD() Raised SQLException during the connection");
+         }
     }
     
-    public void creerDansBD(Joueur joueur) throws BDAccessEx{
+    public void creerDansBD(Rencontre rencontre) throws BDAccessEx{
+                     
+        try{// Chragement du Driver
+            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+        }catch( SQLException ex){
+            throw new BDAccessEx("creerRencontre Raised classNotFound exception during the driver loading"+ex.getMessage());
+        }
+         System.out.println("Driver ok");
+         // Connexion à la BD
+         try{
+            Connection conn = DriverManager.getConnection(URL, USER, PASSWD);
+            System.out.println("Connection ok");
+             try{
+            conn.setAutoCommit(false);
+            conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+            //préparation de la requète
+            PreparedStatement pstmt = conn.prepareStatement("insert into Rencontre(codeRencontre, codeTour,codeTournoi,Joueur1,joueur2) VALUES(?,?,?,?,?)");
+            pstmt.setInt(1, rencontre.codeRencontre.getValue());
+            pstmt.setInt(2, rencontre.codeTour.getValue());
+            pstmt.setInt(3, rencontre.joueurs[0].codeJoueur.getValue());
+            pstmt.setInt(4, rencontre.joueurs[1].codeJoueur.getValue());
+
+            pstmt.executeUpdate();
+            
+            conn.commit();
+            conn.close();
+           System.out.println("Enregistrement de la rencontre " +rencontre.codeRencontre.getValue() + "effectué");         
+             }catch(  SQLException ex){//si la transaction echoue
+                conn.close();
+                 System.err.println(ex.getMessage());
+             }
+        }catch(  SQLException ex){
+            throw new BDAccessEx("creerREncontre Raised SQLException during the connection\n"+ ex.getMessage());
+        }
     
     }
 
@@ -83,8 +200,11 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
     };    
 
     //@Override
-    public void fabriqueTransaction(String operation, Rencontre renc) {
+    public void fabriqueTransaction(String operation, Rencontre renc) throws BDAccessEx {
     
+        
+    
+        
         try {
             // Chargement driver
             System.out.print("Loading Oracle driver... "); 
@@ -105,7 +225,7 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
                         
                         // création d'une nouvelle rencontre
                         case "new":
-                            pstmt = conn.prepareStatement("INSERT INTO Rencontres(codeTour, codeRencontre, JoueurBlanc, JoueurNoir) VALUES (?,?,?,?)");
+                            pstmt = conn.prepareStatement("INSERT INTO Rencontre(codeTour, codeRencontre, JoueurBlanc, JoueurNoir) VALUES (?,?,?,?)");
                             pstmt.setInt(1,renc.codeTour.getValue());
                             pstmt.setInt(2, renc.codeRencontre.getValue());
                             pstmt.setInt(3, renc.joueurs[0].codeJoueur.getValue());
@@ -117,6 +237,17 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
                         
                         // enregistrement du résultat d'une rencontre    
                         case "fini":
+                            pstmt = conn.prepareStatement("UPDATE Rencontre SET Vainqueur=? WHERE codeTour=?, codeRencontre=?");
+                            if(renc.terminee==1){
+                                pstmt.setInt(1,renc.joueurs[0].codeJoueur.getValue());
+                            }
+                            if(renc.terminee==2){
+                                pstmt.setInt(1, renc.joueurs[1].codeJoueur.getValue());
+                            }
+                            
+                            pstmt.setInt(2,renc.codeTour.getValue());
+                            pstmt.setInt(3, renc.codeRencontre.getValue());
+                            pstmt.executeUpdate();
                             
                             break;
                           
@@ -130,10 +261,12 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
                         case "lastCodeRencontre":// le dernier code rencontre utilisé (pour en generer un nouveau)
                             
                             break;
+                            
                     }
+                    
+                conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(FabriqueDeRencontre.class.getName()).log(Level.SEVERE, null, ex);
-        }
+throw new BDAccessEx("lastCodeJoueur() Raised SQLException during the connection"+ex.getMessage());        }
  }
    
 }
