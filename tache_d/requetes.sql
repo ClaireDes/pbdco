@@ -23,7 +23,7 @@ WHERE codeJouer=Machin;
 
 
 /* Les parties en cours */
-/* Si on créer une rencontre seulement quand elle commence: */
+/* Si on crée une rencontre seulement quand elle commence: */
 SELECT codeRencontre from Rencontres 
 MINUS 
 (SELECT codeRencontre from Vainqueur); 
@@ -32,7 +32,7 @@ MINUS
 /*Position possible ? */
 /* la colonne CASE ainsi créee indique si la case est atteignable par la pièce ou non*/
 SELECT ligneFin, colonneFin 
-FROM Pieces 
+FROM Piece
 CASE
 	WHEN ligneFin > 8 OR ligneFin < 0 OR colonneFin < 0 OR colonneFin > 8 THEN 'false'
 	WHEN type = 'tour' AND ligneFin=ligneInit THEN 'true' /*on suppose qu'on se deplace*/
@@ -54,7 +54,8 @@ CASE
 	WHEN type = 'reine' AND ABS(ligneInit-ligneFin) = ABS(colonneInit-colonneFin) THEN 'true'
 	WHEN type = 'reine' AND ligneFin=ligneInit THEN 'true'
 	WHEN type = 'reine' AND colonneFin=colonneInit THEN 'true'
-ELSE 'false';
+	ELSE 'false'
+END;
 	
 		
 
@@ -62,3 +63,17 @@ ELSE 'false';
 
 
 /*position => couleur */
+SELECT couleur FROM Piece
+WHERE ligneInit = L AND colonneInit = C;
+
+
+
+
+
+
+
+
+
+
+
+
