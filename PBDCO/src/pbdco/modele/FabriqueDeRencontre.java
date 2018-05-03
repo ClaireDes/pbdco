@@ -7,6 +7,7 @@ package pbdco.modele;
 
 
 import java.sql.*;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pbdco.BDAccessEx;
@@ -159,11 +160,14 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
     }
     
     public void creerDansBD(Rencontre rencontre) throws BDAccessEx{
-                     
+        
+        Random rand = new Random();
+        
         try{// Chragement du Driver
             DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
         }catch( SQLException ex){
-            throw new BDAccessEx("creerRencontre Raised classNotFound exception during the driver loading"+ex.getMessage());
+            throw new BDAccessEx("creerRencontre Raised classNotFound exception "
+                    + "during the driver loading"+ex.getMessage());
         }
          System.out.println("Driver ok");
          // Connexion à la BD
@@ -174,11 +178,20 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
             conn.setAutoCommit(false);
             conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
             //préparation de la requète
-            PreparedStatement pstmt = conn.prepareStatement("insert into Rencontre(codeRencontre, codeTour,codeTournoi,Joueur1,joueur2) VALUES(?,?,?,?,?)");
+            PreparedStatement pstmt = conn.prepareStatement("insert into Rencontre"
+                    + "(codeRencontre, codeTour,Joueur1,joueur2,Blanc,Noir) VALUES(?,?,?,?,?,?)");
             pstmt.setInt(1, rencontre.codeRencontre.getValue());
             pstmt.setInt(2, rencontre.codeTour.getValue());
             pstmt.setInt(3, rencontre.joueurs[0].codeJoueur.getValue());
             pstmt.setInt(4, rencontre.joueurs[1].codeJoueur.getValue());
+            
+            // Décision Blanc/Noir
+            if(rand.nextInt(10000)%2==0){
+                pstmt.setInt(5, rencontre.joueurs[0].codeJoueur.getValue());
+            }else{
+                pstmt.setInt(5, rencontre.joueurs[1].codeJoueur.getValue());
+            }
+            
 
             pstmt.executeUpdate();
             
