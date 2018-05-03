@@ -66,9 +66,49 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
     }
     
     public Rencontre LoadFromBD(Code code) throws BDAccessEx{
-            return null;
-           
         
+        String requete1 = "SELECT * from Rencontre Where codeRencontre = ?";
+        String requete2 = "SELECT * from Joueur Where codeJoueur = ?";
+        ResultSet resultat;
+        Rencontre rencontre;
+        Joueur joueur1, joueur2;
+        Code codeTour;
+        // Chragement du Driver
+        try{
+            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+        }catch( SQLException ex){
+            throw new BDAccessEx("loadFromBD-Rencontre Raised classNotFound exception during the driver loading");
+        }
+         // Connexion à la BD
+         try{
+            Connection conn = DriverManager.getConnection(URL, USER, PASSWD);
+            try{
+                conn.setAutoCommit(false);
+                conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+
+
+                PreparedStatement stmt = conn.prepareStatement(requete1);
+                resultat= stmt.executeQuery(requete1);
+                int codejoueur1 = resultat.getInt("Joueur1");
+                int codejoueur2 = resultat.getInt("Joueur2");
+                
+                //joueur1 = 
+                //joueur2=
+                //Code codeTour = ;
+                rencontre = new Rencontre(joueur1, joueur2,codeTour,this);
+
+                conn.close();
+           
+             }catch(  SQLException ex){//si la transaction echoue
+                 conn.rollback();
+                 conn.close();
+                 throw new BDAccessEx("loadFromBD Raised SQLException during the transaction");
+             }
+        }catch(  SQLException ex){
+            throw new BDAccessEx("loadFromBD Raised SQLException during the connection");
+         }
+           
+        return rencontre;
     }
     
     public void MAJBD(Rencontre rencontre) throws BDAccessEx{
@@ -99,6 +139,7 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
                             pstmt.setInt(2,rencontre.codeTour.getValue());
                             pstmt.setInt(3, rencontre.codeRencontre.getValue());
                             pstmt.executeUpdate();
+                            conn.commit();
                             
                 
             }catch(  SQLException ex){//si la transaction echoue
@@ -111,7 +152,40 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
          }
     }
     
-    public void creerDansBD(Joueur joueur) throws BDAccessEx{
+    public void creerDansBD(Rencontre rencontre) throws BDAccessEx{
+                     
+        try{// Chragement du Driver
+            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+        }catch( SQLException ex){
+            throw new BDAccessEx("creerRencontre Raised classNotFound exception during the driver loading"+ex.getMessage());
+        }
+         System.out.println("Driver ok");
+         // Connexion à la BD
+         try{
+            Connection conn = DriverManager.getConnection(URL, USER, PASSWD);
+            System.out.println("Connection ok");
+             try{
+            conn.setAutoCommit(false);
+            conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+            //préparation de la requète
+            PreparedStatement pstmt = conn.prepareStatement("insert into Rencontre(codeRencontre, codeTour,codeTournoi,Joueur1,joueur2) VALUES(?,?,?,?,?)");
+            pstmt.setInt(1, rencontre.codeRencontre.getValue());
+            pstmt.setInt(2, rencontre.codeTour.getValue());
+            pstmt.setInt(3, rencontre.joueurs[0].codeJoueur.getValue());
+            pstmt.setInt(4, rencontre.joueurs[1].codeJoueur.getValue());
+
+            pstmt.executeUpdate();
+            
+            conn.commit();
+            conn.close();
+           System.out.println("Enregistrement de la rencontre " +rencontre.codeRencontre.getValue() + "effectué");         
+             }catch(  SQLException ex){//si la transaction echoue
+                conn.close();
+                 System.err.println(ex.getMessage());
+             }
+        }catch(  SQLException ex){
+            throw new BDAccessEx("creerREncontre Raised SQLException during the connection\n"+ ex.getMessage());
+        }
     
     }
 

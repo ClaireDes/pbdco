@@ -133,3 +133,8 @@ UPDATE Tour SET codeTour=codeT WHERE codeTour=codeT2;
 
 
 
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> modele_bd
