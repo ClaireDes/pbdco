@@ -15,34 +15,32 @@ import pbdco.modele.FabriqueDeOrganisation;
 public class Organisation {
     private String tour;
     private int nbrParticipants;
-    private Code codeTour;
+    private Code codeTournoi;
     private FabriqueDeOrganisation fabriqueOrga;
     
-    public Organisation(Code codeTour){
-        this.codeTour = new Code(codeTour);
-        this.frabriqueOrga = new fabriqueDeOrganisation();
-        this.tour = this.fabriqueOrga.quelTour();
+    public Organisation(Code codeTournoi){
+        this.codeTournoi = codeTournoi;
+        this.fabriqueOrga = new FabriqueDeOrganisation();
+        this.tour = this.fabriqueOrga.quelTour(codeTournoi);
         if(this.tour == null){
             //Relever une erreur
         }
-        this.nbrParticipants = this.fabriqueOrga.nbrDeJoueurs();
+        this.nbrParticipants = this.fabriqueOrga.nbrDeJoueurs(codeTournoi);
     }
     
     public Organisation(){
-        this.frabriqueOrga = new fabriqueDeOrganisation();
-        this.tour = this.fabriqueOrga.quelTour();
-        if(this.tour == null){
-            this.codeTour = this.fabriqueOrga.creerTournoi();
-        }
-        this.nbrParticipants = this.fabriqueOrga.nbrDeJoueurs();
+        this.fabriqueOrga = new FabriqueDeOrganisation();
+        this.tour = "qualif";
+        this.codeTournoi = this.fabriqueOrga.creerTournois();
+        this.nbrParticipants = this.fabriqueOrga.nbrDeJoueurs(codeTournoi);
     }
     
     public String getTour(){
         return this.tour;
     }
     
-    public Code getCodeTour(){
-        return this.codeTour;
+    public Code getCodeTournoi(){
+        return this.codeTournoi;
     }
     
     public int getNbrParticipants(){

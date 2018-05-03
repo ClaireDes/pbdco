@@ -5,6 +5,8 @@
  */
 package pbdco.tournois;
 
+import pbdco.Code;
+
 /**
  *
  * @author milcenan
@@ -12,13 +14,13 @@ package pbdco.tournois;
 public class PreparationTour extends Organisation{
     
     
-    public PreparationTour(String tour){
+    public PreparationTour(Code tour){
         super(tour);
     }
     
     public void creeRencontre(){
         switch(this.getTour()){
-            case "Qualif": 
+            case "qualif": 
                 
         }
     }

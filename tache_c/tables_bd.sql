@@ -1,10 +1,14 @@
-//Lucas
+// Pour se connecter a la bd sqlplus grelliel@ensioracle1
+
+//Pour reset la bd les commandes suivantes dans ce sens
+DROP TABLE Coup;
+DROP TABLE Piece;
 DROP TABLE Joueur;
 DROP TABLE Rencontre;
-DROP TABLE Tour;
-DROP TABLE Piece;
-DROP TABLE Coup;
+DROP TABLE Tournoi;
 
+
+// Pour recreer les tables vides
 CREATE TABLE Tournoi(
   codeTournoi INT NOT NULL,
   codeTour CHAR(20) NOT NULL CHECK(codeTour IN('qualif','quart','demi','finale')),

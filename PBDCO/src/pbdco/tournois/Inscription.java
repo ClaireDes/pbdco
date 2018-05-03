@@ -4,18 +4,22 @@
  * and open the template in the editor.
  */
 package pbdco.tournois;
+
+import pbdco.Code;
+import pbdco.modele.Joueur;
+
 /**
  *
  * @author milcenan
  */
 public class Inscription extends Organisation{
 
-    public Inscription(String tour){
-        super(tour);
+    public Inscription(Code tournoi){
+        super(tournoi);
     }
     
     public void inscrit(String nom, String prenom, String adresse){
         Joueur nouvJoueur;
-        this.nouvJoueur = new Joueur(nom, prenom, adresse);
+        nouvJoueur = new Joueur(nom, prenom, adresse);
     }
 }

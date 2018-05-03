@@ -36,7 +36,7 @@ public class FabriqueDeOrganisation {
     }
         
     public Code creerTournois(){
-        Code codeTournois = new Code("");
+        Code codeTournois = new Code("qualif");
          //crée un nouveau tournois et renvois le code associé 
         //normalement  le code tournois est égal à "qualif à la création du tournois "
         
