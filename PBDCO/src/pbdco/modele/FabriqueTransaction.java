@@ -15,8 +15,8 @@ public abstract class FabriqueTransaction {
     
     //A COMPLETER
     static String URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
-    static String USER = "milcenan";
-    static String PASSWD = "milcenan";
+    static String USER = "grelliel";
+    static String PASSWD = "grelliel";
     
     
 //        public abstract void fabriqueTransaction(String operation,Modele param);

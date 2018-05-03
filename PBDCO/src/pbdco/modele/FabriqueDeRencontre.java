@@ -30,11 +30,11 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
         System.out.println("Recherche du dernier code rencontre");
         
         
-        try{// Chragement du Driver
-            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-        }catch( SQLException ex){
-            throw new BDAccessEx("creerJoueur Raised classNotFound exception during the driver loading");
-        }
+//        try{// Chragement du Driver
+//            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+//        }catch( SQLException ex){
+//            throw new BDAccessEx("creerJoueur Raised classNotFound exception during the driver loading");
+//        }
          // Connexion à la BD
          try{
             Connection conn = DriverManager.getConnection(URL, USER, PASSWD);
