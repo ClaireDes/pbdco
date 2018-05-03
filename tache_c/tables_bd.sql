@@ -7,7 +7,8 @@ DROP TABLE Coup;
 
 CREATE TABLE Tournoi(
   codeTournoi INT NOT NULL,
-  PRIMARY KEY (codeTournoi)
+  codeTour CHAR(20) NOT NULL CHECK(codeTour IN('qualif','quart','demi','finale')),
+  PRIMARY KEY (codeTournoi, codeTour)
 )
 
 CREATE TABLE Joueur (
@@ -19,15 +20,15 @@ CREATE TABLE Joueur (
 
 CREATE TABLE Rencontre(
   codeRencontre INT NOT NULL,
-  codeTour CHAR(20) NOT NULL CHECK(codeTour IN('qualif','quart','demi','finale')),
   codeTournoi INT NOT NULL,
+  codeTour CHAR(20) NOT NULL,
   joueur1 INT NOT NULL,
   joueur2 INT NOT NULL,
   blanc INT,
   noir INT,
   vainqueur INT,
   PRIMARY KEY (codeRencontre, codeTour, codeTournoi),
-  FOREIGN KEY (codeTournoi) REFERENCES Tournoi(codeTournoi),
+  FOREIGN KEY (codeTournoi, codeTour) REFERENCES Tournoi(codeTournoi, codeTour),
   FOREIGN KEY (joueur1) REFERENCES Joueur(codeJoueur),
   FOREIGN KEY (joueur2) REFERENCES Joueur(codeJoueur),
   FOREIGN KEY (blanc) REFERENCES Joueur(codeJoueur),
