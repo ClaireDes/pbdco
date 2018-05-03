@@ -65,14 +65,13 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
     
     }
     
-    public Rencontre LoadFromBD(Code code) throws BDAccessEx{
+    public Rencontre LoadFromBD(Code code, FabriqueDeJoueur fabJoueur) throws BDAccessEx{
         
         String requete1 = "SELECT * from Rencontre Where codeRencontre = ?";
         String requete2 = "SELECT * from Joueur Where codeJoueur = ?";
         ResultSet resultat;
         Rencontre rencontre;
-        Joueur joueur1, joueur2;
-        Code codeTour;
+        Code codeJoueur1, codeJoueur2, codeTour;
         // Chragement du Driver
         try{
             DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
@@ -89,13 +88,16 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
 
                 PreparedStatement stmt = conn.prepareStatement(requete1);
                 resultat= stmt.executeQuery(requete1);
-                int codejoueur1 = resultat.getInt("Joueur1");
-                int codejoueur2 = resultat.getInt("Joueur2");
                 
-                //joueur1 = 
-                //joueur2=
-                //Code codeTour = ;
-                rencontre = new Rencontre(joueur1, joueur2,codeTour,this);
+                codeJoueur1 = new Code();
+                codeJoueur1.setValue(resultat.getInt("Joueur1"));
+                codeJoueur2 = new Code();
+                codeJoueur2.setValue(resultat.getInt("Joueur2"));
+
+                codeTour = new Code();
+                codeTour.setValue(resultat.getInt("codeTour"));
+                
+                rencontre = new Rencontre(fabJoueur.LoadFromBD(codeJoueur1), fabJoueur.LoadFromBD(codeJoueur2),codeTour,this);
 
                 conn.close();
            
