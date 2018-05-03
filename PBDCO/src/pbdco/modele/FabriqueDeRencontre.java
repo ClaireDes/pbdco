@@ -70,7 +70,6 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
     public Rencontre LoadFromBD(Code code) throws BDAccessEx{
         
         String requete1 = "SELECT * from Rencontre Where codeRencontre = ?";
-        String requete2 = "SELECT * from Joueur Where codeJoueur = ?";
         ResultSet resultat;
         Rencontre rencontre;
         Code codeJoueur1, codeJoueur2, codeTour;
@@ -89,6 +88,7 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
 
 
                 PreparedStatement stmt = conn.prepareStatement(requete1);
+                stmt.setInt(1, code.getValue());
                 resultat= stmt.executeQuery(requete1);
                 
 
