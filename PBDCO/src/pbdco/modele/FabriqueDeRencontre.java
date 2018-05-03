@@ -111,8 +111,43 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
          }
     }
     
-    public void creerDansBD(Joueur joueur) throws BDAccessEx{
+    public void creerDansBD(Rencontre rencontre) throws BDAccessEx{
     
+        String requete = "INSERT INTO Rencontre(codeRencontre, codeTour, codeTournoi, Joueur1, Joueur2) VALUES(?,?,?,?,?)";
+        
+            try {
+                DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
+            } catch (SQLException ex) {
+                Logger.getLogger(FabriqueDeRencontre.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            try{
+            Connection conn = DriverManager.getConnection(URL, USER, PASSWD);
+            try{
+                conn.setAutoCommit(false);
+                conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+
+
+                PreparedStatement pstmt = conn.prepareStatement(requete); 
+                pstmt.setInt(1,rencontre.codeRencontre.getValue());
+                pstmt.setInt(2, rencontre.codeTour.getValue());
+               // pstmt.setString(3,rencontre.codeTournoi.getValue());
+                pstmt.setInt(4,rencontre.joueurs[0].codeJoueur.getValue());
+                pstmt.setInt(5,rencontre.joueurs[1].codeJoueur.getValue());
+                
+                pstmt.executeUpdate();
+
+
+                conn.close();           
+             }catch(  SQLException ex){//si la transaction echoue
+                 conn.rollback();
+                 conn.close();
+                 throw new BDAccessEx("lastCodeJoueur() Raised SQLException during the transaction");
+             }
+        }catch(  SQLException ex){
+            throw new BDAccessEx("lastCodeJoueur() Raised SQLException during the connection");
+         }
+        
     }
 
     public  void fabriqueRequete(){
