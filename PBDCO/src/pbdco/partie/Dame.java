@@ -18,8 +18,5 @@ public class Dame extends Piece{
         this.setCouleur(c);
     }
 
-    @Override
-    public Boolean verifySituation() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 }

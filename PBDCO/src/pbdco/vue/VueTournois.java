@@ -1,5 +1,7 @@
+package pbdco.vue;
+
 public class VueTournois {
-    private Grille grille;
+    /*private Grille grille;
     private BarreOutils barreOutils;
     private Joueur joueurBlanc;
     private Joueur joueurNoir;
@@ -8,6 +10,6 @@ public class VueTournois {
         this.joueurBlanc = joueurBlanc;
         this.joueurNoir = joueurNoir;
     }
-
+*/
 
 }

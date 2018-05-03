@@ -11,6 +11,16 @@ package pbdco.partie;
  */
 public class Coup {
     
+    private Boolean misEnEchec = false;
+    
+    public Boolean getMisEnEchec(){
+        return this.misEnEchec;
+    }
+    
+    public void setMisEnEchec(Boolean misEnEchec){
+        this.misEnEchec = misEnEchec;
+    }
+    
     public int getPreviousX(Piece piece){
         return piece.getCurrentPosition().getX();
     }
@@ -23,6 +33,13 @@ public class Coup {
         piece.updatePosition(new Position(newPosition.getX(), newPosition.getY(),true));
     }
     
+    public void setEchecCase(Piece piece){
+        //A FAIRE
+        //récupérer liste des positions atteintes actuellement --> previousPosition
+        // for each -> position.setEchec(false);
+        //récupérer liste positions atteintes nouvellement --> currentPosition
+        // for each -> position.setEchec(true);
+    }
     public void verifyCoup(Piece piece, Position newPosition){
         
         int deltaX = newPosition.getX()-piece.getCurrentPosition().getX();
@@ -31,17 +48,31 @@ public class Coup {
         
         switch (piece.getNom()) {
             case "pion":
-                if(newPosition.getState()){//si la case est occupée
+                if(newPosition.getState() && piece.getColorBool()!=newPosition.getColor()){//si la case est occupée par une pièce 
+                        if(newPosition.getPiece().getNom().equals("roi")){
+                            System.out.println("Echec !");
+                            this.setMisEnEchec(true);
+                        }
+                        // A FAIRE
                         // On enlève la pièce qui était à cette position --> manger(newPosition);
                 }
+                else if(newPosition.getState() && piece.getColorBool()==newPosition.getColor()){
+                    throw new UnsupportedOperationException("on ne peut aller sur une case occupée par une de ses propres pièces déjà");
+                }
                 updatePositionPiece(piece, newPosition); //la pièce est déplacée
+                setEchecCase(piece);
                 break;
             case "roi":
-                if(piece.verifySituation()){//on vérifie que le roi ne se met pas en échec
-                    if(newPosition.getState()){//si la case est occupée
+                if(!newPosition.getEchec()){//on vérifie que le roi ne se met pas sur une case en échec
+                    if(newPosition.getState() && piece.getColorBool()!=newPosition.getColor()){//si la case est occupée
+                        // A FAIRE
                         // On enlève la pièce qui était à cette position --> manger(newPosition);
                     }
+                    else if(newPosition.getState() && piece.getColorBool()==newPosition.getColor()){
+                        throw new UnsupportedOperationException("on ne peut aller sur une case occupée par une de ses propres pièces déjà");
+                    }
                     updatePositionPiece(piece, newPosition); //la pièce est déplacée
+                    setEchecCase(piece);
                 }
                 else{
                     throw new UnsupportedOperationException("Le roi ne peut se mettre en échec");
@@ -126,10 +157,15 @@ public class Coup {
                         }
                     }
                 }
-                if(newPosition.getState()){//si la case est occupée
+                if(newPosition.getState() && piece.getColorBool()!=newPosition.getColor()){//si la case est occupée
+                        // A FAIRE
                         // On enlève la pièce qui était à cette position --> manger(newPosition);
                 }
+                else if(newPosition.getState() && piece.getColorBool()==newPosition.getColor()){
+                    throw new UnsupportedOperationException("on ne peut aller sur une case occupée par une de ses propres pièces déjà");
+                }
                 updatePositionPiece(piece, newPosition); //la pièce est déplacée
+                setEchecCase(piece);
                 break;
             case "tour":
                 if(deltaX==0){//déplacement vertical
@@ -174,10 +210,15 @@ public class Coup {
                         }
                     }
                 }
-                if(newPosition.getState()){//si la case est occupée
+                if(newPosition.getState() && piece.getColorBool()!=newPosition.getColor()){//si la case est occupée
+                        // A FAIRE
                         // On enlève la pièce qui était à cette position --> manger(newPosition);
                 }
+                else if(newPosition.getState() && piece.getColorBool()==newPosition.getColor()){
+                    throw new UnsupportedOperationException("on ne peut aller sur une case occupée par une de ses propres pièces déjà");
+                }
                 updatePositionPiece(piece, newPosition); //la pièce est déplacée
+                setEchecCase(piece);
                 break;
             case "fou":
                 if(deltaX<0 && deltaY<0){//déplacement diagonale basse gauche
@@ -216,16 +257,26 @@ public class Coup {
                         }
                     }
                 }
-                if(newPosition.getState()){//si la case est occupée
+                if(newPosition.getState() && piece.getColorBool()!=newPosition.getColor()){//si la case est occupée
+                        // A FAIRE
                         // On enlève la pièce qui était à cette position --> manger(newPosition);
                 }
+                else if(newPosition.getState() && piece.getColorBool()==newPosition.getColor()){
+                    throw new UnsupportedOperationException("on ne peut aller sur une case occupée par une de ses propres pièces déjà");
+                }
                 updatePositionPiece(piece, newPosition); //la pièce est déplacée
+                setEchecCase(piece);
                 break;
             case "cavalier":
-                if(newPosition.getState()){//si la case est occupée
+                if(newPosition.getState() && piece.getColorBool()!=newPosition.getColor()){//si la case est occupée
+                        // A FAIRE
                         // On enlève la pièce qui était à cette position --> manger(newPosition);
                 }
+                else if(newPosition.getState() && piece.getColorBool()==newPosition.getColor()){
+                    throw new UnsupportedOperationException("on ne peut aller sur une case occupée par une de ses propres pièces déjà");
+                }
                 updatePositionPiece(piece, newPosition); //la pièce est déplacée
+                setEchecCase(piece);
                 break;
             default:
                 throw new UnsupportedOperationException("Pièce inexistante : mauvais nom");

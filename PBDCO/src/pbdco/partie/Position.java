@@ -13,6 +13,7 @@ public class Position {
     private int x=1;
     private int y=1;
     private Boolean state; //true pour case occupée, false sinon
+    private Boolean echec = false;
     
     public int getX(){
         return this.x;
@@ -24,6 +25,23 @@ public class Position {
  
     public Boolean getState(){
         return this.state;
+    }
+    
+    public Boolean getEchec(){
+        return this.echec;
+    }
+    
+    public Boolean getColor(){
+        // A FAIRE
+        // requete pour avoir couleur a partir de position
+        return true; //à enlever ensuite une fois que c'est complété au dessus
+    }
+    
+    public Piece getPiece(){
+        // A FAIRE 
+        // requete pour avoir piece a une position
+        Tour tour = new Tour(new Position(1,1,true),true);//à enlever ensuite une fois que c'est complété au dessus
+        return tour;//à enlever ensuite une fois que c'est complété au dessus
     }
     
     public void setPosition(int x, int y){
@@ -41,6 +59,10 @@ public class Position {
     
     public void setState(Boolean state){
         this.state = state;
+    }
+    
+    public void setEchec(Boolean echec){
+        this.echec = echec;
     }
     
     public Position(int x, int y, Boolean state){
