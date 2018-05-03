@@ -67,7 +67,7 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
     
     }
     
-    public Rencontre LoadFromBD(Code code, FabriqueDeJoueur fabJoueur) throws BDAccessEx{
+    public Rencontre LoadFromBD(Code code) throws BDAccessEx{
         
         String requete1 = "SELECT * from Rencontre Where codeRencontre = ?";
         String requete2 = "SELECT * from Joueur Where codeJoueur = ?";
@@ -100,7 +100,7 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
                 codeTour = new Code();
                 codeTour.setValue(resultat.getInt("codeTour"));
                 
-                rencontre = new Rencontre(fabJoueur.LoadFromBD(codeJoueur1), fabJoueur.LoadFromBD(codeJoueur2),codeTour,this);
+                rencontre = new Rencontre(fabDeJoueur.LoadFromBD(codeJoueur1), fabDeJoueur.LoadFromBD(codeJoueur2),codeTour,this);
 
 
                 conn.close();
