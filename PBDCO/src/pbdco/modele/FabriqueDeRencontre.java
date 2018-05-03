@@ -22,7 +22,9 @@ import static pbdco.modele.FabriqueTransaction.*;
 
 public class FabriqueDeRencontre  extends FabriqueTransaction{
 
-
+        FabriqueDeJoueur fabDeJoueur;
+        FabriqueDePiece fabDePiece;
+        FabriqueDeCoups fabDeCoups;
         public Code lastCodeBD() throws BDAccessEx{//renvoie le dernier code rencontre utilisé dans la base pour pouvoir en creer un nouveau
         Code code; 
         ResultSet resultat;
@@ -95,7 +97,7 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
                 //joueur1 = 
                 //joueur2=
                 //Code codeTour = ;
-                rencontre = new Rencontre(joueur1, joueur2,codeTour,this);
+                //rencontre = new Rencontre(joueur1, joueur2,codeTour,this);
 
                 conn.close();
            
@@ -107,8 +109,8 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
         }catch(  SQLException ex){
             throw new BDAccessEx("loadFromBD Raised SQLException during the connection");
          }
-           
-        return rencontre;
+          return null; 
+        //return rencontre;
     }
     
     public void MAJBD(Rencontre rencontre) throws BDAccessEx{
