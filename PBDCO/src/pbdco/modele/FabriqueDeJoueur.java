@@ -245,7 +245,7 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
     public Code lastCodeBD() throws BDAccessEx{//renvoie le dernier code joueur utilisé dans la base pour pouvoiren creer un nouveau
         Code code; 
         ResultSet resultat;
-        String requete="SELECT MAX(codeJoueur) FROM Joueurs;" ;
+        String requete="SELECT MAX(codeJoueur) FROM Joueur;" ;
         System.out.println("Recherche du dernier code Joueur");
         
         
