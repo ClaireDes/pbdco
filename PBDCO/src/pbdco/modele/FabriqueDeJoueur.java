@@ -29,69 +29,9 @@ import pbdco.partie.*;
  */
 public class FabriqueDeJoueur extends FabriqueTransaction{
 
-    //@Override
-   /* public  void fabriqueTransaction(String operation,Joueur joueur){
         
-        try {
-            // Chargement driver
-            System.out.print("Loading Oracle driver... ");
-            //DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-            System.out.println("loaded");
-            
-            
-            // Connexion à la BDD
-            System.out.println("Connexion à la base de données...");
-            Connection conn = DriverManager.getConnection(URL, USER, PASSWD);
-            System.out.println("connecté.");
-            
-            conn.setAutoCommit(false);
-            conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
-            
-
-                    
-                    
-                    switch (operation) {
-                        case "new"://création d'un joueur (uniquement dans inscription)
-                            
-                            
-                            System.out.println("enregistrement d'un nouveau joueur dans la base");
-                            
-                                        PreparedStatement pstmt = conn.prepareStatement("insert into Joueurs(codeJoueur, Prenom, Nom, Adresse) VALUES(?,?,?,?)");
-            pstmt.setInt(1, joueur.codeJoueur.getValue());
-            pstmt.setString(2, joueur.prenom);
-            pstmt.setString(3, joueur.nom);
-            pstmt.setString(4, joueur.adresse);
-                      
-                            break;
-                        case "nom"://modification du nom d'un joueur (existant)
-                            System.out.println("modification du nom d'un joueur");
-                            break;
-                        case "prenom"://modification du prénom d'un joueur (existant)
-                            System.out.println("modificatio du prenom d'un joueur");
-                            break;
-                        case "update":// mise à jour du joueur avec les données dans joueur actuellement
-                            System.out.println("modification d'un joueur ");
-                            break;
-                        case "load": //charge un joueur depuis un code joueur
-                            System.out.println("chargement d'un joueur depuis la base de donnees");
-                            break;
-                    }
-          conn.commit();
-          conn.close();
-          
-        } catch (SQLException ex) {
-            Logger.getLogger(FabriqueDeJoueur.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         }*/
-    
-    
     public void creerDansBD(Joueur joueur) throws BDAccessEx{
-         try{// Chragement du Driver
-            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-        }catch( SQLException ex){
-            throw new BDAccessEx("creerJoueur Raised classNotFound exception during the driver loading"+ex.getMessage());
-        }
-         System.out.println("Driver ok");
+
          // Connexion à la BD
          try{
             Connection conn = DriverManager.getConnection(URL, USER, PASSWD);
@@ -100,8 +40,8 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
             conn.setAutoCommit(false);
             conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
             //préparation de la requète
-            PreparedStatement pstmt = conn.prepareStatement("insert into Joueurs VALUES(?,?,?,?)");
-            pstmt.setInt(1, joueur.codeJoueur.getValue());
+            PreparedStatement pstmt = conn.prepareStatement("insert into Joueur VALUES(?,?,?,?);");
+            pstmt.setInt(1,joueur.codeJoueur.getValue());
             pstmt.setString(2, joueur.prenom);
             pstmt.setString(3, joueur.nom);
             pstmt.setString(4, joueur.adresse);
@@ -123,11 +63,11 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
          int codeJoueur = joueur.codeJoueur.getValue();
          String requete = "UPDATE joueurs Set nom = ?, prenom = ?, adresse = ? WHERE codeJoueur = ?;";
          
-         try{// Chragement du Driver
-            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-        }catch( SQLException ex){
-            throw new BDAccessEx("creerJoueur Raised classNotFound exception during the driver loading");
-        }
+//         try{// Chragement du Driver
+//            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+//        }catch( SQLException ex){
+//            throw new BDAccessEx("creerJoueur Raised classNotFound exception during the driver loading");
+//        }
          // Connexion à la BD
          try{
             Connection conn = DriverManager.getConnection(URL, USER, PASSWD);
@@ -164,17 +104,17 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
          int nbVictoires;
          String etat = "En cours";
          
-         String requete = "SELECT * FROM  joueurs  WHERE codeJoueur = ?;";
-         String requete2 = "SELECT codeRencontre From rencontres WHERE joueur1 = ? OR joueur2 = ? AND etat = ? ;";
-         String requete3 = "SELECT COUNT(vainqueur) FROM rencontres where vainqueur= ?;";
+         String requete = "SELECT * FROM  joueur  WHERE codeJoueur=?;";
+         String requete2 = "SELECT codeRencontre From rencontre WHERE joueur1 = ? OR joueur2 = ? AND etat = ? ;";
+         String requete3 = "SELECT COUNT(vainqueur) FROM rencontre where vainqueur= ?;";
          
          ResultSet resultat;
          
-         try{// Chragement du Driver
-            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-        }catch( SQLException ex){
-            throw new BDAccessEx("creerJoueur Raised classNotFound exception during the driver loading"+ex.getMessage());
-        }
+//     try{// Chragement du Driver
+//        DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+//    }catch( SQLException ex){
+//        throw new BDAccessEx("creerJoueur Raised classNotFound exception during the driver loading"+ex.getMessage());
+//    }
          // Connexion à la BD
          try{
             Connection conn = DriverManager.getConnection(URL, USER, PASSWD);
@@ -185,14 +125,17 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
             
             PreparedStatement pstmt = conn.prepareStatement(requete);
             pstmt.setInt(1, codeJoueur);
+            System.out.println("1");
             
             resultat = pstmt.executeQuery();
             
+            System.out.println("2");
             resultat.next();
             nom=resultat.getString(2);
             prenom=resultat.getString(3);
             adresse = resultat.getString(4);
             
+                 System.out.println("requete 1 ok");
          
             pstmt.close();
             resultat.close();
@@ -249,11 +192,11 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
         System.out.println("Recherche du dernier code Joueur");
         
         
-        try{// Chragement du Driver
-            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-        }catch( SQLException ex){
-            throw new BDAccessEx("creerJoueur Raised classNotFound exception during the driver loading" + ex.getMessage());
-        }
+//        try{// Chragement du Driver
+//            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+//        }catch( SQLException ex){
+//            throw new BDAccessEx("creerJoueur Raised classNotFound exception during the driver loading" + ex.getMessage());
+//        }
          // Connexion à la BD
          try{
             Connection conn = DriverManager.getConnection(URL, USER, PASSWD);
