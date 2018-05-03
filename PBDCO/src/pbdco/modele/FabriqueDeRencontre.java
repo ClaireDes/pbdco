@@ -87,8 +87,8 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
                 conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
 
 
-                PreparedStatement stmt = conn.prepareStatement(requete);
-                resultat= stmt.executeQuery(requete);
+                PreparedStatement stmt = conn.prepareStatement(requete1);
+                resultat= stmt.executeQuery(requete1);
                 int codejoueur1 = resultat.getInt("Joueur1");
                 int codejoueur2 = resultat.getInt("Joueur2");
                 
@@ -152,9 +152,40 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
          }
     }
     
-    public void creerDansBD(Joueur joueur) throws BDAccessEx{
-        
-        String requete = "INSERT INTO Rencontre"
+    public void creerDansBD(Rencontre rencontre) throws BDAccessEx{
+                     
+        try{// Chragement du Driver
+            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+        }catch( SQLException ex){
+            throw new BDAccessEx("creerRencontre Raised classNotFound exception during the driver loading"+ex.getMessage());
+        }
+         System.out.println("Driver ok");
+         // Connexion à la BD
+         try{
+            Connection conn = DriverManager.getConnection(URL, USER, PASSWD);
+            System.out.println("Connection ok");
+             try{
+            conn.setAutoCommit(false);
+            conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+            //préparation de la requète
+            PreparedStatement pstmt = conn.prepareStatement("insert into Rencontre(codeRencontre, codeTour,codeTournoi,Joueur1,joueur2) VALUES(?,?,?,?,?)");
+            pstmt.setInt(1, rencontre.codeRencontre.getValue());
+            pstmt.setInt(2, rencontre.codeTour.getValue());
+            pstmt.setInt(3, rencontre.joueurs[0].codeJoueur.getValue());
+            pstmt.setInt(4, rencontre.joueurs[1].codeJoueur.getValue());
+
+            pstmt.executeUpdate();
+            
+            conn.commit();
+            conn.close();
+           System.out.println("Enregistrement de la rencontre " +rencontre.codeRencontre.getValue() + "effectué");         
+             }catch(  SQLException ex){//si la transaction echoue
+                conn.close();
+                 System.err.println(ex.getMessage());
+             }
+        }catch(  SQLException ex){
+            throw new BDAccessEx("creerREncontre Raised SQLException during the connection\n"+ ex.getMessage());
+        }
     
     }
 
