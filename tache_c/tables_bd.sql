@@ -3,8 +3,8 @@
 //Pour reset la bd les commandes suivantes dans ce sens
 DROP TABLE Coup;
 DROP TABLE Piece;
-DROP TABLE Joueur;
 DROP TABLE Rencontre;
+DROP TABLE Joueur;
 DROP TABLE Tournoi;
 
 
@@ -13,14 +13,14 @@ CREATE TABLE Tournoi(
   codeTournoi INT NOT NULL,
   codeTour CHAR(20) NOT NULL CHECK(codeTour IN('qualif','quart','demi','finale')),
   PRIMARY KEY (codeTournoi, codeTour)
-)
+);
 
 CREATE TABLE Joueur (
   codeJoueur INT NOT NULL PRIMARY KEY,
   prenom CHAR(30) NOT NULL,
   nom CHAR(30) NOT NULL,
   adresse CHAR(50) NOT NULL
-)
+);
 
 CREATE TABLE Rencontre(
   codeRencontre INT NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE Rencontre(
   FOREIGN KEY (blanc) REFERENCES Joueur(codeJoueur),
   FOREIGN KEY (noir) REFERENCES Joueur(codeJoueur),
   FOREIGN KEY (vainqueur) REFERENCES Joueur(codeJoueur)
-)
+);
 
 CREATE TABLE Piece(
   codePiece INT NOT NULL,
@@ -60,7 +60,7 @@ CREATE TABLE Piece(
   CONSTRAINT Kcavalier CHECK ((typePiece!='cavalier') OR ((ABS(ligneFin-ligneInit)=1 AND ABS(colonneFin-colonneInit)=2) OR (ABS(ligneFin-ligneInit)=2 AND ABS(colonneFin-colonneInit)=1))),
   CONSTRAINT Kroi CHECK ((typePiece!='roi') OR ((ABS(ligneFin-ligneInit)<2 AND ABS(colonneFin-colonneInit)<2))),
   CONSTRAINT Kreine CHECK ((typePiece!='reine') OR (((ligneFin!=ligneInit AND colonneFin=colonneInit) OR ( ligneFin=ligneInit AND colonneFin!=colonneInit)) OR (ABS(ligneFin-ligneInit)=ABS(colonneFin-colonneInit))))
-)
+);
 
 CREATE TABLE Coup (
   codeCoup INT NOT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE Coup (
   codeTournoi INT NOT NULL,
   PRIMARY KEY (codeCoup, codeRencontre, codeTour, codeTournoi),
   FOREIGN KEY (codeRencontre, codeTour, codeTournoi) REFERENCES Rencontre(codeRencontre, codeTour, codeTournoi)
-)
+);
 
 
 tests :
