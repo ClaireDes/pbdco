@@ -49,7 +49,7 @@ public class Rencontre implements Modele{
     }
     
     void enregistreNouvelleRencontre(){
-        fabRencontre.fabriqueTransaction("new", this);
+        //fabRencontre.fabriqueTransaction("new", this);
     }
     
     public void majBD() {
@@ -58,7 +58,7 @@ public class Rencontre implements Modele{
 
     public void chargementDepuisBd(int code) {
         
-       fabRencontre.fabriqueTransaction("load",null);
+      //fabRencontre.fabriqueTransaction("load",null);
         
     }
     

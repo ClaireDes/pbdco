@@ -22,7 +22,9 @@ import static pbdco.modele.FabriqueTransaction.*;
 
 public class FabriqueDeRencontre  extends FabriqueTransaction{
 
-
+        FabriqueDeJoueur fabDeJoueur;
+        FabriqueDePiece fabDePiece;
+        FabriqueDeCoups fabDeCoups;
         public Code lastCodeBD() throws BDAccessEx{//renvoie le dernier code rencontre utilisé dans la base pour pouvoir en creer un nouveau
         Code code; 
         ResultSet resultat;
@@ -30,11 +32,11 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
         System.out.println("Recherche du dernier code rencontre");
         
         
-        try{// Chragement du Driver
-            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-        }catch( SQLException ex){
-            throw new BDAccessEx("creerJoueur Raised classNotFound exception during the driver loading");
-        }
+//        try{// Chragement du Driver
+//            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+//        }catch( SQLException ex){
+//            throw new BDAccessEx("creerJoueur Raised classNotFound exception during the driver loading");
+//        }
          // Connexion à la BD
          try{
             Connection conn = DriverManager.getConnection(URL, USER, PASSWD);
@@ -89,6 +91,7 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
                 PreparedStatement stmt = conn.prepareStatement(requete1);
                 resultat= stmt.executeQuery(requete1);
                 
+
                 codeJoueur1 = new Code();
                 codeJoueur1.setValue(resultat.getInt("Joueur1"));
                 codeJoueur2 = new Code();
@@ -98,6 +101,7 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
                 codeTour.setValue(resultat.getInt("codeTour"));
                 
                 rencontre = new Rencontre(fabJoueur.LoadFromBD(codeJoueur1), fabJoueur.LoadFromBD(codeJoueur2),codeTour,this);
+
 
                 conn.close();
            
@@ -109,8 +113,8 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
         }catch(  SQLException ex){
             throw new BDAccessEx("loadFromBD Raised SQLException during the connection");
          }
-           
-        return rencontre;
+          return null; 
+        //return rencontre;
     }
     
     public void MAJBD(Rencontre rencontre) throws BDAccessEx{

@@ -66,11 +66,11 @@ public class Joueur implements Modele{
 
         this.fabJoueur = fab;//
         this.codeJoueur=new Code(0);//
-        try {
+        /*try {
             genereCodeJoueur();
         } catch (BDAccessEx ex) {
             System.err.println("erreur lors de la génération du code joueur de "+ this.nom + this.prenom + ex.getMessage());
-        }
+        }*/
         enregistreNouveauJoueur();
         //this.fabJoueur.fabriqueTransaction("new",this);
     }
