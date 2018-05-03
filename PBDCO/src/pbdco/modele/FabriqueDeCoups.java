@@ -18,6 +18,10 @@ import javax.sql.*;
 public class FabriqueDeCoups/* extends FabriqueTransaction*/{
   
    
+    public Code lastCodeBD() throws BDAccessEx{
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
     public  void fabriqueRequete(String operation, Coup coup){
         
         throw new UnsupportedOperationException("Not supported yet.");
