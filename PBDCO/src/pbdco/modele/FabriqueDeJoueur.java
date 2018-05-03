@@ -29,62 +29,7 @@ import pbdco.partie.*;
  */
 public class FabriqueDeJoueur extends FabriqueTransaction{
 
-    //@Override
-   /* public  void fabriqueTransaction(String operation,Joueur joueur){
         
-        try {
-            // Chargement driver
-            System.out.print("Loading Oracle driver... ");
-            //DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-            System.out.println("loaded");
-            
-            
-            // Connexion à la BDD
-            System.out.println("Connexion à la base de données...");
-            Connection conn = DriverManager.getConnection(URL, USER, PASSWD);
-            System.out.println("connecté.");
-            
-            conn.setAutoCommit(false);
-            conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
-            
-
-                    
-                    
-                    switch (operation) {
-                        case "new"://création d'un joueur (uniquement dans inscription)
-                            
-                            
-                            System.out.println("enregistrement d'un nouveau joueur dans la base");
-                            
-                                        PreparedStatement pstmt = conn.prepareStatement("insert into Joueurs(codeJoueur, Prenom, Nom, Adresse) VALUES(?,?,?,?)");
-            pstmt.setInt(1, joueur.codeJoueur.getValue());
-            pstmt.setString(2, joueur.prenom);
-            pstmt.setString(3, joueur.nom);
-            pstmt.setString(4, joueur.adresse);
-                      
-                            break;
-                        case "nom"://modification du nom d'un joueur (existant)
-                            System.out.println("modification du nom d'un joueur");
-                            break;
-                        case "prenom"://modification du prénom d'un joueur (existant)
-                            System.out.println("modificatio du prenom d'un joueur");
-                            break;
-                        case "update":// mise à jour du joueur avec les données dans joueur actuellement
-                            System.out.println("modification d'un joueur ");
-                            break;
-                        case "load": //charge un joueur depuis un code joueur
-                            System.out.println("chargement d'un joueur depuis la base de donnees");
-                            break;
-                    }
-          conn.commit();
-          conn.close();
-          
-        } catch (SQLException ex) {
-            Logger.getLogger(FabriqueDeJoueur.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         }*/
-    
-    
     public void creerDansBD(Joueur joueur) throws BDAccessEx{
 
          // Connexion à la BD
@@ -96,7 +41,7 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
             conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
             //préparation de la requète
             PreparedStatement pstmt = conn.prepareStatement("insert into Joueur VALUES(?,?,?,?);");
-            pstmt.setInt(1,1 /*joueur.codeJoueur.getValue()*/);
+            pstmt.setInt(1,joueur.codeJoueur.getValue());
             pstmt.setString(2, joueur.prenom);
             pstmt.setString(3, joueur.nom);
             pstmt.setString(4, joueur.adresse);
