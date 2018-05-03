@@ -1,4 +1,4 @@
-package pbdco.vue;
+package pbdco.vue.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
@@ -55,7 +55,7 @@ public class VuePartie {
                     } else {
                         b.setBackground(Color.BLACK);
                     }
-                    b.setIcon(GOLD_QUEEN);
+                    b.setIcon(PiecesGraphiques.GOLD_QUEEN);
                     chessBoardSquares[jj][ii] = b;
                 }
             }
