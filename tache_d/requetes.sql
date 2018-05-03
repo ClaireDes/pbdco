@@ -1,7 +1,7 @@
 /****REQUETES****/
 
 /* nombre joueurs */
-SELECT COUNT(Joueurs) FROM Joueurs WHERE codeTour=XXX;
+SELECT COUNT(codeJoueur) FROM Joueur NATURAL JOIN Rencontre WHERE codeTour='finale';
 
 /* nombre parties gagnées par joueur */ 
 SELECT COUNT(Vainqueur) FROM Vainqueur where codeJoueur=XXX;
@@ -15,11 +15,6 @@ SELECT COUNT(Rencontres) FROM Rencontres WHERE codeTour=XXX;
 /* liste parties à jouer / en train d'être jouées par tour */
 SELECT codeRencontre, 
 
-/* Rang d'un joueur */
-SELECT codeJoueur,COUNT(Vainqueur) AS NbVictoires,ROW_NUMBER() RNO OVER (ORDER BY NBVictoires) 
-FROM Vainqueur 
-ORDER BY NbVictoires 
-WHERE codeJouer=Machin;
 
 
 /* Les parties en cours */
@@ -31,43 +26,37 @@ MINUS
 
 /*Position possible ? */
 /* la colonne CASE ainsi créee indique si la case est atteignable par la pièce ou non*/
-SELECT ligneFin, colonneFin 
-FROM Piece
-CASE
-	WHEN ligneFin > 8 OR ligneFin < 0 OR colonneFin < 0 OR colonneFin > 8 THEN 'false'
-	WHEN type = 'tour' AND ligneFin=ligneInit THEN 'true' /*on suppose qu'on se deplace*/
-	WHEN type = 'tour' AND colonneFin=colonneInit THEN 'true'
-	WHEN type = 'tour' AND ligneFin <> ligneInit AND colonneFin <> colonneFin THEN 'false'
-	WHEN type = 'fou' AND ABS(ligneInit-ligneFin) = ABS(colonneInit-colonneFin) THEN 'true'
-	WHEN type = 'fou' AND ABS(ligneInit-ligneFin) <> ABS(colonneInit-colonneFin) THEN 'false'
-	WHEN type = 'cavalier' AND ABS(ligneInit-ligneFin)=2 AND ABS(colonneInit-colonneFin)=1 THEN 'true'
-	WHEN type = 'cavalier' AND ABS(ligneInit-ligneFin)=1 AND ABS(colonneInit-colonneFin)=2 THEN 'true'
-	WHEN type = 'cavalier' AND ABS(ligneInit-ligneFin)=1 AND ABS(colonneInit-colonneFin)<>2 THEN 'false'
-	WHEN type = 'cavalier' AND ABS(ligneInit-ligneFin)=2 AND ABS(colonneInit-colonneFin)<>1 THEN 'false'
-	WHEN type = 'cavalier' AND ABS(ligneInit-ligneFin)<>1 AND ABS(colonneInit-colonneFin)=2 THEN 'false'
-	WHEN type = 'cavalier' AND ABS(ligneInit-ligneFin)<>2 AND ABS(colonneInit-colonneFin)=1 THEN 'true'
-	WHEN type = 'cavalier' AND ABS(ligneInit-ligneFin)>1 THEN 'false'
-	WHEN type = 'cavalier' AND ABS(colonneInit-colonneFin)>1 THEN 'false'
-	WHEN type = 'roi' AND ABS(ligneInit-ligneFin)>1 THEN 'false'
-	WHEN type = 'roi' AND ABS(colonneInit-colonneFin)>1 THEN 'false'
-	WHEN type = 'roi' AND ABS(ligneInit-ligneFin)=1 OR ABS(colonneInit-colonneFin)=1 THEN 'true'
-	WHEN type = 'reine' AND ABS(ligneInit-ligneFin) = ABS(colonneInit-colonneFin) THEN 'true'
-	WHEN type = 'reine' AND ligneFin=ligneInit THEN 'true'
-	WHEN type = 'reine' AND colonneFin=colonneInit THEN 'true'
-	ELSE 'false'
-END;
+SELECT codepiece,CASE 
+WHEN ligneFin > 8 OR ligneFin < 0 OR colonneFin < 0 OR colonneFin > 8 THEN 'false'
+WHEN typepiece = 'tour' and lignefin=ligneinit THEN 'true'
+WHEN typepiece = 'tour' AND colonneFin=colonneInit THEN 'true'
+WHEN typepiece = 'tour' AND ligneFin <> ligneInit AND colonneFin <> colonneFin THEN 'false'
+WHEN typepiece = 'fou' AND ABS(ligneInit-ligneFin) = ABS(colonneInit-colonneFin) THEN 'true'
+WHEN typepiece = 'fou' AND ABS(ligneInit-ligneFin) <> ABS(colonneInit-colonneFin) THEN 'false'
+WHEN typepiece = 'cavalier' AND ABS(ligneInit-ligneFin)=2 AND ABS(colonneInit-colonneFin)=1 THEN 'true'
+WHEN typepiece = 'cavalier' AND ABS(ligneInit-ligneFin)=1 AND ABS(colonneInit-colonneFin)=2 THEN 'true'
+WHEN typepiece = 'cavalier' AND ABS(ligneInit-ligneFin)=1 AND ABS(colonneInit-colonneFin)<>2 THEN 'false'
+WHEN typepiece = 'cavalier' AND ABS(ligneInit-ligneFin)=2 AND ABS(colonneInit-colonneFin)<>1 THEN 'false'
+WHEN typepiece = 'cavalier' AND ABS(ligneInit-ligneFin)<>1 AND ABS(colonneInit-colonneFin)=2 THEN 'false'
+WHEN typepiece = 'cavalier' AND ABS(ligneInit-ligneFin)<>2 AND ABS(colonneInit-colonneFin)=1 THEN 'true'
+WHEN typepiece = 'cavalier' AND ABS(ligneInit-ligneFin)>1 THEN 'false'
+WHEN typepiece = 'cavalier' AND ABS(colonneInit-colonneFin)>1 THEN 'false'
+WHEN typepiece = 'roi' AND ABS(ligneInit-ligneFin)>1 THEN 'false'
+WHEN typepiece = 'roi' AND ABS(colonneInit-colonneFin)>1 THEN 'false'
+WHEN typepiece = 'roi' AND ABS(ligneInit-ligneFin)=1 OR ABS(colonneInit-colonneFin)=1 THEN 'true'
+WHEN typepiece = 'reine' AND ABS(ligneInit-ligneFin) = ABS(colonneInit-colonneFin) THEN 'true'
+WHEN typepiece = 'reine' AND ligneFin=ligneInit THEN 'true'
+WHEN typepiece = 'reine' AND colonneFin=colonneInit THEN 'true'
+ELSE 'false' 
+END AS possible FROM Piece;
 	
 		
-
-
-
-
 /*position => couleur */
 SELECT couleur FROM Piece
 WHERE ligneInit = L AND colonneInit = C;
 
-
-
+/*quel tour on est */
+SELECT codeTour FROM Rencontre;
 
 
 
