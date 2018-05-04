@@ -41,11 +41,12 @@ public abstract class Organisation {
             this.fabriqueOrga = new FabriqueDeOrganisation();
             this.tour = "qualif";
             this.fabriqueOrga.creerTournois();
-            this.nbrParticipants = 0;
+            this.nbrParticipants = this.fabriqueOrga.nbrDeJoueurs();
         }
         else{// charge le tournoi en cours
             this.fabriqueOrga = new FabriqueDeOrganisation();
-            
+            this.tour = this.fabriqueOrga.quelTour();
+            this.nbrParticipants = this.fabriqueOrga.nbrDeJoueurs();
         }
         
         

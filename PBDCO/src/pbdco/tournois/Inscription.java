@@ -24,5 +24,6 @@ public class Inscription extends Organisation{
     public void inscrit(String nom, String prenom, String adresse) throws BDAccessEx{
         Joueur nouvJoueur;
         nouvJoueur = new Joueur(nom, prenom, adresse, fabJoueur);
+        this.setNbrParticipants(this.getNbrParticipants()+1);
     }
 }

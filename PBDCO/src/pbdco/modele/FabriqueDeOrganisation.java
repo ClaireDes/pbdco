@@ -31,7 +31,7 @@ public class FabriqueDeOrganisation {
         System.out.println("Driver ok");
     }
     
-    public int nbrDeJoueurs(Code codeTournois) throws BDAccessEx{
+    public int nbrDeJoueurs() throws BDAccessEx{
         //ici la requète pour
         //appel à la BD concernant la table TOUR
         //pour connaitre le nombre de joueurs dans le tournois
@@ -66,7 +66,7 @@ public class FabriqueDeOrganisation {
          return nbJoueurs;
     }
     
-    public String quelTour(Code codeTournoi){
+    public String quelTour(){
         
         
         
@@ -180,7 +180,7 @@ public class FabriqueDeOrganisation {
     
     public void creerTournois(){
         Code codeTournois = new Code("qualif");
-        
+        // doit supprimer tous les elements dans les tables (peut se faire en recreant les tables)
         //insert ... crée un tour qualif
     } 
             
