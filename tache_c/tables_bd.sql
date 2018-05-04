@@ -5,34 +5,35 @@ DROP TABLE Tour;
 DROP TABLE Piece;
 DROP TABLE Coup;
 
+CREATE TABLE Tournoi(
+  codeTournoi INT NOT NULL,
+  PRIMARY KEY (codeTournoi)
+)
+
 CREATE TABLE Joueur (
   codeJoueur INT NOT NULL PRIMARY KEY,
   prenom CHAR(30) NOT NULL,
   nom CHAR(30) NOT NULL,
   adresse CHAR(50) NOT NULL
-);
+)
 
 CREATE TABLE Rencontre(
   codeRencontre INT NOT NULL,
-  codeTour CHAR(20) NOT NULL,
+  codeTour CHAR(20) NOT NULL CHECK(codeTour IN('qualif','quart','demi','finale')),
+  codeTournoi INT NOT NULL,
   joueur1 INT NOT NULL,
   joueur2 INT NOT NULL,
   blanc INT,
   noir INT,
   vainqueur INT,
-  PRIMARY KEY (codeRencontre, codeTour),
-  FOREIGN KEY (codeTour) REFERENCES Tour(codeTour),
+  PRIMARY KEY (codeRencontre, codeTour, codeTournoi),
+  FOREIGN KEY (codeTournoi) REFERENCES Tournoi(codeTournoi),
   FOREIGN KEY (joueur1) REFERENCES Joueur(codeJoueur),
   FOREIGN KEY (joueur2) REFERENCES Joueur(codeJoueur),
   FOREIGN KEY (blanc) REFERENCES Joueur(codeJoueur),
   FOREIGN KEY (noir) REFERENCES Joueur(codeJoueur),
   FOREIGN KEY (vainqueur) REFERENCES Joueur(codeJoueur)
-);
-
-CREATE TABLE Tour(
-  codeTour CHAR(20) NOT NULL CHECK(codeTour IN('qualif','quart','demi','finale')),
-  PRIMARY KEY (codeTour)
-);
+)
 
 CREATE TABLE Piece(
   codePiece INT NOT NULL,
@@ -44,8 +45,9 @@ CREATE TABLE Piece(
   couleur CHAR(5) NOT NULL CHECK(couleur IN('blanc', 'noir', 'rose')),
   codeRencontre INT NOT NULL,
   codeTour CHAR(20) NOT NULL,
-  PRIMARY KEY (codePiece, codeRencontre, codeTour),
-  FOREIGN KEY (codeRencontre, codeTour)  REFERENCES Rencontre(codeRencontre, codeTour),
+  codeTournoi INT NOT NULL,
+  PRIMARY KEY (codePiece, codeRencontre, codeTour, codeTournoi),
+  FOREIGN KEY (codeRencontre, codeTour, codeTournoi)  REFERENCES Rencontre(codeRencontre, codeTour, codeTournoi),
   CONSTRAINT Kuniq UNIQUE (ligneInit,colonneInit),
   CONSTRAINT Kpion CHECK ((typePiece!='pion') OR ((couleur='blanc' AND (ligneFin=ligneInit+1)) OR ((couleur='noir' AND (ligneFin=ligneInit-1))))),
   CONSTRAINT Ktour CHECK ((typePiece!='tour') OR ((ligneFin!=ligneInit AND colonneFin=colonneInit) OR ( ligneFin=ligneInit AND colonneFin!=colonneInit))),
@@ -53,7 +55,7 @@ CREATE TABLE Piece(
   CONSTRAINT Kcavalier CHECK ((typePiece!='cavalier') OR ((ABS(ligneFin-ligneInit)=1 AND ABS(colonneFin-colonneInit)=2) OR (ABS(ligneFin-ligneInit)=2 AND ABS(colonneFin-colonneInit)=1))),
   CONSTRAINT Kroi CHECK ((typePiece!='roi') OR ((ABS(ligneFin-ligneInit)<2 AND ABS(colonneFin-colonneInit)<2))),
   CONSTRAINT Kreine CHECK ((typePiece!='reine') OR (((ligneFin!=ligneInit AND colonneFin=colonneInit) OR ( ligneFin=ligneInit AND colonneFin!=colonneInit)) OR (ABS(ligneFin-ligneInit)=ABS(colonneFin-colonneInit))))
-);
+)
 
 CREATE TABLE Coup (
   codeCoup INT NOT NULL,
@@ -63,9 +65,10 @@ CREATE TABLE Coup (
   colonnePrec INT NOT NULL CHECK(colonnePrec>0 AND colonnePrec<9),
   codeRencontre INT NOT NULL,
   codeTour CHAR(20) NOT NULL,
-  PRIMARY KEY (codeCoup, codeRencontre, codeTour),
-  FOREIGN KEY (codeRencontre, codeTour) REFERENCES Rencontre(codeRencontre, codeTour)
-);
+  codeTournoi INT NOT NULL,
+  PRIMARY KEY (codeCoup, codeRencontre, codeTour, codeTournoi),
+  FOREIGN KEY (codeRencontre, codeTour, codeTournoi) REFERENCES Rencontre(codeRencontre, codeTour, codeTournoi)
+)
 
 
 tests :

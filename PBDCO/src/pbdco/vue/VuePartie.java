@@ -13,7 +13,7 @@ public class VuePartie {
         private JButton[][] chessBoardSquares = new JButton[8][8];
         private JPanel chessBoard;
         private final JLabel message = new JLabel(
-                "Chess Champ is ready to play!"); //TODO: mettre à jour en fonction de l'état du controleur
+                "Allez Morée, tu vas y arriver !"); //TODO: mettre à jour en fonction de l'état du controleur
         private static final String COLS = "ABCDEFGH";
 
         VuePartie() {
@@ -26,11 +26,8 @@ public class VuePartie {
             JToolBar tools = new JToolBar();
             tools.setFloatable(false);
             gui.add(tools, BorderLayout.PAGE_START);
-            tools.add(new JButton("New")); // TODO - add functionality!
-            tools.add(new JButton("Save")); // TODO - add functionality!
-            tools.add(new JButton("Restore")); // TODO - add functionality!
-            tools.addSeparator();
-            tools.add(new JButton("Resign")); // TODO - add functionality!
+            tools.add(new JButton("Recommencer")); // TODO - add functionality!
+            tools.add(new JButton("Abandonner")); // TODO - add functionality
             tools.addSeparator();
             tools.add(message);
 
@@ -58,6 +55,7 @@ public class VuePartie {
                     } else {
                         b.setBackground(Color.BLACK);
                     }
+                    b.setIcon(PiecesGraphiques.GOLD_QUEEN);
                     chessBoardSquares[jj][ii] = b;
                 }
             }
@@ -90,29 +88,5 @@ public class VuePartie {
 
         public final JComponent getGui() {
             return gui;
-        }
-
-        public static void main(String[] args) {
-            Runnable r = new Runnable() {
-
-                @Override
-                public void run() {
-                    VuePartie cb =
-                            new VuePartie();
-
-                    JFrame f = new JFrame("ChessChamp");
-                    f.add(cb.getGui());
-                    f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                    f.setLocationByPlatform(true);
-
-                    // ensures the frame is the minimum size it needs to be
-                    // in order display the components within it
-                    f.pack();
-                    // ensures the minimum size is enforced.
-                    f.setMinimumSize(f.getSize());
-                    f.setVisible(true);
-                }
-            };
-            SwingUtilities.invokeLater(r);
         }
 }

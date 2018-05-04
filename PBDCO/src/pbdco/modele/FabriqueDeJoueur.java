@@ -124,7 +124,7 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
          String requete = "UPDATE joueurs Set nom = ?, prenom = ?, adresse = ? WHERE codeJoueur = ?;";
          
          try{// Chragement du Driver
-            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+            //DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
         }catch( SQLException ex){
             throw new BDAccessEx("creerJoueur Raised classNotFound exception during the driver loading");
         }
@@ -171,7 +171,7 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
          ResultSet resultat;
          
          try{// Chragement du Driver
-            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+            //DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
         }catch( SQLException ex){
             throw new BDAccessEx("creerJoueur Raised classNotFound exception during the driver loading"+ex.getMessage());
         }
@@ -250,7 +250,7 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
         
         
         try{// Chragement du Driver
-            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+            //DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
         }catch( SQLException ex){
             throw new BDAccessEx("creerJoueur Raised classNotFound exception during the driver loading" + ex.getMessage());
         }

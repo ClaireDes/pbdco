@@ -2,7 +2,54 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54cc874b-5a96-4984-af9d-9ef7a3181cf6" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PBDCO/src/pbdco/vue/chessicons.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PBDCO/src/pbdco/vue/PiecesGraphiques.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/VueOrga.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/VueTournois.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/com/intellij/uiDesigner/core/AbstractLayout.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/com/intellij/uiDesigner/core/DimensionInfo.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/com/intellij/uiDesigner/core/GridConstraints.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/com/intellij/uiDesigner/core/GridLayoutManager.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/com/intellij/uiDesigner/core/HorizontalInfo.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/com/intellij/uiDesigner/core/LayoutState.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/com/intellij/uiDesigner/core/Spacer.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/com/intellij/uiDesigner/core/SupportCode$TextWithMnemonic.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/com/intellij/uiDesigner/core/SupportCode.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/com/intellij/uiDesigner/core/Util.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/com/intellij/uiDesigner/core/VerticalInfo.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/pbdco/Modele.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/pbdco/Rencontre.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/pbdco/modele/Joueur.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/pbdco/partie/Cavalier.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/pbdco/partie/ControleurPartie.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/pbdco/partie/Dame.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/pbdco/partie/Fou.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/pbdco/partie/Main.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/pbdco/partie/Piece.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/pbdco/partie/Pion.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/pbdco/partie/Position.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/pbdco/partie/Roi.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/pbdco/partie/Tour.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/pbdco/tournois/ControleurTournois.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/pbdco/tournois/Inscription.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/pbdco/tournois/Lance_Tournois.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/pbdco/tournois/Organisation.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/pbdco/tournois/Preparation_rencontre.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/pbdco/tournois/Vue.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/pbdco/vue/CopieVue$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/pbdco/vue/CopieVue.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PBDCO/out/production/PBDCO/pbdco/vue/TestVue.class" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PBDCO/.idea/workspace.xml" afterPath="$PROJECT_DIR$/PBDCO/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PBDCO/nbproject/build-impl.xml" afterPath="$PROJECT_DIR$/PBDCO/nbproject/build-impl.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PBDCO/nbproject/genfiles.properties" afterPath="$PROJECT_DIR$/PBDCO/nbproject/genfiles.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PBDCO/src/pbdco/modele/FabriqueDeJoueur.java" afterPath="$PROJECT_DIR$/PBDCO/src/pbdco/modele/FabriqueDeJoueur.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PBDCO/src/pbdco/modele/Joueur.java" afterPath="$PROJECT_DIR$/PBDCO/src/pbdco/modele/Joueur.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PBDCO/src/pbdco/tournois/Organisation.java" afterPath="$PROJECT_DIR$/PBDCO/src/pbdco/tournois/Organisation.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PBDCO/src/pbdco/vue/TestVue.java" afterPath="$PROJECT_DIR$/PBDCO/src/pbdco/vue/TestVue.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PBDCO/src/pbdco/vue/VuePartie.java" afterPath="$PROJECT_DIR$/PBDCO/src/pbdco/vue/VuePartie.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PBDCO/src/pbdco/vue/VueTournois.java" afterPath="$PROJECT_DIR$/PBDCO/src/pbdco/vue/VueTournois.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tache_c/tables_bd.sql" afterPath="$PROJECT_DIR$/tache_c/tables_bd.sql" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,70 +65,7 @@
     <favorites_list name="pbdco" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Vue.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/PBDCO/src/pbdco/tournois/Vue.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#271#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VueTournois.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PBDCO/src/pbdco/vue/VueTournois.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="28" lean-forward="true" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TestVue.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PBDCO/src/pbdco/vue/TestVue.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VueOrga.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PBDCO/src/pbdco/vue/VueOrga.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VuePartie.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PBDCO/src/pbdco/vue/VuePartie.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="645">
-              <caret line="48" column="43" lean-forward="false" selection-start-line="48" selection-start-column="43" selection-end-line="48" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Etat.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PBDCO/src/pbdco/vue/Etat.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -97,6 +81,8 @@
         <option value="$PROJECT_DIR$/PBDCO/src/pbdco/vue/VueOrga.java" />
         <option value="$PROJECT_DIR$/PBDCO/src/pbdco/vue/Vue.form" />
         <option value="$PROJECT_DIR$/PBDCO/src/pbdco/vue/VueTournois.java" />
+        <option value="$PROJECT_DIR$/PBDCO/src/pbdco/vue/TestVue.java" />
+        <option value="$PROJECT_DIR$/PBDCO/src/pbdco/vue/VuePartie.java" />
       </list>
     </option>
   </component>
@@ -106,10 +92,9 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="y" value="28" />
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
     <option name="width" value="1920" />
-    <option name="height" value="1018" />
+    <option name="height" value="1200" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -157,40 +142,16 @@
               <item name="PBDCO" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pbdco" type="462c0819:PsiDirectoryNode" />
-              <item name="modele" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pbdco" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pbdco" type="462c0819:PsiDirectoryNode" />
-              <item name="PBDCO" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pbdco" type="462c0819:PsiDirectoryNode" />
-              <item name="partie" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pbdco" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pbdco" type="462c0819:PsiDirectoryNode" />
-              <item name="PBDCO" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pbdco" type="462c0819:PsiDirectoryNode" />
-              <item name="tournois" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pbdco" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pbdco" type="462c0819:PsiDirectoryNode" />
-              <item name="PBDCO" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pbdco" type="462c0819:PsiDirectoryNode" />
               <item name="vue" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="AndroidView" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -426,14 +387,17 @@
       <option name="presentableId" value="Default" />
       <updated>1524487153681</updated>
       <workItem from="1525257796314" duration="1348000" />
+      <workItem from="1525350679032" duration="960000" />
+      <workItem from="1525356117201" duration="539000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1348000" />
+    <option name="totallyTimeSpent" value="2847000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1200" extended-state="0" />
+    <frame x="0" y="0" width="1920" height="1200" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -447,15 +411,15 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24973376" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25239617" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -485,7 +449,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="1" lean-forward="false" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -493,9 +456,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#271#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -503,7 +463,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -540,19 +499,24 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PBDCO/src/pbdco/vue/Vue.form" />
-    <entry file="file://$PROJECT_DIR$/PBDCO/src/pbdco/vue/Etat.java">
+    <entry file="file://$PROJECT_DIR$/PBDCO/src/pbdco/vue/TestVue.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="480">
+          <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PBDCO/src/pbdco/vue/TestVue.java">
+    <entry file="file://$PROJECT_DIR$/PBDCO/src/pbdco/vue/VueTournois.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="120">
+          <caret line="8" column="28" lean-forward="false" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PBDCO/src/pbdco/tournois/Vue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -560,33 +524,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PBDCO/src/pbdco/vue/VueTournois.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="28" lean-forward="true" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PBDCO/src/pbdco/vue/VuePartie.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="48" column="43" lean-forward="false" selection-start-line="48" selection-start-column="43" selection-end-line="48" selection-end-column="43" />
-          <folding />
+        <state relative-caret-position="1095">
+          <caret line="75" column="33" lean-forward="false" selection-start-line="75" selection-start-column="33" selection-end-line="75" selection-end-column="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PBDCO/src/pbdco/tournois/Vue.java">
+    <entry file="file://$PROJECT_DIR$/PBDCO/src/pbdco/vue/Etat.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#271#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PBDCO/src/pbdco/vue/PiecesGraphiques.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>

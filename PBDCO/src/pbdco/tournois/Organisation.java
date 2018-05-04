@@ -53,12 +53,17 @@ public class Organisation {
         return this.fabriqueOrga;
     }
     
-    public void setCodeTour(Code codeTournoi){
-        this.codeTour = codeTournoi;
-        this.fabriqueOrga.setCodeTour(codeTournoi);
-    }
+//    public void setCodeTour(Code codeTournoi){
+//        this.codeTour = codeTournoi;
+//        this.fabriqueOrga.setCodeTour(codeTournoi);
+//    }
     
     public void setTour(String nouvTour){
         this.tour = nouvTour;
     }
+    
+    public void setNbrParticipants(int nouvNbr){
+        this.nbrParticipants = nouvNbr;
+    }
+    
 }

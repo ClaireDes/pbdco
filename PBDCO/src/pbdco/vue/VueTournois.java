@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 import pbdco.modele.*;
 
+=======
+>>>>>>> 5e73976de8c039821dbcef4dee412fb5aabbe374
 package pbdco.vue;
 
 public class VueTournois {
