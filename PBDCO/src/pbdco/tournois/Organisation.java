@@ -5,9 +5,16 @@
  */
 package pbdco.tournois;
 
+
+
+import java.util.List;
+import pbdco.BDAccessEx;
 import pbdco.Code;
 import pbdco.modele.FabriqueDeOrganisation;
-
+import java.sql.*;
+import java.util.Map;
+import java.util.Set;
+import pbdco.modele.*;
 /**
  *
  * @author milcenan
@@ -15,6 +22,7 @@ import pbdco.modele.FabriqueDeOrganisation;
 public abstract class Organisation {
     private String tour;
     private int nbrParticipants;
+    private Map<Integer,Joueur> listeDesJoueurs;
     private Code codeTournoi;
     private FabriqueDeOrganisation fabriqueOrga;
     
@@ -28,7 +36,9 @@ public abstract class Organisation {
 //        this.nbrParticipants = this.fabriqueOrga.nbrDeJoueurs(codeTournoi);
 //    }
     
-    public Organisation(){
+    public Organisation() throws BDAccessEx{
+        
+        
         this.fabriqueOrga = new FabriqueDeOrganisation();
         this.tour = "qualif";
         this.fabriqueOrga.creerTournois();
@@ -62,6 +72,10 @@ public abstract class Organisation {
     
     public void setNbrParticipants(int nouvNbr){
         this.nbrParticipants = nouvNbr;
+    }
+    
+    public void loadAllJoueurs() throws BDAccessEx{
+        listeDesJoueurs = fabriqueOrga.loadAllJoueurs();
     }
     
 }
