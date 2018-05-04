@@ -6,6 +6,8 @@ INSERT INTO Joueur VALUES ('codeJ', 'Louis','Mn', 'louis@fout.com');
 /* Créer rencontre */
 INSERT INTO Rencontre VALUES ('codeR','codeT','J1','J2','JB','JN','V');
 
+/*Créer ou ajouter tour*/
+INSERT INTO Tour Values ('codeTour');
 
 /*creer echiquier*/
 /*codeR et codeT sont des variables determinees en java*/
