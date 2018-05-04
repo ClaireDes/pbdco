@@ -24,6 +24,12 @@ public class FabriqueDeRencontre extends FabriqueTransaction {
     FabriqueDePiece fabDePiece;
     FabriqueDeCoups fabDeCoups;
 
+    public FabriqueDeRencontre(FabriqueDeJoueur fabJ, FabriqueDePiece fabP, FabriqueDeCoups fabC) {
+        this.fabDeCoups = fabC;
+        this.fabDeJoueur = fabJ;
+        this.fabDePiece = fabP;
+    }
+
     public Code lastCodeBD() throws BDAccessEx {//renvoie le dernier code rencontre utilisé dans la base pour pouvoir en creer un nouveau
         Code code;
         ResultSet resultat;
@@ -151,7 +157,7 @@ public class FabriqueDeRencontre extends FabriqueTransaction {
 
     public void creerDansBD(Rencontre rencontre) throws BDAccessEx {
 
-        String requete = "INSERT INTO Rencontre (codeRencontre, codeTour,Joueur1,joueur2,Blanc,Noir) VALUES(?,?,?,?,?,?)";
+        String requete = "INSERT INTO Rencontre(codeRencontre, codeTour,Joueur1,joueur2,Blanc,Noir) VALUES(?,?,?,?,?,?)";
         int nbModif;
         // Connexion à la BD
         try {
@@ -162,6 +168,8 @@ public class FabriqueDeRencontre extends FabriqueTransaction {
             } else {
                 System.out.println("Connection ok");
             }
+            conn.setAutoCommit(false);
+            conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
             try {
 
                 //préparation de la requète
@@ -173,20 +181,24 @@ public class FabriqueDeRencontre extends FabriqueTransaction {
                 if (rencontre.blanc == 1) {
                     pstmt.setInt(5, rencontre.joueurs[0].codeJoueur.getValue());
                     pstmt.setInt(6, rencontre.joueurs[1].codeJoueur.getValue());
-                } else {
+                }
+                if (rencontre.blanc == 2) {
                     pstmt.setInt(5, rencontre.joueurs[1].codeJoueur.getValue());
                     pstmt.setInt(6, rencontre.joueurs[0].codeJoueur.getValue());
+                } else {
+                    throw new BDAccessEx("erreur lors de l'insertion de l'insertion d'une rencontre ");
                 }
 
-                nbModif = pstmt.executeUpdate();
-                if (nbModif != 6) {
-                    throw new BDAccessEx("erreur lors de l'insertion de l'insertion d'une rencontre : " + nbModif + "champs ajoutés au lieu de 6");
-                }
+                System.out.println("Mise a jour de la bd...");
+                pstmt.executeUpdate();
+                System.out.print("..faite!");
+                conn.commit();
 
                 pstmt.close();
                 conn.close();
                 System.out.println("Enregistrement de la rencontre " + rencontre.codeRencontre.getValue() + "effectué");
             } catch (SQLException ex) {//si la transaction echoue
+                conn.rollback();
                 conn.close();
                 System.err.println(ex.getMessage());
             }

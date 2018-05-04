@@ -16,7 +16,7 @@ import pbdco.Code;
  */
 public class Rencontre implements Modele{
 
-    Joueur[] joueurs;
+    Joueur[] joueurs = {null,null};
     String codeTour;
     Code codeRencontre;
     Code codeJoueur1,codeJoueur2;
@@ -44,23 +44,22 @@ public class Rencontre implements Modele{
      * @param codeRencontre
      * @throws BDAccessEx 
      */
-    public Rencontre( Code codeRencontre, Map<Integer,Joueur> listeDesJoueurs) throws BDAccessEx{//pour charger une rencontre depuis la base de données
-        this.fabRencontre = new FabriqueDeRencontre();
+    public Rencontre( Code codeRencontre, Map<Integer,Joueur> listeDesJoueurs, FabriqueDeRencontre fabRencontre) throws BDAccessEx{//pour charger une rencontre depuis la base de données
+        this.fabRencontre = fabRencontre;
         this.fabRencontre.LoadFromBD(this);
         this.joueurs[0]=listeDesJoueurs.get(codeJoueur1.getValue());
         this.joueurs[2]=listeDesJoueurs.get(codeJoueur2.getValue());
         
     }
     
-    public Rencontre(Joueur joueur1, Joueur joueur2,String codeTour) throws BDAccessEx{//pour creer une nouvelle rencontre
-        this.fabRencontre = new FabriqueDeRencontre();
+    public Rencontre(Joueur joueur1, Joueur joueur2,String codeTour,FabriqueDeRencontre fabRencontre) throws BDAccessEx{//pour creer une nouvelle rencontre
+        this.fabRencontre = fabRencontre;
         this.joueurs[0]=joueur1;
         this.joueurs[1]=joueur2;
         this.codeJoueur1=this.joueurs[0].codeJoueur;
         this.codeJoueur2=this.joueurs[1].codeJoueur;
         this.codeTour = codeTour;
-        this.codeRencontre = new Code(0);
-        genereCodeRencontre();
+        this.codeRencontre = new Code(fabRencontre.lastCodeBD().getValue()+1);
         this.grille= new int[8][8];
         this.terminee = 0;
        choisitNoirBlanc();
@@ -95,16 +94,6 @@ public class Rencontre implements Modele{
         fabRencontre.LoadFromBD(this);
     }
     
-      
-    public void genereCodeRencontre() throws BDAccessEx {//génère un code joueur si le precedent code était 0 un nouveau code joueur est toujours supérieur au plus grand code joueur de la base
-        
-        if (this.codeRencontre.getValue() == 0){
-            this.codeRencontre = this.fabRencontre.lastCodeBD();
-            this.codeRencontre.setValue(this.codeRencontre.getValue()+1);  
-        }else{
-            System.out.println("tentative de modification du code de la rencontre " + this.codeRencontre.getValue());
-        }
-    }
-
+     
     
 }

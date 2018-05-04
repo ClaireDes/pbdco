@@ -65,7 +65,7 @@ public class Joueur implements Modele{
         this.victoiresTournoisCourant = 0;
 
         this.fabJoueur = fab;//
-        this.codeJoueur=new Code(0);//
+        this.codeJoueur= new Code(fab.lastCodeBD().getValue()+1);//
         /*try {
             genereCodeJoueur();
         } catch (BDAccessEx ex) {

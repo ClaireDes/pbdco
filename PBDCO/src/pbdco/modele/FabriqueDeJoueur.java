@@ -52,7 +52,7 @@ public class FabriqueDeJoueur extends FabriqueTransaction {
                 pstmt.close();
                 conn.close();
 
-                System.out.println("Enregistrement du joueur " + joueur.codeJoueur.getValue() + "effectué");
+                System.out.println("Enregistrement du joueur " + joueur.codeJoueur.getValue() + " effectué");
 
             } catch (SQLException ex) {//si la transaction echoue
                 conn.close();
