@@ -120,7 +120,7 @@ public class FabriqueDeRencontre  extends FabriqueTransaction{
     
     public void MAJBD(Rencontre rencontre) throws BDAccessEx{
         
-        String requete = "UPDATE Rencontre SET Vainqueur=? WHERE codeTour=?, codeRencontre=?";
+        String requete = "UPDATE Rencontre SET Vainqueur=? WHERE codeTour=? AND codeRencontre=?";
         
         //Chargement du driver
         try{
