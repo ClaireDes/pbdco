@@ -31,11 +31,11 @@ public class FabriqueDeOrganisation {
         System.out.println("Driver ok");
     }
     
-    public int nbrDeJoueurs(Code codeTournois) throws BDAccessEx{
+    public int nbrDeJoueurs() throws BDAccessEx{
         //ici la requète pour
         //appel à la BD concernant la table TOUR
         //pour connaitre le nombre de joueurs dans le tournois
-        String requete = "SELECT COUNT(codeJoueur) FROM Joueur NATURAL JOIN Rencontre WHERE codeTour=?";
+        String requete = "SELECT COUNT(codeJoueur) FROM Joueur";
         ResultSet resultat;
         int nbJoueurs=0;
         
@@ -47,16 +47,16 @@ public class FabriqueDeOrganisation {
             else{ System.out.println("Connection ok");}
              try{
             //préparation de la requète
-            PreparedStatement pstmt = conn.prepareStatement(requete);
-            pstmt.setString(1, "qualif");
+            Statement stmt = conn.createStatement();
+            resultat = stmt.executeQuery(requete);
 
-            resultat = pstmt.executeQuery();
             nbJoueurs = resultat.getInt(1);
             
             conn.commit();
             conn.close();
            System.out.println("Le nombre de participants au tournoi est : " + nbJoueurs);         
              }catch(  SQLException ex){//si la transaction echoue
+                 conn.rollback();
                 conn.close();
                  System.err.println(ex.getMessage());
              }
