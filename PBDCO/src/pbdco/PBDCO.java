@@ -13,6 +13,9 @@ import java.util.logging.Logger;
 import pbdco.modele.FabriqueDeJoueur;
 import pbdco.modele.*;
 import pbdco.*;
+import pbdco.partie.Fou;
+import pbdco.partie.Piece;
+import pbdco.partie.Position;
 
 /**
  *
@@ -66,7 +69,8 @@ public class PBDCO {
 
        
         try {
-            Rencontre renc = new Rencontre(fabJoueur.LoadFromBD(new Code(1)),fabJoueur.LoadFromBD(new Code(2)),"qualif",fabRencontre);
+            Piece f = new Fou(new Position(1,1),true);
+            fabPiece.nouvellePiece(f, new Code("qualif"), new Code(1));
             
             //test création controleur
             //test communication vue / controlleur
