@@ -111,11 +111,10 @@ public class FabriqueDeJoueur extends FabriqueTransaction {
         String adresse;
         List rencontres;
         int nbVictoires;
-        String etat = "En cours";
 
-        String requete = "SELECT * FROM  joueur  WHERE codeJoueur=?;";
-        String requete2 = "SELECT codeRencontre From rencontre WHERE joueur1 = ? OR joueur2 = ? AND etat = ? ;";
-        String requete3 = "SELECT COUNT(vainqueur) FROM rencontre where vainqueur= ?;";
+        String requete = "SELECT * FROM  joueur  WHERE codeJoueur=?";
+        String requete2 = "SELECT codeRencontre From rencontre WHERE joueur1 = ? OR joueur2 = ?";
+        String requete3 = "SELECT COUNT(vainqueur) FROM rencontre where vainqueur= ?";
 
         ResultSet resultat;
 
@@ -140,7 +139,6 @@ public class FabriqueDeJoueur extends FabriqueTransaction {
                 pstmt = conn.prepareStatement(requete2);
                 pstmt.setInt(1, codeJoueur);
                 pstmt.setInt(2, codeJoueur);
-                pstmt.setString(3, etat);
 
                 resultat = pstmt.executeQuery();
 
