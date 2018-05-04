@@ -1,13 +1,13 @@
 /****REQUETES****/
 
 /* nombre joueurs */
-SELECT COUNT(codeJoueur) FROM Joueur NATURAL JOIN Rencontre WHERE codeTour='finale';
+SELECT COUNT(codeJoueur) FROM Joueur;
 
 /* nombre parties gagnées par joueur */ 
-SELECT COUNT(Vainqueur) FROM Vainqueur where codeJoueur=XXX;
+/*SELECT COUNT(Vainqueur) FROM Vainqueur where codeJoueur=XXX;*/
 
 /* nombre parties à jouer par joueur */
-SELECT COUNT(Rencontres) FROM Rencontres WHERE codeJoueur=XXX;
+/*SELECT COUNT(Rencontres) FROM Rencontres WHERE codeJoueur=XXX;*/
 
 /* liste parties par tour */
 SELECT COUNT(Rencontres) FROM Rencontres WHERE codeTour=XXX;
