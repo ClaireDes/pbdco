@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pbdco.modele.FabriqueDeJoueur;
-import pbdco.modele.Joueur;
+import pbdco.modele.*;
 import pbdco.*;
 
 /**
@@ -35,6 +35,9 @@ public class PBDCO {
         System.out.println("Driver ok");
 
         FabriqueDeJoueur fabJoueur = new FabriqueDeJoueur();
+        FabriqueDePiece fabPiece = new FabriqueDePiece();
+        FabriqueDeCoups fabCoups = new FabriqueDeCoups();
+        FabriqueDeRencontre fabRencontre = new FabriqueDeRencontre(fabJoueur,fabPiece,fabCoups);
         ResultSet resultat;
 
         Connection conn = null;
@@ -63,7 +66,7 @@ public class PBDCO {
 
        
         try {
-            Joueur J = fabJoueur.LoadFromBD(new Code(1));
+            Rencontre renc = new Rencontre(fabJoueur.LoadFromBD(new Code(1)),fabJoueur.LoadFromBD(new Code(2)),"qualif",fabRencontre);
             
             //test création controleur
             //test communication vue / controlleur
