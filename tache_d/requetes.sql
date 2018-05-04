@@ -30,23 +30,17 @@ SELECT codepiece,CASE
 WHEN ligneFin > 8 OR ligneFin < 0 OR colonneFin < 0 OR colonneFin > 8 THEN 'false'
 WHEN typepiece = 'tour' and lignefin=ligneinit THEN 'true'
 WHEN typepiece = 'tour' AND colonneFin=colonneInit THEN 'true'
-WHEN typepiece = 'tour' AND ligneFin <> ligneInit AND colonneFin <> colonneFin THEN 'false'
 WHEN typepiece = 'fou' AND ABS(ligneInit-ligneFin) = ABS(colonneInit-colonneFin) THEN 'true'
 WHEN typepiece = 'fou' AND ABS(ligneInit-ligneFin) <> ABS(colonneInit-colonneFin) THEN 'false'
 WHEN typepiece = 'cavalier' AND ABS(ligneInit-ligneFin)=2 AND ABS(colonneInit-colonneFin)=1 THEN 'true'
 WHEN typepiece = 'cavalier' AND ABS(ligneInit-ligneFin)=1 AND ABS(colonneInit-colonneFin)=2 THEN 'true'
-WHEN typepiece = 'cavalier' AND ABS(ligneInit-ligneFin)=1 AND ABS(colonneInit-colonneFin)<>2 THEN 'false'
-WHEN typepiece = 'cavalier' AND ABS(ligneInit-ligneFin)=2 AND ABS(colonneInit-colonneFin)<>1 THEN 'false'
-WHEN typepiece = 'cavalier' AND ABS(ligneInit-ligneFin)<>1 AND ABS(colonneInit-colonneFin)=2 THEN 'false'
 WHEN typepiece = 'cavalier' AND ABS(ligneInit-ligneFin)<>2 AND ABS(colonneInit-colonneFin)=1 THEN 'true'
-WHEN typepiece = 'cavalier' AND ABS(ligneInit-ligneFin)>1 THEN 'false'
-WHEN typepiece = 'cavalier' AND ABS(colonneInit-colonneFin)>1 THEN 'false'
-WHEN typepiece = 'roi' AND ABS(ligneInit-ligneFin)>1 THEN 'false'
-WHEN typepiece = 'roi' AND ABS(colonneInit-colonneFin)>1 THEN 'false'
 WHEN typepiece = 'roi' AND ABS(ligneInit-ligneFin)=1 OR ABS(colonneInit-colonneFin)=1 THEN 'true'
 WHEN typepiece = 'reine' AND ABS(ligneInit-ligneFin) = ABS(colonneInit-colonneFin) THEN 'true'
 WHEN typepiece = 'reine' AND ligneFin=ligneInit THEN 'true'
 WHEN typepiece = 'reine' AND colonneFin=colonneInit THEN 'true'
+WHEN typepiece = 'pion' AND colonneFin=colonneInit AND ABS(ligneFin-lignInit)=1 THEN 'true'
+WHEN typepiece = 'pion' AND ABS(colonneFin-colonneInit)=1 AND ABS (ligneFin-ligneInit)=1 THEN 'true'
 ELSE 'false' 
 END AS possible FROM Piece;
 	
@@ -56,7 +50,13 @@ SELECT couleur FROM Piece
 WHERE ligneInit = L AND colonneInit = C;
 
 /*quel tour on est */
-SELECT codeTour FROM Rencontre;
+SELECT CASE
+WHEN Count(CodeTour)=1 THEN 'qualif'
+WHEN Count(CodeTour)=2 THEN 'quart'
+WHEN Count(CodeTour)=3 THEN 'demi'
+WHEN Count(CodeTour)=4 THEN 'finale'
+END AS Tour_Courant
+FROM Tour;
 
 
 
