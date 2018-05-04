@@ -31,63 +31,68 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
 
         
     public void creerDansBD(Joueur joueur) throws BDAccessEx{
-
+         Connection conn = null;
          // Connexion à la BD
          try{
-            Connection conn = DriverManager.getConnection(URL, USER, PASSWD);
-            System.out.println("Connection ok");
-             try{
-            conn.setAutoCommit(false);
-            conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
-            //préparation de la requète
-            PreparedStatement pstmt = conn.prepareStatement("insert into Joueur VALUES(?,?,?,?);");
-            pstmt.setInt(1,joueur.codeJoueur.getValue());
-            pstmt.setString(2, joueur.prenom);
-            pstmt.setString(3, joueur.nom);
-            pstmt.setString(4, joueur.adresse);
+                conn = DriverManager.getConnection(URL, USER, PASSWD);
+                if (conn==null){throw new BDAccessEx("connexion échouée");}
+                else{ System.out.println("Connection ok");}
 
-            conn.commit();
-            conn.close();
-           System.out.println("Enregistrement du joueur " +joueur.codeJoueur.getValue() + "effectué");         
+                 try{
+                //préparation de la requète
+                PreparedStatement pstmt = conn.prepareStatement("insert into Joueur VALUES(?,?,?,?);");
+                pstmt.setInt(1,joueur.codeJoueur.getValue());
+                pstmt.setString(2, joueur.prenom);
+                pstmt.setString(3, joueur.nom);
+                pstmt.setString(4, joueur.adresse);
+                
+                pstmt.executeQuery();
+                
+                pstmt.close();
+                conn.close();
+
+                System.out.println("Enregistrement du joueur " +joueur.codeJoueur.getValue() + "effectué");   
+           
              }catch(  SQLException ex){//si la transaction echoue
                 conn.close();
-                 System.err.println(ex.getMessage());
+                System.err.println(ex.getMessage());
              }
         }catch(  SQLException ex){
             throw new BDAccessEx("creerJoueur Raised SQLException during the connection\n"+ ex.getMessage());
         }
     }
-    
+
+
         public void MAJBD(Joueur joueur) throws BDAccessEx{//remplace les données du joueur de code joueur.codeJoueur par celles de joueur
-            
+        
          int codeJoueur = joueur.codeJoueur.getValue();
          String requete = "UPDATE joueurs Set nom = ?, prenom = ?, adresse = ? WHERE codeJoueur = ?;";
-         
-//         try{// Chragement du Driver
-//            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-//        }catch( SQLException ex){
-//            throw new BDAccessEx("creerJoueur Raised classNotFound exception during the driver loading");
-//        }
+         int champsModif;
          // Connexion à la BD
          try{
-            Connection conn = DriverManager.getConnection(URL, USER, PASSWD);
+              Connection conn = null;
+            conn = DriverManager.getConnection(URL, USER, PASSWD);
+            if (conn==null){throw new BDAccessEx("connexion échouée");}
+            else{ System.out.println("Connection ok");}
              try{
-            conn.setAutoCommit(false);
-            conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
-            //préparation de la requète
-            
-            PreparedStatement pstmt = conn.prepareStatement(requete);
-            pstmt.setString(1, joueur.nom);
-            pstmt.setString(2, joueur.prenom);
-            pstmt.setString(3, joueur.adresse);
-            pstmt.setInt(3, codeJoueur);
-            
-            conn.commit();
-            conn.close();
-            
-           System.out.println("MAJ du joueur " +joueur.codeJoueur.getValue() + "effectuée");         
+                //préparation de la requète
+                PreparedStatement pstmt = conn.prepareStatement(requete);
+                pstmt.setString(1, joueur.nom);
+                pstmt.setString(2, joueur.prenom);
+                pstmt.setString(3, joueur.adresse);
+                pstmt.setInt(3, codeJoueur);
+
+                champsModif = pstmt.executeUpdate();
+                if (champsModif != 3)
+                {      throw new BDAccessEx("Problème lors de la jour de la BD : "+champsModif + " champs modifiés au lieu de 3");}
+
+                pstmt.close();
+                conn.close();
+
+               System.out.println("MAJ du joueur " +joueur.codeJoueur.getValue() + "effectuée");         
              }catch(  SQLException ex){//si la transaction echoue
                 conn.close();
+                System.out.println("MAJ du joueur " +joueur.codeJoueur.getValue() + "échouée" + ex.getMessage());   
              }
         }catch(  SQLException ex){
             throw new BDAccessEx("MAJJoueur Raised SQLException during the connection");
@@ -110,33 +115,22 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
          
          ResultSet resultat;
          
-//     try{// Chragement du Driver
-//        DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-//    }catch( SQLException ex){
-//        throw new BDAccessEx("creerJoueur Raised classNotFound exception during the driver loading"+ex.getMessage());
-//    }
+
          // Connexion à la BD
          try{
             Connection conn = DriverManager.getConnection(URL, USER, PASSWD);
              try{
-            conn.setAutoCommit(false);
-            conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+                 
             //préparation de la requète
-            
             PreparedStatement pstmt = conn.prepareStatement(requete);
             pstmt.setInt(1, codeJoueur);
-            System.out.println("1");
-            
+
             resultat = pstmt.executeQuery();
-            
-            System.out.println("2");
             resultat.next();
             nom=resultat.getString(2);
             prenom=resultat.getString(3);
             adresse = resultat.getString(4);
-            
-                 System.out.println("requete 1 ok");
-         
+
             pstmt.close();
             resultat.close();
             
@@ -167,14 +161,15 @@ public class FabriqueDeJoueur extends FabriqueTransaction{
             
             J = new Joueur(nom ,prenom ,code,adresse,rencontres,nbVictoires,this);
             
-            conn.commit();
+            resultat.close();
+            pstmt.close();
             conn.close();
             
            System.out.println("LoadFromBD du joueur " +codeJoueur + "effectuée");      
            return J;
            
              }catch(  SQLException ex){//si la transaction echoue
-                conn.close();
+                   conn.close();
                  throw new BDAccessEx("LoadFromBD Joueur Raised SQLException during the transaction" + ex.getMessage());
              }
         }catch(  SQLException ex){

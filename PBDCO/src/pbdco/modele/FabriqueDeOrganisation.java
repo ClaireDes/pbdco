@@ -6,6 +6,12 @@
 package pbdco.modele;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import pbdco.*;
 import static pbdco.modele.FabriqueTransaction.*;
 
@@ -15,6 +21,16 @@ import static pbdco.modele.FabriqueTransaction.*;
  * @author milcenan
  */
 public class FabriqueDeOrganisation {
+    
+    public FabriqueDeOrganisation() throws BDAccessEx{
+        try{// Chragement du Driver
+            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+        }catch( SQLException ex){
+            throw new BDAccessEx(" exception "+ "during the driver loading"+ex.getMessage());
+        }
+        System.out.println("Driver ok");
+    }
+    
     public int nbrDeJoueurs(Code codeTournois) throws BDAccessEx{
         //ici la requète pour
         //appel à la BD concernant la table TOUR
@@ -23,26 +39,17 @@ public class FabriqueDeOrganisation {
         ResultSet resultat;
         int nbJoueurs=0;
         
-        try{// Chragement du Driver
-            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-        }catch( SQLException ex){
-            throw new BDAccessEx("nbrDeJoueurs Raised classNotFound exception "
-                    + "during the driver loading"+ex.getMessage());
-        }
-        System.out.println("Driver ok");
-        
          // Connexion à la BD
-         try{
-            Connection conn = DriverManager.getConnection(URL, USER, PASSWD);
-            System.out.println("Connection ok");
+        try{
+             Connection conn = null;
+            conn = DriverManager.getConnection(URL, USER, PASSWD);
+            if (conn==null){throw new BDAccessEx("connexion échouée");}
+            else{ System.out.println("Connection ok");}
              try{
-            conn.setAutoCommit(false);
-            conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
-            
             //préparation de la requète
             PreparedStatement pstmt = conn.prepareStatement(requete);
             pstmt.setString(1, "qualif");
-            
+
             resultat = pstmt.executeQuery();
             nbJoueurs = resultat.getInt(1);
             
@@ -56,9 +63,7 @@ public class FabriqueDeOrganisation {
         }catch(  SQLException ex){
             throw new BDAccessEx("nbrDeJoueurs Raised SQLException during the connection\n"+ ex.getMessage());
         }
-         
          return nbJoueurs;
-    
     }
     
     public String quelTour(Code codeTournoi){
@@ -75,7 +80,104 @@ public class FabriqueDeOrganisation {
         throw new UnsupportedOperationException("Not supported yet.");  
         
     }
+   
+    
+    /**
+     * 
+     * Charge tous les joueurs de la BD dans la HashMap joueur
+     * Cette hashMap permet d'avoir un acces rapide à tous les joueurs en ne connaissant que leur code 
+     * Afin d'assurer que deux instances du meme joueur ne soient jamais créees en meme temps, il est recommandé de charger tous les joueurs une fois avec cette methose puis d'utiliser la hashMap pour faire les modifs dessus.
+     * Si un nouveau Joueur est ajouté à la BD, il faut l'ajouter à la HashMap avec la methode put (int, Joueur) 
+     * l'enregistrement dans la BD se fait dans le constructeur de joueur
+     * 
+     * @return
+     * @throws BDAccessEx 
+     */
+    public Map loadAllJoueurs() throws BDAccessEx{
+        Map<Integer,Joueur> joueurs;
+        joueurs = new HashMap<>();
+        FabriqueDeJoueur fabJoueur=new FabriqueDeJoueur();
+         int codeJoueur;
+         String requete = "SELECT codeJoueur FROM Joueur";
+        ResultSet resultat;
+         // Connexion à la BD
+         try{
+              Connection conn = null;
+               conn = DriverManager.getConnection(URL, USER, PASSWD);
+            if (conn==null){throw new BDAccessEx("connexion échouée");}
+            else{ System.out.println("Connection ok");}
+             try{
+                //préparation de la requète
+                PreparedStatement pstmt = conn.prepareStatement(requete);
+                resultat = pstmt.executeQuery();
+                
+                   while (resultat.next()){//Ajoute les joueurs de la BD dans le Set avec la methode déjà écrite dans Fabrique de Joueur
+                       joueurs.put(resultat.getInt("codeJoueur"),fabJoueur.LoadFromBD(new Code(resultat.getInt("codeJoueur"))) );
+                   }
         
+                resultat.close();
+                pstmt.close();
+                conn.close();
+                return joueurs;
+                    
+             }catch(  SQLException ex){//si la transaction echoue
+                conn.close();
+                System.out.println(ex.getMessage());   
+                throw new BDAccessEx("loadAllJoueur Raised SQLException during the Query"+ex.getMessage());
+             }
+        }catch(  SQLException ex){
+            throw new BDAccessEx("loadAllJoueur Raised SQLException during the connection");
+        }   
+    }
+        
+        /**
+     * 
+     * Met à jour tous les joueurs de la BD (et uniquement ceux qui sont encore présents dedans, les vielles instances de joueur déjà supprimées ne seront pas ajoutées)
+     * à partir de la hashMap Fournie qui doit etre à jour en permanence puisqu'elle contient les instances uniques des Joueur
+     * 
+     * Peut etre utile mais pas nécéssaire.
+     * 
+     * @throws BDAccessEx 
+     */
+    public void UpdateAllJoueurs(Map<Integer,Joueur> joueurs) throws BDAccessEx{
+        
+        FabriqueDeJoueur fabJoueur=new FabriqueDeJoueur();
+         int codeJoueur;
+         String requete = "SELECT codeJoueur FROM Joueur";
+        ResultSet resultat;
+         // Connexion à la BD
+         try{
+              Connection conn = null;
+               conn = DriverManager.getConnection(URL, USER, PASSWD);
+            if (conn==null){throw new BDAccessEx("connexion échouée");}
+            else{ System.out.println("Connection ok");}
+             try{
+                 
+                //préparation de la requète
+                PreparedStatement pstmt = conn.prepareStatement(requete);
+                resultat = pstmt.executeQuery();
+                
+                   while (resultat.next()){//Mets à jour les joueurs de la BD avec la methode de FabriqueDeJoueur
+                      fabJoueur.MAJBD(joueurs.get(resultat.getInt(1)));
+                   }
+                resultat.close();
+                pstmt.close();
+                conn.close();    
+             }catch(  SQLException ex){//si la transaction echoue
+                conn.close();
+                System.out.println(ex.getMessage());   
+                throw new BDAccessEx("loadAllJoueur Raised SQLException during the Query"+ex.getMessage());
+             }
+        }catch(  SQLException ex){
+            throw new BDAccessEx("loadAllJoueur Raised SQLException during the connection");
+        }   
+    }
+    
+     public Map loadAllRencontres(){   
+         // construite sur le meme principe que load all joueurs pour garantir que les rencontres ne sont créees qu'une seule fois 
+         throw new UnsupportedOperationException("not supported yet");
+     }
+    
     public void creerTournois(){
         Code codeTournois = new Code("qualif");
         
