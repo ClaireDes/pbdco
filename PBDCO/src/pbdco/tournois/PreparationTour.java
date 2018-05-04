@@ -5,6 +5,7 @@
  */
 package pbdco.tournois;
 
+import pbdco.BDAccessEx;
 import pbdco.Code;
 
 /**
@@ -14,7 +15,7 @@ import pbdco.Code;
 public class PreparationTour extends Organisation{
     
     
-    public PreparationTour(){
+    public PreparationTour() throws BDAccessEx{
         super();
     }
     

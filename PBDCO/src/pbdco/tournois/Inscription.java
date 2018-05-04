@@ -17,7 +17,7 @@ import pbdco.modele.Joueur;
 public class Inscription extends Organisation{
     private FabriqueDeJoueur fabJoueur = new FabriqueDeJoueur();
     
-    public Inscription(){
+    public Inscription() throws BDAccessEx{
         super();
     }
     
