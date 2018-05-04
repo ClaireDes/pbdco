@@ -15,8 +15,8 @@ import pbdco.Code;
 public class PreparationTour extends Organisation{
     
     
-    public PreparationTour() throws BDAccessEx{
-        super();
+    public PreparationTour(boolean bool) throws BDAccessEx{
+        super(bool);
     }
     
     public void creeRencontre(){

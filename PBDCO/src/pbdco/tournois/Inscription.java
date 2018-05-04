@@ -17,8 +17,8 @@ import pbdco.modele.Joueur;
 public class Inscription extends Organisation{
     private FabriqueDeJoueur fabJoueur = new FabriqueDeJoueur();
     
-    public Inscription() throws BDAccessEx{
-        super();
+    public Inscription(boolean bool) throws BDAccessEx{
+        super(bool);
     }
     
     public void inscrit(String nom, String prenom, String adresse) throws BDAccessEx{

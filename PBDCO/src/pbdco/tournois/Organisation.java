@@ -23,7 +23,6 @@ public abstract class Organisation {
     private String tour;
     private int nbrParticipants;
     private Map<Integer,Joueur> listeDesJoueurs;
-    private Code codeTournoi;
     private FabriqueDeOrganisation fabriqueOrga;
     
 //    public Organisation(Code codeTournoi){
@@ -36,21 +35,24 @@ public abstract class Organisation {
 //        this.nbrParticipants = this.fabriqueOrga.nbrDeJoueurs(codeTournoi);
 //    }
     
-    public Organisation() throws BDAccessEx{
+    public Organisation(boolean bool) throws BDAccessEx{
+        // crée un nouveau tournoi
+        if(bool = true){
+            this.fabriqueOrga = new FabriqueDeOrganisation();
+            this.tour = "qualif";
+            this.fabriqueOrga.creerTournois();
+            this.nbrParticipants = 0;
+        }
+        else{// charge le tournoi en cours
+            this.fabriqueOrga = new FabriqueDeOrganisation();
+            
+        }
         
         
-        this.fabriqueOrga = new FabriqueDeOrganisation();
-        this.tour = "qualif";
-        this.fabriqueOrga.creerTournois();
-        this.nbrParticipants = this.fabriqueOrga.nbrDeJoueurs(codeTournoi);
     }
     
     public String getTour(){
         return this.tour;
-    }
-    
-    public Code getCodeTournoi(){
-        return this.codeTournoi;
     }
     
     public int getNbrParticipants(){
