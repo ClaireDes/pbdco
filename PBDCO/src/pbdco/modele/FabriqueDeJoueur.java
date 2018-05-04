@@ -41,7 +41,7 @@ public class FabriqueDeJoueur extends FabriqueTransaction {
 
             try {
                 //préparation de la requète
-                PreparedStatement pstmt = conn.prepareStatement("insert into Joueur VALUES(?,?,?,?);");
+                PreparedStatement pstmt = conn.prepareStatement("insert into Joueur VALUES(?,?,?,?)");
                 pstmt.setInt(1, joueur.codeJoueur.getValue());
                 pstmt.setString(2, joueur.prenom);
                 pstmt.setString(3, joueur.nom);
@@ -66,7 +66,7 @@ public class FabriqueDeJoueur extends FabriqueTransaction {
     public void MAJBD(Joueur joueur) throws BDAccessEx {//remplace les données du joueur de code joueur.codeJoueur par celles de joueur
 
         int codeJoueur = joueur.codeJoueur.getValue();
-        String requete = "UPDATE joueurs Set nom = ?, prenom = ?, adresse = ? WHERE codeJoueur = ?;";
+        String requete = "UPDATE joueurs Set nom = ?, prenom = ?, adresse = ? WHERE codeJoueur = ?";
         int champsModif;
         // Connexion à la BD
         try {

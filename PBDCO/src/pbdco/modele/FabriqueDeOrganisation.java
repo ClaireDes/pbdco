@@ -35,7 +35,7 @@ public class FabriqueDeOrganisation {
         //ici la requète pour
         //appel à la BD concernant la table TOUR
         //pour connaitre le nombre de joueurs dans le tournois
-        String requete = "SELECT COUNT(codeJoueur) FROM Joueur NATURAL JOIN Rencontre WHERE codeTour=?;";
+        String requete = "SELECT COUNT(codeJoueur) FROM Joueur NATURAL JOIN Rencontre WHERE codeTour=?";
         ResultSet resultat;
         int nbJoueurs=0;
         
