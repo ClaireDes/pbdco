@@ -5,6 +5,8 @@
  */
 package pbdco.partie;
 
+import pbdco.Code;
+
 /**
  *
  * @author belinbr
@@ -12,6 +14,7 @@ package pbdco.partie;
 abstract public class Piece {
     private String nomPiece;
     private Boolean couleur;
+    private Code codePiece;
     
     private Position currentPosition = new Position(1,1,true);
     private Position previousPosition = new Position(1,1,false);

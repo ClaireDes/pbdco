@@ -1,19 +1,7 @@
-/****TRANSACTIONS****/
-
-/* Créer joueur */
-INSERT INTO Joueur VALUES ('codeJ', 'prenom', 'adresse')
-
-/* Supprimer un joueur*/
-DELETE FROM Joueur WHERE CodeJoueur=codeJ;
-
-/* Créer rencontre */
-INSERT INTO Rencontre VALUES ('codeR','codeT','J1','J2','JB','JN','V');
-
-/*Créer ou ajouter tour*/
-INSERT INTO Tour Values ('codeTour');
+/*transactions*/
 
 /*creer echiquier*/
-/*codeR et codeT sont des variables determinees en java*/
+/*codeR et codeT sont des variables detrminees en java*/
 INSERT INTO Piece
 VALUES (1,1,1,null,null,'tour','blanc','codeR','codeT');
 
@@ -114,14 +102,16 @@ VALUES (32,8,8,null,null,'tour','noir','codeR','codeT');
 /*rejouer une partie*/
 DELETE * FROM Coup WHERE codeRencontre=codeR AND codeTour=codeT;
 DELETE * FROM Piece WHERE codeRencontre=codeR AND codeTour=codeT;
-UPDATE Rencontre SET JoueurBlanc=nouveauJBlanc WHERE codeRencontre=rencontreARejouer;
 /* + creer echiquier */
   
 
 /* Créer coup */
-INSERT INTO Coup VALUES (codeCoup,ligneCour, colonneCour, lignePrec, colonnePrec, codeR, codeT);
-UPDATE Piece SET ligneInit=L,colonneInit=C WHERE colonneFin=CC AND ligneFin=LL;
+INSERT INTO Coup VALUES (codeC, ligneC, colonneC, ligneP, colonneP,codeR, codeT);
+UPDATE Piece SET colonneInit=colonneC AND ligneInit=ligneC WHERE colonneFin=colonneC AND ligneFin=colonneC;
 
-/*vider la table des coups*/
-DELETE FROM Coup;
+/* Demarrer un nouveau tour */
+UPDATE Tour SET codeTour=codeT WHERE codeTour=codeT2;
+
+
+
 

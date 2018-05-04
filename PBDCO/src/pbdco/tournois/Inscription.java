@@ -4,18 +4,25 @@
  * and open the template in the editor.
  */
 package pbdco.tournois;
+
+import pbdco.BDAccessEx;
+import pbdco.Code;
+import pbdco.modele.FabriqueDeJoueur;
+import pbdco.modele.Joueur;
+
 /**
  *
  * @author milcenan
  */
 public class Inscription extends Organisation{
-
-    public Inscription(String tour){
-        super(tour);
+    private FabriqueDeJoueur fabJoueur = new FabriqueDeJoueur();
+    
+    public Inscription(boolean bool) throws BDAccessEx{
+        super(bool);
     }
     
-    public void inscrit(String nom, String prenom, String adresse){
+    public void inscrit(String nom, String prenom, String adresse) throws BDAccessEx{
         Joueur nouvJoueur;
-        this.nouvJoueur = new Joueur(nom, prenom, adresse);
+        nouvJoueur = new Joueur(nom, prenom, adresse, fabJoueur);
     }
 }
