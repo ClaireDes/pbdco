@@ -1,7 +1,10 @@
 /****TRANSACTIONS****/
 
 /* Créer joueur */
-INSERT INTO Joueur VALUES ('codeJ', 'Louis','Mn', 'louis@fout.com');
+INSERT INTO Joueur VALUES ('codeJ', 'prenom', 'adresse')
+
+/* Supprimer un joueur*/
+DELETE FROM Joueur WHERE CodeJoueur=codeJ;
 
 /* Créer rencontre */
 INSERT INTO Rencontre VALUES ('codeR','codeT','J1','J2','JB','JN','V');
@@ -116,7 +119,9 @@ UPDATE Rencontre SET JoueurBlanc=nouveauJBlanc WHERE codeRencontre=rencontreARej
   
 
 /* Créer coup */
-INSERT INTO Coup VALUES (1, 1, 2, 1, 1,1, 'finale');
+INSERT INTO Coup VALUES (codeCoup,ligneCour, colonneCour, lignePrec, colonnePrec, codeR, codeT);
 UPDATE Piece SET ligneInit=L,colonneInit=C WHERE colonneFin=CC AND ligneFin=LL;
 
+/*vider la table des coups*/
+DELETE FROM Coup;
 
