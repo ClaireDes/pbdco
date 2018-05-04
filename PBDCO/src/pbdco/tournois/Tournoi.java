@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package pbdco.tournois;
-
 /**
  *
  * @author grelliel
@@ -13,7 +12,7 @@ public class Tournoi {
     
     public static void main(String[] args){
         //afficher vue ecran d'accueil
-        
+//        PremiereVue laFirst = new PremiereVue();
         
     }
 }
