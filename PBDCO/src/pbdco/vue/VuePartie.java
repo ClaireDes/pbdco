@@ -55,7 +55,7 @@ public class VuePartie {
                     } else {
                         b.setBackground(Color.BLACK);
                     }
-                    b.setIcon(PiecesGraphiques.GOLD_QUEEN);
+                    //b.setIcon(PiecesGraphiques.GOLD_QUEEN);
                     chessBoardSquares[jj][ii] = b;
                 }
             }
