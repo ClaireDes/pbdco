@@ -27,5 +27,20 @@ public class Tournoi {
         Inscription inscript = new Inscription(false);
         inscript.inscrit(nom, prenom, adresse);
     }
+    
+    public int nbrInscrits() throws BDAccessEx{
+        Inscription inscript = new Inscription(false);
+        return inscript.getNbrParticipants();
+    }
+    
+    public void commencerLeTournoi() throws BDAccessEx{
+        PreparationTour prep = new PreparationTour(false);
+        prep.creeRencontre();
+    }
+    
+    public void recupererLesRencontres(String nom, String prenom, String adresse) throws BDAccessEx{
+        PreparationTour prep = new PreparationTour(false); 
+        
+    }
 
 }
