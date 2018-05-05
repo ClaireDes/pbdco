@@ -5,44 +5,54 @@
  */
 package pbdco.tournois;
 
+
+
+import java.util.List;
+import pbdco.BDAccessEx;
 import pbdco.Code;
 import pbdco.modele.FabriqueDeOrganisation;
-
+import java.sql.*;
+import java.util.Map;
+import java.util.Set;
+import pbdco.modele.*;
 /**
  *
  * @author milcenan
  */
-public class Organisation {
+public abstract class Organisation {
     private String tour;
     private int nbrParticipants;
-    private Code codeTour;
+    private Map<Integer,Joueur> listeDesJoueurs;
     private FabriqueDeOrganisation fabriqueOrga;
     
-    public Organisation(Code codeTour){
-        this.codeTour = new Code(codeTour);
-        this.frabriqueOrga = new fabriqueDeOrganisation();
-        this.tour = this.fabriqueOrga.quelTour();
-        if(this.tour == null){
-            //Relever une erreur
-        }
-        this.nbrParticipants = this.fabriqueOrga.nbrDeJoueurs();
-    }
+//    public Organisation(Code codeTournoi){
+//        this.codeTournoi = codeTournoi;
+//        this.fabriqueOrga = new FabriqueDeOrganisation();
+//        this.tour = this.fabriqueOrga.quelTour(codeTournoi);
+//        if(this.tour == null){
+//            //Relever une erreur
+//        }
+//        this.nbrParticipants = this.fabriqueOrga.nbrDeJoueurs(codeTournoi);
+//    }
     
-    public Organisation(){
-        this.frabriqueOrga = new fabriqueDeOrganisation();
-        this.tour = this.fabriqueOrga.quelTour();
-        if(this.tour == null){
-            this.codeTour = this.fabriqueOrga.creerTournoi();
+    public Organisation(boolean bool) throws BDAccessEx{
+        // crée un nouveau tournoi
+        if(bool = true){
+            this.fabriqueOrga = new FabriqueDeOrganisation();
+            this.tour = "qualif";
+            this.fabriqueOrga.creerTournois();
+            this.nbrParticipants = 0;
         }
-        this.nbrParticipants = this.fabriqueOrga.nbrDeJoueurs();
+        else{// charge le tournoi en cours
+            this.fabriqueOrga = new FabriqueDeOrganisation();
+            
+        }
+        
+        
     }
     
     public String getTour(){
         return this.tour;
-    }
-    
-    public Code getCodeTour(){
-        return this.codeTour;
     }
     
     public int getNbrParticipants(){
@@ -64,6 +74,10 @@ public class Organisation {
     
     public void setNbrParticipants(int nouvNbr){
         this.nbrParticipants = nouvNbr;
+    }
+    
+    public void loadAllJoueurs() throws BDAccessEx{
+        listeDesJoueurs = fabriqueOrga.loadAllJoueurs();
     }
     
 }

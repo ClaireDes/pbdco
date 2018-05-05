@@ -26,7 +26,7 @@ public class Code {
         return name;
     }
     public void setName(String i){
-        this.name=name;
+        this.name=i;
     }
 
     public Code(int i){
