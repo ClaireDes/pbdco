@@ -1,4 +1,4 @@
-package vueorga;
+package pbdco.vueorga;
 
 import javax.swing.*;
 
@@ -11,7 +11,7 @@ public class VuesOrga extends JFrame {
     }
 
     public VuesOrga() {
-        this.frame = new VueAccueil(this);
+        this.frame = new VueAccueilOrganisation();
     }
 
     public void setFrame(JFrame view) {

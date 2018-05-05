@@ -1,6 +1,5 @@
-package vueorga;
+package pbdco.vueorga;
 
-import oracle.jvm.hotspot.jfr.JFR;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,7 +12,7 @@ public class VueAccueil extends JFrame {
 
     public VueAccueil(VuesOrga ordonnanceur) {
         super("Organisation du tournois - Accueil");
-        setContentPane(panelMain);
+    setContentPane(panelMain);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         pack();

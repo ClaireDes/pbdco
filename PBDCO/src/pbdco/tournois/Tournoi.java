@@ -6,6 +6,7 @@
 package pbdco.tournois;
 
 import pbdco.BDAccessEx;
+import pbdco.vueorga.*;
 
 /**
  *
@@ -16,7 +17,7 @@ public class Tournoi {
     public static void main(String[] args){
         //afficher vue ecran d'accueil
 //        PremiereVue laFirst = new PremiereVue();
-        new PremiereVue().setVisible(true);
+        VuesOrga vue = new VuesOrga();
     }
 
     public void creerTournoi() throws BDAccessEx{
