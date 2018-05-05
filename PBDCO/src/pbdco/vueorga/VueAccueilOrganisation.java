@@ -96,7 +96,7 @@ public class VueAccueilOrganisation extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void continuerTournoisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continuerTournoisActionPerformed
-
+        
         dispose();
         try {
             new VueMatchsJoueur().setVisible(true);
