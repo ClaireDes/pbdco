@@ -30,9 +30,10 @@ public class JeuInterface extends JFrame {
         p.setLayout(new GridLayout(8,8));
         for(int i=0; i<64; i++) {
             boutons[i] = new BoutonCase();
+            boutons[i].setText("un bouton");
             p.add(boutons[i]);
         }
-        
+        add(p);
         setVisible(true);
     }
     
