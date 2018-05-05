@@ -22,8 +22,14 @@ import pbdco.modele.*;
 public abstract class Organisation {
     private String tour;
     private int nbrParticipants;
+    private int nbrRencontres;
     private Map<Integer,Joueur> listeDesJoueurs;
     private FabriqueDeOrganisation fabriqueOrga;
+    private FabriqueDeJoueur fabJoueur = new FabriqueDeJoueur();
+    private FabriqueDePiece fabPiece = new FabriqueDePiece();
+    private FabriqueDeCoups fabCoup = new FabriqueDeCoups();
+    private FabriqueDeRencontre fabRenc = new FabriqueDeRencontre(fabJoueur, fabPiece, fabCoup);
+
     
 //    public Organisation(Code codeTournoi){
 //        this.codeTournoi = codeTournoi;
@@ -41,11 +47,14 @@ public abstract class Organisation {
             this.fabriqueOrga = new FabriqueDeOrganisation();
             this.tour = "qualif";
             this.fabriqueOrga.creerTournois();
-            this.nbrParticipants = 0;
+            this.nbrParticipants = this.fabriqueOrga.nbrDeJoueurs();
         }
         else{// charge le tournoi en cours
             this.fabriqueOrga = new FabriqueDeOrganisation();
-            
+            this.tour = this.fabriqueOrga.quelTour();
+            this.nbrParticipants = this.fabriqueOrga.nbrDeJoueurs();
+            this.nbrRencontres = this.fabriqueOrga.nbrRencontres(tour);
+            listeDesJoueurs = fabriqueOrga.loadAllJoueurs();
         }
         
         
@@ -59,8 +68,32 @@ public abstract class Organisation {
         return this.nbrParticipants;
     }
     
+    public int getNbrRencontres(){
+        return this.nbrRencontres;
+    }
+    
     public FabriqueDeOrganisation getFabriqueOrga(){
         return this.fabriqueOrga;
+    }
+    
+    public FabriqueDeJoueur getFabriqueJoueur(){
+        return this.fabJoueur;
+    }
+    
+    public FabriqueDePiece getFabriquePiece(){
+        return this.fabPiece;
+    }
+    
+    public FabriqueDeCoups getFabriqueCoup(){
+        return this.fabCoup;
+    }
+    
+    public FabriqueDeRencontre getFabriqueRencontre(){
+        return this.fabRenc;
+    }
+    
+    public Map getListJoueur(){
+        return this.listeDesJoueurs;
     }
     
 //    public void setCodeTour(Code codeTournoi){
@@ -74,6 +107,10 @@ public abstract class Organisation {
     
     public void setNbrParticipants(int nouvNbr){
         this.nbrParticipants = nouvNbr;
+    }
+    
+    public void incNbrRencontres(){
+        this.nbrRencontres++;
     }
     
     public void loadAllJoueurs() throws BDAccessEx{

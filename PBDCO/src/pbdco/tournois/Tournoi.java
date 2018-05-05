@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package pbdco.tournois;
+
+import pbdco.BDAccessEx;
+
 /**
  *
  * @author grelliel
@@ -13,6 +16,16 @@ public class Tournoi {
     public static void main(String[] args){
         //afficher vue ecran d'accueil
 //        PremiereVue laFirst = new PremiereVue();
-        
+        new PremiereVue().setVisible(true);
     }
+
+    public void creerTournoi() throws BDAccessEx{
+        Inscription tourn = new Inscription(true);
+    }
+    
+    public void ajoutParticipant(String nom, String prenom, String adresse) throws BDAccessEx{
+        Inscription inscript = new Inscription(false);
+        inscript.inscrit(nom, prenom, adresse);
+    }
+
 }
