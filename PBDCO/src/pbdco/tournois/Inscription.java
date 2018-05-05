@@ -20,9 +20,10 @@ public class Inscription extends Organisation{
         super(bool);
     }
     
-    public void inscrit(String nom, String prenom, String adresse) throws BDAccessEx{
+    public Code inscrit(String nom, String prenom, String adresse) throws BDAccessEx{
         Joueur nouvJoueur;
         nouvJoueur = new Joueur(nom, prenom, adresse, this.getFabriqueJoueur());
         this.setNbrParticipants(this.getNbrParticipants()+1);
+        return nouvJoueur.getCodeJoueur();
     }
 }
