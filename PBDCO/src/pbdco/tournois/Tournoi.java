@@ -5,9 +5,13 @@
  */
 package pbdco.tournois;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pbdco.BDAccessEx;
 import pbdco.Code;
 import pbdco.modele.Joueur;
+import pbdco.vueorga.VueAccueilOrganisation;
+import pbdco.vueorga.VueCreation;
 import pbdco.vueorga.VuesOrga;
 
 /**
@@ -19,7 +23,11 @@ public class Tournoi {
     public static void main(String[] args){
         //afficher vue ecran d'accueil
 //        PremiereVue laFirst = new PremiereVue();
-        VuesOrga vue = new VuesOrga();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new VueAccueilOrganisation().setVisible(true);
+                }
+            });
     }
 
     public void creerTournoi() throws BDAccessEx{
@@ -32,8 +40,13 @@ public class Tournoi {
     }
     
     public int nbrInscrits() throws BDAccessEx{
+        System.out.println("je suis dans inscrit de Tournoi");
         Inscription inscript = new Inscription(false);
-        return inscript.getNbrParticipants();
+        System.out.println("je suis dans inscrit avant de chercher a savoir le nbr de participants");
+        int nbr = inscript.getNbrParticipants();
+        System.out.println("je suis senser avoir le nombre de participants");
+        System.out.println(nbr);
+        return nbr;
     }
     
     public void commencerLeTournoi() throws BDAccessEx{

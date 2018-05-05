@@ -37,6 +37,7 @@ public class FabriqueDeOrganisation {
         String requete = "SELECT COUNT(codeJoueur) FROM Joueur";
         ResultSet resultat;
         int nbJoueurs = 0;
+        System.out.println("je suis dans nbrDeJoueurs");
 
         // Connexion à la BD
         try {
@@ -48,15 +49,16 @@ public class FabriqueDeOrganisation {
                 System.out.println("Connection ok");
             }
             try {
+                System.out.println("je commence la transaction");
                 conn.setAutoCommit(false);
                 conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
 
                 //préparation de la requète
                 Statement stmt = conn.createStatement();
                 resultat = stmt.executeQuery(requete);
-
+                System.out.println(nbJoueurs);
                 nbJoueurs = resultat.getInt(1);
-
+                System.out.println(nbJoueurs);
                 conn.commit();
                 conn.close();
                 System.out.println("Le nombre de participants au tournoi est : " + nbJoueurs);
@@ -64,6 +66,7 @@ public class FabriqueDeOrganisation {
                 conn.rollback();
                 conn.close();
                 System.err.println(ex.getMessage());
+                System.out.println("il y a une erreur dans la transaction");
             }
         } catch (SQLException ex) {
             throw new BDAccessEx("nbrDeJoueurs Raised SQLException during the connection\n" + ex.getMessage());

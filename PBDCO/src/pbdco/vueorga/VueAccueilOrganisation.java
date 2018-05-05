@@ -105,7 +105,15 @@ public class VueAccueilOrganisation extends javax.swing.JFrame {
         Tournoi tourn = new Tournoi();
         try {
             tourn.creerTournoi();
-            new VueCreation().setVisible(true);
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    try {
+                        new VueCreation().setVisible(true);
+                    } catch (BDAccessEx ex) {
+                        Logger.getLogger(VueCreation.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
         } catch (BDAccessEx ex) {
             Logger.getLogger(VueAccueilOrganisation.class.getName()).log(Level.SEVERE, null, ex);
         }

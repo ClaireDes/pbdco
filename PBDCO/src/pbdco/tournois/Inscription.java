@@ -22,6 +22,7 @@ public class Inscription extends Organisation{
     
     public Code inscrit(String nom, String prenom, String adresse) throws BDAccessEx{
         Joueur nouvJoueur;
+        System.out.println("je suis dans inscrit de Inscription");
         nouvJoueur = new Joueur(nom, prenom, adresse, this.getFabriqueJoueur());
         this.setNbrParticipants(this.getNbrParticipants()+1);
         return nouvJoueur.getCodeJoueur();

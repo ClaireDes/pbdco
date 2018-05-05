@@ -47,11 +47,14 @@ public abstract class Organisation {
             this.fabriqueOrga = new FabriqueDeOrganisation();
             this.tour = "qualif";
             this.fabriqueOrga.creerTournois();
+            System.out.println("JE VAIS METTRE AJOUR LE NOMBRE DE PARTICIPANTS");
+
             this.nbrParticipants = this.fabriqueOrga.nbrDeJoueurs();
         }
         else{// charge le tournoi en cours
             this.fabriqueOrga = new FabriqueDeOrganisation();
             this.tour = this.fabriqueOrga.quelTour();
+            System.out.println("JE VAIS METTRE AJOUR LE NOMBRE DE PARTICIPANTS");
             this.nbrParticipants = this.fabriqueOrga.nbrDeJoueurs();
             this.nbrRencontres = this.fabriqueOrga.nbrRencontres(tour);
             listeDesJoueurs = fabriqueOrga.loadAllJoueurs();
@@ -65,6 +68,7 @@ public abstract class Organisation {
     }
     
     public int getNbrParticipants(){
+        System.out.println("je dis cb y a de participants");
         return this.nbrParticipants;
     }
     

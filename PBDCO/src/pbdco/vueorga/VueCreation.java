@@ -21,7 +21,7 @@ public class VueCreation extends javax.swing.JFrame {
      */
     public VueCreation() throws BDAccessEx {
         initComponents();
-        //nombreInscrits.setText(String.valueOf(new Tournoi().nbrInscrits()));
+        nombreInscrits.setText(String.valueOf(new Tournoi().nbrInscrits()));
     }
 
     /**
@@ -116,7 +116,11 @@ public class VueCreation extends javax.swing.JFrame {
 
     private void nouveauParticipantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nouveauParticipantActionPerformed
         dispose();
-        new VueInscription().setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new VueInscription().setVisible(true);
+            }
+        });
     }//GEN-LAST:event_nouveauParticipantActionPerformed
 
     private void commencerTournoisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commencerTournoisActionPerformed
