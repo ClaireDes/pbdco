@@ -8,6 +8,7 @@ package pbdco.tournois;
 import pbdco.BDAccessEx;
 import pbdco.Code;
 import pbdco.modele.Joueur;
+import pbdco.vueorga.VueAccueilOrganisation;
 import pbdco.vueorga.VuesOrga;
 
 /**
@@ -19,7 +20,7 @@ public class Tournoi {
     public static void main(String[] args){
         //afficher vue ecran d'accueil
 //        PremiereVue laFirst = new PremiereVue();
-        VuesOrga vue = new VuesOrga();
+        new VueAccueilOrganisation().setVisible(true);
     }
 
     public void creerTournoi() throws BDAccessEx{

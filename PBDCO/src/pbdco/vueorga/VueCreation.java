@@ -21,7 +21,8 @@ public class VueCreation extends javax.swing.JFrame {
      */
     public VueCreation() throws BDAccessEx {
         initComponents();
-        //nombreInscrits.setText(String.valueOf(new Tournoi().nbrInscrits()));
+        //int nbInscritsEnBase = new Tournoi().nbrInscrits();
+        nombreInscrits.setText(String.valueOf(1));
     }
 
     /**
@@ -44,7 +45,7 @@ public class VueCreation extends javax.swing.JFrame {
 
         jLabel1.setText("Nombre de participants :");
 
-        nombreInscrits.setText("jLabel2");
+        nombreInscrits.setText("String.valueOf(new Tournoi().nbrInscrits()))");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -87,7 +88,7 @@ public class VueCreation extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(commencerTournois, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(nouveauParticipant, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
