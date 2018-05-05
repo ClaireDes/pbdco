@@ -103,4 +103,16 @@ public class Joueur implements Modele{
             //System.err.println("erreur lors de la création dans la BD de "+ this.nom + this.prenom);
         
     }
+    
+    public Code getCodeJoueur(){
+        return this.codeJoueur;
+    }
+    
+    public String[] getDetails(){
+        String[] det = new String[3];
+        det[0] = this.nom;
+        det[1] = this.prenom;
+        det[2] = this.adresse;
+        return det;
+    }
 }

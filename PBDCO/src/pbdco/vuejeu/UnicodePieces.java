@@ -1,4 +1,4 @@
-package vuejeu;
+package pbdco.vuejeu;
 
 public class UnicodePieces {
     public static final String ROIN = new String("\u265A");
