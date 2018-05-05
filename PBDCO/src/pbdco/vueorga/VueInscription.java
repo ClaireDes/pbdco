@@ -8,6 +8,7 @@ package pbdco.vueorga;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pbdco.BDAccessEx;
+import pbdco.tournois.Tournoi;
 
 /**
  *
@@ -188,7 +189,17 @@ public class VueInscription extends javax.swing.JFrame {
         dispose();
         //TODO
         try {
-            new VueCreation().setVisible(true);
+            Tournoi tourn = new Tournoi();
+            tourn.ajoutParticipant(jTextField1.getText(), jTextField2.getText(), jTextField3.getText());
+            java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    new VueCreation().setVisible(true);
+                } catch (BDAccessEx ex) {
+                    Logger.getLogger(VueCreation.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
         } catch (BDAccessEx ex) {
             Logger.getLogger(VueInscription.class.getName()).log(Level.SEVERE, null, ex);
         }

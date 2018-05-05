@@ -20,9 +20,8 @@ public class VueAccueilOrganisation extends javax.swing.JFrame {
     /**
      * Creates new form VueAccueilOrganisation
      */
-    
-    VuesOrga ordonnanceur;
-    
+
+
     public VueAccueilOrganisation() {
         initComponents();
     }
@@ -107,7 +106,17 @@ public class VueAccueilOrganisation extends javax.swing.JFrame {
 
     private void creerTournoisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creerTournoisActionPerformed
         try {
-            new VueCreation().setVisible(true);
+            Tournoi tourn = new Tournoi();
+            tourn.creerTournoi();
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    try {
+                        new VueCreation().setVisible(true);
+                    } catch (BDAccessEx ex) {
+                        Logger.getLogger(VueCreation.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
         } catch (BDAccessEx ex) {
             Logger.getLogger(VueAccueilOrganisation.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -123,7 +132,7 @@ public class VueAccueilOrganisation extends javax.swing.JFrame {
             }
         });
             tourn.creerTournoi();
-            
+
         } catch (BDAccessEx ex) {
             Logger.getLogger(VueAccueilOrganisation.class.getName()).log(Level.SEVERE, null, ex);
         }*/
@@ -137,7 +146,7 @@ public class VueAccueilOrganisation extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

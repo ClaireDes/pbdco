@@ -52,9 +52,12 @@ public class FabriqueDeOrganisation {
                 conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
 
                 //préparation de la requète
-                Statement stmt = conn.createStatement();
-                resultat = stmt.executeQuery(requete);
+                PreparedStatement pstmt;
+                
+                pstmt = conn.prepareStatement(requete);
+                resultat = pstmt.executeQuery();
 
+                resultat.next();
                 nbJoueurs = resultat.getInt(1);
 
                 conn.commit();
