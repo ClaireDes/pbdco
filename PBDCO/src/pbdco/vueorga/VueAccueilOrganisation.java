@@ -20,9 +20,9 @@ public class VueAccueilOrganisation extends javax.swing.JFrame {
     /**
      * Creates new form VueAccueilOrganisation
      */
-    
+
     VuesOrga ordonnanceur;
-    
+
     public VueAccueilOrganisation() {
         initComponents();
     }
@@ -98,12 +98,16 @@ public class VueAccueilOrganisation extends javax.swing.JFrame {
     private void continuerTournoisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continuerTournoisActionPerformed
 
         dispose();
-        new VueMatchsJoueur().setVisible(true);
+        try {
+            new VueMatchsJoueur().setVisible(true);
+        } catch (BDAccessEx ex) {
+            Logger.getLogger(VueAccueilOrganisation.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_continuerTournoisActionPerformed
 
     private void creerTournoisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creerTournoisActionPerformed
-        Tournoi tourn = new Tournoi();
         try {
+            Tournoi tourn = new Tournoi();
             tourn.creerTournoi();
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
@@ -117,6 +121,22 @@ public class VueAccueilOrganisation extends javax.swing.JFrame {
         } catch (BDAccessEx ex) {
             Logger.getLogger(VueAccueilOrganisation.class.getName()).log(Level.SEVERE, null, ex);
         }
+        /*Tournoi tourn = new Tournoi();
+        try {
+            java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    new VueCreation().setVisible(true);
+                } catch (BDAccessEx ex) {
+                    Logger.getLogger(VueCreation.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+            tourn.creerTournoi();
+
+        } catch (BDAccessEx ex) {
+            Logger.getLogger(VueAccueilOrganisation.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
         dispose();
     }//GEN-LAST:event_creerTournoisActionPerformed
 
@@ -127,7 +147,7 @@ public class VueAccueilOrganisation extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

@@ -5,6 +5,12 @@
  */
 package pbdco.vueorga;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import pbdco.BDAccessEx;
+import pbdco.Code;
+import pbdco.tournois.Tournoi;
+
 /**
  *
  * @author livingstonehgs
@@ -14,8 +20,15 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
     /**
      * Creates new form VueMatchsJoueur
      */
-    public VueMatchsJoueur() {
+    public VueMatchsJoueur() throws BDAccessEx {
         initComponents();
+        Code codeJoueur = new Code(Integer.parseInt(numeroJoueur.getText()));
+        for(String[] joueur : new Tournoi().recupRencontresAJouer(codeJoueur)) {
+            joueursAAfronter.addItem(joueur[0]+joueur[1]); //Affiche nom et prénom dans le menu déroulant
+        }
+        for(String[] joueur : new Tournoi().recupRencontresDejaJouer(codeJoueur)) {
+            joueursAAfronter.addItem(joueur[0]+joueur[1]); //Affiche nom et prénom dans le menu déroulant
+        }
     }
 
     /**
@@ -33,11 +46,11 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
         numeroJoueur = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        joueursAAfronter = new javax.swing.JComboBox<>();
         jouerMatch = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        joueursAffrontes = new javax.swing.JComboBox<>();
         revoirMatch = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -74,10 +87,10 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
 
         jLabel2.setText("Matchs à jouer");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        joueursAAfronter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Item" }));
+        joueursAAfronter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                joueursAAfronterActionPerformed(evt);
             }
         });
 
@@ -98,7 +111,7 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(joueursAAfronter, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -110,7 +123,7 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(joueursAAfronter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jouerMatch)
                 .addContainerGap(39, Short.MAX_VALUE))
@@ -118,7 +131,7 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
 
         jLabel3.setText("Matchs joués");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        joueursAffrontes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Item" }));
 
         revoirMatch.setText("Revoir le match");
 
@@ -132,7 +145,7 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(joueursAffrontes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(revoirMatch, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -143,7 +156,7 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(joueursAffrontes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(revoirMatch)
                 .addGap(0, 7, Short.MAX_VALUE))
@@ -189,9 +202,9 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_numeroJoueurActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void joueursAAfronterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joueursAAfronterActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_joueursAAfronterActionPerformed
 
     private void jouerMatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jouerMatchActionPerformed
         // TODO add your handling code here:
@@ -227,14 +240,16 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VueMatchsJoueur().setVisible(true);
+                try {
+                    new VueMatchsJoueur().setVisible(true);
+                } catch (BDAccessEx ex) {
+                    Logger.getLogger(VueMatchsJoueur.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -243,6 +258,8 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JButton jouerMatch;
+    private javax.swing.JComboBox<String> joueursAAfronter;
+    private javax.swing.JComboBox<String> joueursAffrontes;
     private javax.swing.JTextField numeroJoueur;
     private javax.swing.JButton revoirMatch;
     // End of variables declaration//GEN-END:variables

@@ -5,6 +5,9 @@
  */
 package pbdco.partie;
 
+import pbdco.vuejeu.JeuInterface;
+import pbdco.vuejeu.VueJoueur;
+
 /**
  *
  * @author belinbr
@@ -23,8 +26,9 @@ public class Main {
         
         //TESTS MARCHENT
         
-        
-        
+        new JeuInterface().setVisible(true);
+        new VueJoueur().setVisible(true);
+            
         
     }
     
