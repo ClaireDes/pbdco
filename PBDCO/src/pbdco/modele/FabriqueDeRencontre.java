@@ -51,6 +51,7 @@ public class FabriqueDeRencontre extends FabriqueTransaction {
 
                 pstmt.close();
                 resultat.close();
+                conn.commit();
                 conn.close();
 
                 System.out.println("Le plus grand codeRencontre enregistré est " + code.getValue());
@@ -85,6 +86,9 @@ public class FabriqueDeRencontre extends FabriqueTransaction {
             }
             try {
 
+                conn.setAutoCommit(false);
+                conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+
                 PreparedStatement stmt = conn.prepareStatement(requete1);
                 stmt.setInt(1, rencontre.codeRencontre.getValue());
 
@@ -98,6 +102,7 @@ public class FabriqueDeRencontre extends FabriqueTransaction {
                 rencontre.blanc = resultat.getInt("Blanc");
 
                 stmt.close();
+                conn.commit();
                 conn.close();
 
             } catch (SQLException ex) {//si la transaction echoue
@@ -131,6 +136,9 @@ public class FabriqueDeRencontre extends FabriqueTransaction {
                 System.out.println("Connection ok");
             }
 
+            conn.setAutoCommit(false);
+            conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+
             try {
                 PreparedStatement pstmt = conn.prepareStatement(requete);
                 if (rencontre.terminee == 1) {
@@ -144,9 +152,11 @@ public class FabriqueDeRencontre extends FabriqueTransaction {
                 pstmt.executeUpdate();
 
                 pstmt.close();
+                conn.commit();
                 conn.close();
 
             } catch (SQLException ex) {//si la transaction echoue
+                conn.rollback();
                 conn.close();
                 throw new BDAccessEx("majBD() Raised SQLException during the transaction" + ex.getLocalizedMessage());
             }

@@ -123,6 +123,9 @@ public class FabriqueDeJoueur extends FabriqueTransaction {
             Connection conn = DriverManager.getConnection(URL, USER, PASSWD);
             try {
 
+                conn.setAutoCommit(false);
+                conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+                
                 //préparation de la requète
                 PreparedStatement pstmt = conn.prepareStatement(requete);
                 pstmt.setInt(1, codeJoueur);
@@ -164,12 +167,14 @@ public class FabriqueDeJoueur extends FabriqueTransaction {
 
                 resultat.close();
                 pstmt.close();
+                conn.commit();
                 conn.close();
 
                 System.out.println("LoadFromBD du joueur " + codeJoueur + "effectuée");
                 return J;
 
             } catch (SQLException ex) {//si la transaction echoue
+                conn.rollback();
                 conn.close();
                 throw new BDAccessEx("LoadFromBD Joueur Raised SQLException during the transaction" + ex.getMessage());
             }
