@@ -173,8 +173,12 @@ public class FabriqueDeOrganisation {
         }   
     }
     
-     public Map loadAllRencontres(){   
+     public Map loadAllRencontres(String codeTour){   
          // construite sur le meme principe que load all joueurs pour garantir que les rencontres ne sont créees qu'une seule fois 
+         throw new UnsupportedOperationException("not supported yet");
+     }
+     
+     public int nbrRencontres(String codeTour){
          throw new UnsupportedOperationException("not supported yet");
      }
     

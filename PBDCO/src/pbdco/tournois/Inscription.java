@@ -15,7 +15,6 @@ import pbdco.modele.Joueur;
  * @author milcenan
  */
 public class Inscription extends Organisation{
-    private FabriqueDeJoueur fabJoueur = new FabriqueDeJoueur();
     
     public Inscription(boolean bool) throws BDAccessEx{
         super(bool);
@@ -23,7 +22,7 @@ public class Inscription extends Organisation{
     
     public void inscrit(String nom, String prenom, String adresse) throws BDAccessEx{
         Joueur nouvJoueur;
-        nouvJoueur = new Joueur(nom, prenom, adresse, fabJoueur);
+        nouvJoueur = new Joueur(nom, prenom, adresse, this.getFabriqueJoueur());
         this.setNbrParticipants(this.getNbrParticipants()+1);
     }
 }
