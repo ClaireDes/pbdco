@@ -24,10 +24,10 @@ public class Tournoi {
         //afficher vue ecran d'accueil
 //        PremiereVue laFirst = new PremiereVue();
         java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                    new VueAccueilOrganisation().setVisible(true);
-                }
-            });
+            public void run() {
+                new VueAccueilOrganisation().setVisible(true);
+            }
+        });
     }
 
     public void creerTournoi() throws BDAccessEx{
@@ -40,12 +40,8 @@ public class Tournoi {
     }
 
     public int nbrInscrits() throws BDAccessEx{
-        System.out.println("je suis dans inscrit de Tournoi");
         Inscription inscript = new Inscription(false);
-        System.out.println("je suis dans inscrit avant de chercher a savoir le nbr de participants");
         int nbr = inscript.getNbrParticipants();
-        System.out.println("je suis senser avoir le nombre de participants");
-        System.out.println(nbr);
         return nbr;
     }
 

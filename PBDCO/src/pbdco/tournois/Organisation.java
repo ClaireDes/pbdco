@@ -65,6 +65,7 @@ public abstract class Organisation {
     }
     
     public int getNbrParticipants(){
+        
         return this.nbrParticipants;
     }
     

@@ -21,7 +21,6 @@ public class VueAccueilOrganisation extends javax.swing.JFrame {
      * Creates new form VueAccueilOrganisation
      */
 
-    VuesOrga ordonnanceur;
 
     public VueAccueilOrganisation() {
         initComponents();
