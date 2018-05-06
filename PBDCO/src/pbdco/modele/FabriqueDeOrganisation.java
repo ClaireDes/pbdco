@@ -237,7 +237,11 @@ public class FabriqueDeOrganisation {
         Code codeTournois = new Code("qualif");
         // doit supprimer tous les elements dans les tables (peut se faire en recreant les tables)
         //insert ... crée un tour qualif
-        String rViderTable = "DELETE FROM ?";
+        String rViderCoup = "DELETE FROM Coup";
+        String rViderJoueur = "DELETE FROM Joueur";
+        String rViderPiece = "DELETE FROM Piece";
+        String rViderTour = "DELETE FROM Tour";
+        String rViderRencontre = "DELETE FROM Rencontre";
         String rCreerQualif = "INSERT INTO TOUR VALUES('qualif')";
 
         try {
@@ -253,17 +257,16 @@ public class FabriqueDeOrganisation {
                 conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
 
                 //préparation de la requète
-                PreparedStatement pstmt = conn.prepareStatement(rViderTable);
-                pstmt.setString(1, "Coup");
+                PreparedStatement pstmt = conn.prepareStatement(rViderCoup);
                 pstmt.executeUpdate();
-                pstmt.setString(1, "Piece");
+                pstmt = conn.prepareStatement(rViderPiece);
                 pstmt.executeUpdate();
-                pstmt.setString(1, "Rencontre");
+                pstmt = conn.prepareStatement(rViderRencontre);
                 pstmt.executeUpdate();
-                pstmt.setString(1, "Joueur");
+                pstmt = conn.prepareStatement(rViderJoueur);
                 pstmt.executeUpdate();
-                pstmt.setString(1, "Tour");
-
+                pstmt = conn.prepareStatement(rViderTour);
+                pstmt.executeUpdate();
                 pstmt = conn.prepareStatement(rCreerQualif);
                 pstmt.executeUpdate();
 
