@@ -152,7 +152,6 @@ public class VueCreation extends javax.swing.JFrame {
         try {
             dispose();
             Tournoi tourn = new Tournoi();
-            System.out.println("je vais appeler pour commencer le tournoi");
             tourn.commencerLeTournoi();
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {

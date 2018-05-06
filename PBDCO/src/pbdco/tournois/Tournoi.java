@@ -5,6 +5,7 @@
  */
 package pbdco.tournois;
 
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pbdco.BDAccessEx;
@@ -46,7 +47,6 @@ public class Tournoi {
     }
 
     public void commencerLeTournoi() throws BDAccessEx{
-        System.out.println("je suis dans commencer le tournoi");
         PreparationTour prep = new PreparationTour(false);
         prep.creeRencontre();
     }
@@ -63,7 +63,6 @@ public class Tournoi {
         Inscription inscrit = new Inscription(false);
         Joueur j = inscrit.getFabriqueJoueur().LoadFromBD(codeJoueur);
         Code[] js = j.getRencontresAJouer();
-
         return js;
     }
 
@@ -80,11 +79,13 @@ public class Tournoi {
         Code[] tabCode1 = this.recupererLesCodesRencontresAJouer(codeJoueur);
 
         String[][] recup = new String[tabCode1.length][3];
-
-        for(int i=0;i<=tabCode1.length-1;i++){
-            recup[i][0] = this.recupererDetails(tabCode1[i])[0];
-            recup[i][1] = this.recupererDetails(tabCode1[i])[1];
-            recup[i][2] = this.recupererDetails(tabCode1[i])[2];
+                
+        if(tabCode1[0] != null){
+            for(int i=0;i<=tabCode1.length-1;i++){
+                recup[i][0] = this.recupererDetails(tabCode1[i])[0];
+                recup[i][1] = this.recupererDetails(tabCode1[i])[1];
+                recup[i][2] = this.recupererDetails(tabCode1[i])[2];
+            }
         }
 
         return recup;
@@ -95,11 +96,12 @@ public class Tournoi {
         Code[] tabCode1 = this.recupererLesCodesRencontresDejaJouer(codeJoueur);
 
         String[][] recup = new String[tabCode1.length][3];
-
-        for(int i=0;i<=tabCode1.length-1;i++){
-            recup[i][0] = this.recupererDetails(tabCode1[i])[0];
-            recup[i][1] = this.recupererDetails(tabCode1[i])[1];
-            recup[i][2] = this.recupererDetails(tabCode1[i])[2];
+        if(tabCode1[0] != null){
+            for(int i=0;i<=tabCode1.length-1;i++){
+                recup[i][0] = this.recupererDetails(tabCode1[i])[0];
+                recup[i][1] = this.recupererDetails(tabCode1[i])[1];
+                recup[i][2] = this.recupererDetails(tabCode1[i])[2];
+            }
         }
 
         return recup;

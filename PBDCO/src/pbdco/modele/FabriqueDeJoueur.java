@@ -21,6 +21,7 @@ import pbdco.BDAccessEx;
 import pbdco.Code;
 import static pbdco.modele.FabriqueTransaction.URL;
 import pbdco.partie.*;
+import pbdco.tournois.Inscription;
 
 /**
  *
@@ -107,13 +108,15 @@ public class FabriqueDeJoueur extends FabriqueTransaction {
         Joueur J;
         int codeJoueur = code.getValue();
         String nom, prenom, adresse;
-        Code rencontresAJouer[] = {};
-        Code rencontresJouees[] = {};
+        Inscription inscript = new Inscription(false);
+        int verif = inscript.getNbrRencontres();
+        Code[] rencontresAJouer = new Code[verif];
+        Code[] rencontresJouees = new Code[verif];
         int nbVictoires;
 
-        String requete = "SELECT * FROM  joueur  WHERE codeJoueur=?";
-        String rRencontresAJouer = "SELECT codeRencontre From rencontre WHERE (joueur1 = ? OR joueur2 = ?) AND vainqueur=? ";
-        String rRencontresJouees = "SELECT codeRencontre From Rencontre WHERE (joueur1 = ? OR joueur2 = ?) AND NOT(vainqueur = ?)";
+        String requete = "SELECT * FROM  Joueur  WHERE codeJoueur=?";
+        String rRencontresAJouer = "SELECT codeRencontre From Rencontre WHERE (joueur1 = ? OR joueur2 = ?) AND vainqueur=?";
+        String rRencontresJouees = "SELECT codeRencontre From Rencontre WHERE (joueur1 = ? OR joueur2 = ?) AND NOT(vainqueur =?)";
         String requete3 = "SELECT COUNT(vainqueur) FROM rencontre where vainqueur= ?";
 
         ResultSet resultat;

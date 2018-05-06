@@ -34,7 +34,7 @@ public class FabriqueDeOrganisation {
         //ici la requète pour
         //appel à la BD concernant la table TOUR
         //pour connaitre le nombre de joueurs dans le tournois
-        String requete = "SELECT COUNT(codeJoueur) FROM Joueur";
+        String requete = "SELECT COUNT(codeJoueur) FROM Joueur WHERE codeJoueur>0";
         ResultSet resultat;
         int nbJoueurs = 0;
 
@@ -104,7 +104,6 @@ public class FabriqueDeOrganisation {
 //                tour="finale";
             conn.commit();
             conn.close();
-           System.out.println("Le tour actuel est : " + res);         
              }catch(  SQLException ex){//si la transaction echoue
                  conn.rollback();
                 conn.close();
@@ -174,7 +173,7 @@ public class FabriqueDeOrganisation {
         Code[] joueurs = new Code[this.nbrDeJoueurs()];
         FabriqueDeJoueur fabJoueur = new FabriqueDeJoueur();
         int codeJoueur;
-        String requete = "SELECT codeJoueur FROM Joueur";
+        String requete = "SELECT codeJoueur FROM Joueur WHERE codeJoueur>0";
         ResultSet resultat;
         // Connexion à la BD
         try {
@@ -187,11 +186,9 @@ public class FabriqueDeOrganisation {
             }
             try {
                 //préparation de la requète
-                        System.out.println("le tableau est de taille " + this.nbrDeJoueurs() );
 
                 PreparedStatement pstmt = conn.prepareStatement(requete);
                 resultat = pstmt.executeQuery();
-                System.out.println("j'ai executer la requete");
                 while (resultat.next()) {//Ajoute les joueurs de la BD dans le Set avec la methode déjà écrite dans Fabrique de Joueur
                     joueurs[resultat.getInt("codeJoueur")-1] = new Code(resultat.getInt("codeJoueur"));
                 }
@@ -269,7 +266,7 @@ public class FabriqueDeOrganisation {
     }
 
     public int nbrRencontres(String codeTour) throws BDAccessEx {
-        String requete = "SELECT COUNT(codeRencontre) FROM Rencontre WHERE codeTour=?";
+        String requete = "SELECT COUNT(codeRencontre) FROM Rencontre WHERE codeTour='"+ codeTour +"'";
         ResultSet resultat;
         int nbRencontres = 0;
 
@@ -287,10 +284,12 @@ public class FabriqueDeOrganisation {
                 conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
 
                 //préparation de la requète
-                PreparedStatement pstmt = conn.prepareStatement(requete);
-                pstmt.setString(1, codeTour);
+                PreparedStatement pstmt ;
+                pstmt = conn.prepareStatement(requete);
                 resultat = pstmt.executeQuery();
 
+                resultat.next();
+                
                 nbRencontres = resultat.getInt(1);
 
                 conn.commit();
@@ -312,7 +311,7 @@ public class FabriqueDeOrganisation {
         // doit supprimer tous les elements dans les tables (peut se faire en recreant les tables)
         //insert ... crée un tour qualif
         String rViderCoup = "DELETE FROM Coup";
-        String rViderJoueur = "DELETE FROM Joueur";
+        String rViderJoueur = "DELETE FROM Joueur WHERE codeJoueur>0";
         String rViderPiece = "DELETE FROM Piece";
         String rViderTour = "DELETE FROM Tour";
         String rViderRencontre = "DELETE FROM Rencontre";
