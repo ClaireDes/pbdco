@@ -124,7 +124,24 @@ public class VueCreation extends javax.swing.JFrame {
     }//GEN-LAST:event_nouveauParticipantActionPerformed
 
     private void commencerTournoisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commencerTournoisActionPerformed
-        dispose();
+        System.out.println("je suis avant d'entrer dans le try");
+        try {
+            dispose();
+            Tournoi tourn = new Tournoi();
+            System.out.println("je vais appeler pour commencer le tournoi");
+            tourn.commencerLeTournoi();
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    try {
+                        new VueMatchsJoueur().setVisible(true);
+                    } catch (BDAccessEx ex) {
+                        Logger.getLogger(VueCreation.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+        } catch (BDAccessEx ex) {
+            Logger.getLogger(VueCreation.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_commencerTournoisActionPerformed
 
     /**

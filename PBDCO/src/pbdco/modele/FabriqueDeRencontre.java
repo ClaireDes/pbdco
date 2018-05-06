@@ -90,16 +90,16 @@ public class FabriqueDeRencontre extends FabriqueTransaction {
                 conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
 
                 PreparedStatement stmt = conn.prepareStatement(requete1);
-                stmt.setInt(1, rencontre.codeRencontre.getValue());
+                stmt.setInt(1, rencontre.getCodeRencontre().getValue());
 
                 resultat = stmt.executeQuery(requete1);
 
-                rencontre.codeJoueur1 = new Code(resultat.getInt("Joueur1"));
-                rencontre.codeJoueur2 = new Code(resultat.getInt("Joueur2"));
+                rencontre.setCodeJoueur1( new Code(resultat.getInt("Joueur1")) );
+                rencontre.setCodeJoueur2( new Code(resultat.getInt("Joueur2")) );
 
-                rencontre.codeTour = resultat.getString("codeTour");
-                rencontre.terminee = resultat.getInt("Vainqueur");
-                rencontre.blanc = resultat.getInt("Blanc");
+                rencontre.setCodeTour(resultat.getString("codeTour"));
+                rencontre.setTerminee(resultat.getInt("Vainqueur"));
+                rencontre.setBlanc(resultat.getInt("Blanc"));
 
                 stmt.close();
                 conn.commit();
@@ -141,14 +141,14 @@ public class FabriqueDeRencontre extends FabriqueTransaction {
 
             try {
                 PreparedStatement pstmt = conn.prepareStatement(requete);
-                if (rencontre.terminee == 1) {
-                    pstmt.setInt(1, rencontre.joueurs[0].codeJoueur.getValue());
+                if (rencontre.getTerminee() == 1) {
+                    pstmt.setInt(1, rencontre.getJoueurs()[0].getCode().getValue());
                 }
-                if (rencontre.terminee == 2) {
-                    pstmt.setInt(1, rencontre.joueurs[1].codeJoueur.getValue());
+                if (rencontre.getTerminee() == 2) {
+                    pstmt.setInt(1, rencontre.getJoueurs()[1].getCode().getValue());
                 }
-                pstmt.setString(2, rencontre.codeTour);
-                pstmt.setInt(3, rencontre.codeRencontre.getValue());
+                pstmt.setString(2, rencontre.getCodeTour());
+                pstmt.setInt(3, rencontre.getCodeRencontre().getValue());
                 pstmt.executeUpdate();
 
                 pstmt.close();
@@ -184,17 +184,17 @@ public class FabriqueDeRencontre extends FabriqueTransaction {
 
                 //préparation de la requète
                 PreparedStatement pstmt = conn.prepareStatement(requete);
-                pstmt.setInt(1, rencontre.codeRencontre.getValue());
-                pstmt.setString(2, rencontre.codeTour);
-                pstmt.setInt(3, rencontre.joueurs[0].codeJoueur.getValue());
-                pstmt.setInt(4, rencontre.joueurs[1].codeJoueur.getValue());
-                if (rencontre.blanc == 1) {
-                    pstmt.setInt(5, rencontre.joueurs[0].codeJoueur.getValue());
-                    pstmt.setInt(6, rencontre.joueurs[1].codeJoueur.getValue());
+                pstmt.setInt(1, rencontre.getCodeRencontre().getValue());
+                pstmt.setString(2, rencontre.getCodeTour());
+                pstmt.setInt(3, rencontre.getJoueurs()[0].getCode().getValue());
+                pstmt.setInt(4, rencontre.getJoueurs()[1].getCode().getValue());
+                if (rencontre.getBlanc() == 1) {
+                    pstmt.setInt(5, rencontre.getJoueurs()[0].getCode().getValue());
+                    pstmt.setInt(6, rencontre.getJoueurs()[1].getCode().getValue());
                 }
-                if (rencontre.blanc == 2) {
-                    pstmt.setInt(5, rencontre.joueurs[1].codeJoueur.getValue());
-                    pstmt.setInt(6, rencontre.joueurs[0].codeJoueur.getValue());
+                if (rencontre.getBlanc() == 2) {
+                    pstmt.setInt(5, rencontre.getJoueurs()[1].getCode().getValue());
+                    pstmt.setInt(6, rencontre.getJoueurs()[0].getCode().getValue());
                 } else {
                     throw new BDAccessEx("erreur lors de l'insertion de l'insertion d'une rencontre ");
                 }
@@ -206,7 +206,7 @@ public class FabriqueDeRencontre extends FabriqueTransaction {
 
                 pstmt.close();
                 conn.close();
-                System.out.println("Enregistrement de la rencontre " + rencontre.codeRencontre.getValue() + "effectué");
+                System.out.println("Enregistrement de la rencontre " + rencontre.getCodeRencontre().getValue() + "effectué");
             } catch (SQLException ex) {//si la transaction echoue
                 conn.rollback();
                 conn.close();

@@ -35,6 +35,7 @@ public class Tournoi {
     }
 
     public Code ajoutParticipant(String nom, String prenom, String adresse) throws BDAccessEx{
+        System.out.println("je suis dans ajout part");
         Inscription inscript = new Inscription(false);
         return inscript.inscrit(nom, prenom, adresse);
     }
@@ -46,6 +47,7 @@ public class Tournoi {
     }
 
     public void commencerLeTournoi() throws BDAccessEx{
+        System.out.println("je suis dans commencer le tournoi");
         PreparationTour prep = new PreparationTour(false);
         prep.creeRencontre();
     }
@@ -59,15 +61,17 @@ public class Tournoi {
     }
 
     public Code[] recupererLesCodesRencontresAJouer(Code codeJoueur) throws BDAccessEx{
-        PreparationTour prep = new PreparationTour(false);
-        Code[] js = new Code[0];
+        Inscription inscrit = new Inscription(false);
+        Joueur j = inscrit.getFabriqueJoueur().LoadFromBD(codeJoueur);
+        Code[] js = j.getRencontresAJouer();
 
         return js;
     }
 
     public Code[] recupererLesCodesRencontresDejaJouer(Code codeJoueur) throws BDAccessEx{
-        PreparationTour prep = new PreparationTour(false);
-        Code[] js = new Code[0];
+        Inscription inscrit = new Inscription(false);
+        Joueur j = inscrit.getFabriqueJoueur().LoadFromBD(codeJoueur);        
+        Code[] js = j.getRencontresJouees();
 
         return js;
     }
