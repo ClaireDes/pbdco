@@ -11,7 +11,7 @@ package pbdco.partie;
  */
 public class TablePositions {
     private Position[] echiquier = new Position[64];
-    
+
     public TablePositions() {
         if (echiquier == null){
             System.out.println("Essaie"+echiquier.toString());
@@ -38,25 +38,24 @@ public class TablePositions {
     
     public void init(){
         // creation de la table des positions
-        echiquier = new Position[64];
         for (int lig=0; lig<8;lig++){
             for (int col=0;col<8;col++){
-                if(lig < 2){ //cases occupées initialement
-                    this.echiquier[lig+col].setPosition(lig+1, col+1);
-                    this.echiquier[lig+col].setState(1);
+                if(lig < 2){ //cases occupées initialement par les blancs
+                    this.echiquier[8*lig+col].setPosition(lig+1, col+1);
+                    this.echiquier[8*lig+col].setState(1);
                 }
-                else if (lig > 5) {
-                    this.echiquier[lig+col].setPosition(lig+1, col+1);
-                    this.echiquier[lig+col].setState(2);
+                if (lig>5) {
+                    this.echiquier[8*lig+col].setPosition(lig+1, col+1);
+                    this.echiquier[8*lig+col].setState(1);
                 }
                 else { //cases libres
-                    this.echiquier[lig+col].setPosition(lig+1, col+1);
-                    this.echiquier[lig+col].setState(0);
+                    this.echiquier[8*lig+col].setPosition(lig+1, col+1);
+                    this.echiquier[8*lig+col].setState(2);
                 }
             }
         }      
     }
-    
+
     public int caseOccupee(int numeroCase) {
         System.out.println("numeroCase = "+ numeroCase+echiquier.toString()+echiquier[0].toString());
         
