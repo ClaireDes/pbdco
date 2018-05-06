@@ -12,7 +12,7 @@ package pbdco.partie;
 public class Dame extends Piece{
     private String nomPiece = "dame";
     
-    public Dame(Position position, Boolean c){
+    public Dame(Position position, int c){
         this.nomPiece="dame";
         this.updatePosition(position);
         this.setCouleur(c);

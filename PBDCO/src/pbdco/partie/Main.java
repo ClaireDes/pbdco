@@ -19,26 +19,26 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
-       
-        System.out.println("Les blancs jouent en bas, les noirs en haut. Grille de 8x8 cases. Bonne chance !\n\n");
+
+
+        System.out.println("Les blancs jouent en haut, les noirs en bas. Grille de 8x8 cases. Bonne chance !\n\n");
         initialize();
-        
+
         //TESTS MARCHENT
-        
+
         new JeuInterface().setVisible(true);
         //new VueJoueur().setVisible(true);
-            
-        
+
+
     }
-    
+
     /**
      *
      */
     public static void initialize(){
         //Pièces noires
         //---Pions----
-        Pion p1 = new Pion(new Position(1,7,true),false);
+        Pion p1 = new Pion(new Position(1,7,2),2);
         System.out.println(p1.toString());
 //        Pion p2 = new Pion(new Position(2,7,true),false);
 //        System.out.println(p2.toString());
@@ -54,7 +54,7 @@ public class Main {
 //        System.out.println(p7.toString());
 //        Pion p8 = new Pion(new Position(8,7,true),false);
 //        System.out.println(p8.toString()+"\n\n");
-//        
+//
 //        //Pièces blanches
 //        //---Pions----
 //        Pion p9 = new Pion(new Position(1,2,true),true);
@@ -73,8 +73,8 @@ public class Main {
 //        System.out.println(p15.toString());
 //        Pion p16 = new Pion(new Position(8,2,true),true);
 //        System.out.println(p16.toString());
-        
-        
+
+
     }
-    
+
 }

@@ -12,7 +12,7 @@ package pbdco.partie;
 public class Tour extends Piece{
     private String nomPiece = "tour";
     
-    public Tour(Position position, Boolean c){
+    public Tour(Position position, int c){
         this.nomPiece="tour";
         this.updatePosition(position);
         this.setCouleur(c);
