@@ -38,7 +38,6 @@ public class VueAccueilOrganisation extends javax.swing.JFrame {
         panelMain = new javax.swing.JPanel();
         continuerTournois = new javax.swing.JButton();
         creerTournois = new javax.swing.JButton();
-        nouveauParticipantBouton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,14 +57,6 @@ public class VueAccueilOrganisation extends javax.swing.JFrame {
             }
         });
 
-        nouveauParticipantBouton.setText("Nouveau participant");
-        nouveauParticipantBouton.setActionCommand("nouveauParticipant");
-        nouveauParticipantBouton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nouveauParticipantBoutonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout panelMainLayout = new javax.swing.GroupLayout(panelMain);
         panelMain.setLayout(panelMainLayout);
         panelMainLayout.setHorizontalGroup(
@@ -74,8 +65,7 @@ public class VueAccueilOrganisation extends javax.swing.JFrame {
                 .addGap(125, 125, 125)
                 .addGroup(panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(continuerTournois, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(creerTournois, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(nouveauParticipantBouton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(creerTournois, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(149, Short.MAX_VALUE))
         );
         panelMainLayout.setVerticalGroup(
@@ -85,9 +75,7 @@ public class VueAccueilOrganisation extends javax.swing.JFrame {
                 .addComponent(continuerTournois)
                 .addGap(18, 18, 18)
                 .addComponent(creerTournois)
-                .addGap(18, 18, 18)
-                .addComponent(nouveauParticipantBouton)
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -151,15 +139,6 @@ public class VueAccueilOrganisation extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_creerTournoisActionPerformed
 
-    private void nouveauParticipantBoutonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nouveauParticipantBoutonActionPerformed
-        dispose();
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VueInscription().setVisible(true);
-            }
-        });
-    }//GEN-LAST:event_nouveauParticipantBoutonActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -198,7 +177,6 @@ public class VueAccueilOrganisation extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton continuerTournois;
     private javax.swing.JButton creerTournois;
-    private javax.swing.JButton nouveauParticipantBouton;
     private javax.swing.JPanel panelMain;
     // End of variables declaration//GEN-END:variables
 }

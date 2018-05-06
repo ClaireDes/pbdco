@@ -1,6 +1,8 @@
 package pbdco.partie;
 
 import pbdco.modele.Joueur;
+import pbdco.vuejeu.JeuInterface;
+import pbdco.vuejeu.VueJoueur;
 
 /**
  * Created by ravenetq on 4/23/18.
@@ -29,6 +31,8 @@ public class ControleurPartie {
     }
     
     public static void main(String[] args) {
+        new JeuInterface().setVisible(true);
         
+        new VueJoueur().setVisible(true);
     }
 }
