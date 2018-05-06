@@ -31,6 +31,7 @@ public class JeuInterface extends JFrame {
             boutons[i] = new BoutonCase();
             boutons[i].setFont(new Font("Arial", Font.PLAIN, 50));
             if (i%2==0) boutons[i].setBackground(Color.GRAY);
+            boutons[i].setPosition(i%8+1, 8-(i/8+1)+1);
             p.add(boutons[i]);
         }
 

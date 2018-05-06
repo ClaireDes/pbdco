@@ -16,13 +16,24 @@ import java.awt.event.ActionEvent;
  */
 public class BoutonCase extends JButton implements ActionListener {
     ImageIcon roiN, roiB, reineN, reineB; //Compléter
+    int posX, posY;
     
     public BoutonCase() {
         addActionListener(this);
     }
+    
+    public BoutonCase(int posX, int posY) {
+        addActionListener(this);
+        this.posX = posX;
+        this.posY = posY;
+    }
+    
+    public void setPosition(int posX, int posY) {
+        this.posX = posX;
+        this.posY = posY;
+    }
 
     public void actionPerformed(ActionEvent e) {
-
-        System.out.println("Action performed !!");
+        System.out.println("Button pushed : "+ posX+" "+ posY);
     }
 }
