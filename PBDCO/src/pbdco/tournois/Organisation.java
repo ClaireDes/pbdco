@@ -24,6 +24,7 @@ public abstract class Organisation {
     private int nbrParticipants;
     private int nbrRencontres;
     private Map<Integer,Joueur> listeDesJoueurs;
+    private Code[] listeJoueurs;
     private final FabriqueDeOrganisation fabriqueOrga;
     private final FabriqueDeJoueur fabJoueur = new FabriqueDeJoueur();
     private final FabriqueDePiece fabPiece = new FabriqueDePiece();
@@ -95,6 +96,10 @@ public abstract class Organisation {
         return this.listeDesJoueurs;
     }
     
+    public Code[] getJoueur(){
+        return this.listeJoueurs;
+    }
+    
 //    public void setCodeTour(Code codeTournoi){
 //        this.codeTour = codeTournoi;
 //        this.fabriqueOrga.setCodeTour(codeTournoi);
@@ -113,7 +118,11 @@ public abstract class Organisation {
     }
     
     public void loadAllJoueurs() throws BDAccessEx{
-        listeDesJoueurs = fabriqueOrga.loadAllJoueurs();
+        this.listeDesJoueurs = fabriqueOrga.loadAllJoueurs();
+    }
+    
+    public void loadJoueurs() throws BDAccessEx{
+        this.listeJoueurs = fabriqueOrga.loadJoueurs();
     }
     
     public void quelleTour() throws BDAccessEx{

@@ -26,35 +26,51 @@ public class PreparationTour extends Organisation{
     
     public void creeRencontre() throws BDAccessEx{
         switch(this.getTour()){
-            case "qualif": 
-                this.loadAllJoueurs();
+//            case "qualif": 
+//                System.out.println("je vais charger les joueurs");
+//                this.loadJoueurs();
+//                System.out.println("je vais creer les rencontres");
+//                Set<Entry<Integer, Joueur>> setHM1 = this.getListJoueur().entrySet();
+//                Set<Entry<Integer, Joueur>> setHM2 = this.getListJoueur().entrySet();
+//                Iterator<Entry<Integer, Joueur>> it1 = setHM1.iterator();
+//                Iterator<Entry<Integer, Joueur>> it2 = setHM2.iterator();
+//                int i = 1;
+//                Joueur j1;
+//                Joueur j2;
+//
+//                while(it1.hasNext()){
+//                    Entry<Integer, Joueur> e1 =  it1.next();
+//                    if(i!=this.getNbrParticipants()){
+//                        int j = i+1;
+//                        int k = 1;
+//                        while(k!=j){
+//                            Entry<Integer, Joueur> e2 = it2.next();
+//                            k=k+1;
+//                        }
+//                        while(it2.hasNext()){
+//                            Entry<Integer, Joueur> e2 = it2.next();
+//                            j1 = (Joueur) e1.getValue(i);
+//                            j2 = (Joueur) e2.getValue(j);
+//                            Rencontre renc = new Rencontre(j1, j2, this.getTour(), getFabriqueRencontre());
+//                            j = j+1;
+//                        }
+//                    }
+//                    i=i+1;
+//                }
+//                break;
+                case "qualif": 
+                System.out.println("je vais charger les joueurs");
+                this.loadJoueurs();
                 System.out.println("je vais creer les rencontres");
-                Set<Entry<Integer, Joueur>> setHM1 = this.getListJoueur().entrySet();
-                Set<Entry<Integer, Joueur>> setHM2 = this.getListJoueur().entrySet();
-                Iterator <Entry<Integer, Joueur>> it1 = setHM1.iterator();
-                Iterator <Entry<Integer, Joueur>> it2 = setHM2.iterator();
-                int i = 1;
-                Joueur j1;
-                Joueur j2;
-
-                while(it1.hasNext()){
-                    Entry<Integer, Joueur> e1 = it1.next();
-                    if(i!=this.getNbrParticipants()){
-                        int j = i+1;
-                        int k = 1;
-                        while(k!=j){
-                            Entry<Integer, Joueur> e2 = it2.next();
-                            k=k+1;
-                        }
-                        while(it2.hasNext()){
-                            Entry<Integer, Joueur> e2 = it2.next();
-                            j1 = (Joueur) e1.getValue(i);
-                            j2 = (Joueur) e2.getValue(j);
-                            Rencontre renc = new Rencontre(j1, j2, this.getTour(), getFabriqueRencontre());
-                            j = j+1;
-                        }
+                int j =0;
+                for(int i=1; i<(this.getNbrParticipants());i++){
+                    j=i+1;
+                    while(j<this.getNbrParticipants()){
+                        Joueur j1 = this.getFabriqueJoueur().LoadFromBD(this.getJoueur()[i]);
+                        Joueur j2 = this.getFabriqueJoueur().LoadFromBD(this.getJoueur()[j]);
+                        Rencontre renc = new Rencontre(j1, j2, this.getTour(), this.getFabriqueRencontre());
+                        j = j+1;
                     }
-                    i=i+1;
                 }
                 break;
             case "demi":

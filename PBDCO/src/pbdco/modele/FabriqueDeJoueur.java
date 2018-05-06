@@ -113,7 +113,7 @@ public class FabriqueDeJoueur extends FabriqueTransaction {
 
         String requete = "SELECT * FROM  joueur  WHERE codeJoueur=?";
         String rRencontresAJouer = "SELECT codeRencontre From rencontre WHERE (joueur1 = ? OR joueur2 = ?) AND vainqueur=? ";
-        String rRencontresJouees = "SELECT codeRencontre From Rencontre WHERE (joueur1 = ? OR joueur 2 = ?) AND NOT(vainqueur = ?)";
+        String rRencontresJouees = "SELECT codeRencontre From Rencontre WHERE (joueur1 = ? OR joueur2 = ?) AND NOT(vainqueur = ?)";
         String requete3 = "SELECT COUNT(vainqueur) FROM rencontre where vainqueur= ?";
 
         ResultSet resultat;
