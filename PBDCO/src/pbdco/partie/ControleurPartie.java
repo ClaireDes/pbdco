@@ -10,7 +10,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 //import javafx.scene.control.TablePosition;
-
 import pbdco.modele.FabriqueTransaction;
 import pbdco.BDAccessEx;
 import pbdco.Code;

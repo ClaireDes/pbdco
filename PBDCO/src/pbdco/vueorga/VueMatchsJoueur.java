@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package pbdco.vueorga;
 
 import java.util.Arrays;
@@ -108,7 +109,11 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
         jouerMatch.setActionCommand("jouer");
         jouerMatch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jouerMatchActionPerformed(evt);
+                try {
+                    jouerMatchActionPerformed(evt);
+                } catch (BDAccessEx ex) {
+                    Logger.getLogger(VueMatchsJoueur.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 
