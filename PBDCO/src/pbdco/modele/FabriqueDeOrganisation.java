@@ -169,6 +169,47 @@ public class FabriqueDeOrganisation {
             throw new BDAccessEx("loadAllJoueur Raised SQLException during the connection");
         }
     }
+    
+    public Code[] loadJoueurs() throws BDAccessEx {
+        Code[] joueurs = new Code[this.nbrDeJoueurs()];
+        FabriqueDeJoueur fabJoueur = new FabriqueDeJoueur();
+        int codeJoueur;
+        String requete = "SELECT codeJoueur FROM Joueur";
+        ResultSet resultat;
+        // Connexion à la BD
+        try {
+            Connection conn = null;
+            conn = DriverManager.getConnection(URL, USER, PASSWD);
+            if (conn == null) {
+                throw new BDAccessEx("connexion échouée");
+            } else {
+                System.out.println("Connection ok");
+            }
+            try {
+                //préparation de la requète
+                        System.out.println("le tableau est de taille " + this.nbrDeJoueurs() );
+
+                PreparedStatement pstmt = conn.prepareStatement(requete);
+                resultat = pstmt.executeQuery();
+                System.out.println("j'ai executer la requete");
+                while (resultat.next()) {//Ajoute les joueurs de la BD dans le Set avec la methode déjà écrite dans Fabrique de Joueur
+                    joueurs[resultat.getInt("codeJoueur")-1] = new Code(resultat.getInt("codeJoueur"));
+                }
+
+                resultat.close();
+                pstmt.close();
+                conn.close();
+                return joueurs;
+
+            } catch (SQLException ex) {//si la transaction echoue
+                conn.close();
+                System.out.println(ex.getMessage());
+                throw new BDAccessEx("loadJoueur Raised SQLException during the Query" + ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new BDAccessEx("loadJoueur Raised SQLException during the connection");
+        }
+    }
 
     /**
      *

@@ -35,7 +35,6 @@ public class Tournoi {
     }
 
     public Code ajoutParticipant(String nom, String prenom, String adresse) throws BDAccessEx{
-        System.out.println("je suis dans ajout part");
         Inscription inscript = new Inscription(false);
         return inscript.inscrit(nom, prenom, adresse);
     }
