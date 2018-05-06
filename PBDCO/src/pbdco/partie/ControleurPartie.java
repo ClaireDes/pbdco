@@ -241,7 +241,7 @@ public class ControleurPartie {
         //Fait recommencer le joueur qui utilise cette vue : "joueur"
     }
 
-    public void coupSuivant() { //Pour lire une partie
+    public void coupSuivant(Coup coup, Piece piece, String codeTour, Code codeRencontre) throws BDAccessEx { //Pour lire une partie
         //Joue le coup suivant de la partie en lecture
         String trans = "UPDATE Piece SET ligneInit=?, colonneInit=? WHERE ligneInit=? AND colonneInit=? AND codeRencontre=?\n" +
                 " AND codeTour=?";
@@ -259,10 +259,10 @@ public class ControleurPartie {
                 PreparedStatement pstmt = conn.prepareStatement(trans);
                 pstmt.setInt(3,coup.getPreviousY(piece));
                 pstmt.setInt(4,coup.getPreviousX(piece));
-                pstmt.setInt(1,coup.getCurrentY(piece));
-                pstmt.setInt(2,coup.getCurrentX(piece));
+                //pstmt.setInt(1,coup.getCurrentY(piece));
+                //pstmt.setInt(2,coup.getCurrentX(piece));
                 pstmt.setInt(5,codeRencontre.getValue());
-                pstmt.setString(6, codeTour.getName());
+                pstmt.setString(6, codeTour);
                 conn.commit();
                 conn.close();
                 System.out.println("enregistrement des différentes pieces dans la base");
