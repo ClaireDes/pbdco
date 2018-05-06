@@ -226,10 +226,36 @@ public class ControleurPartie {
         //Fait recommencer le joueur qui utilise cette vue : "joueur"
     }
 
-    public void coupSuivant() { //Pour lire une partie
+    public void coupSuivant(Piece piece, Coup coup, Code codeRencontre, Code codeTour) throws BDAccessEx { //Pour lire une partie
         //Joue le coup suivant de la partie en lecture
-    }
+        String trans = "UPDATE Piece SET ligneInit=?, colonneInit=? WHERE ligneInit=? AND colonneInit=?";
+        Connection conn = null;
+        // Connexion à la BD
+        try {
+            conn = DriverManager.getConnection("jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1", "grelliel", "grelliel");
+            if (conn == null) {
+                throw new BDAccessEx("connexion échouée");
+            } else {
+                System.out.println("Connection ok");
+            }
 
+            try {
+                PreparedStatement pstmt = conn.prepareStatement(trans);
+                pstmt.setInt(1,coup.getPreviousY(piece));
+                pstmt.setInt(2,coup.getPreviousX(piece));
+                conn.commit();
+                conn.close();
+                System.out.println("enregistrement des différentes pieces dans la base");
+            } catch (SQLException ex) {//si la transaction echoue
+                conn.rollback();
+                conn.close();
+                System.err.println(ex.getMessage());
+               }
+        } catch (SQLException ex) {
+            throw new BDAccessEx("initPlateau Raised SQLException during the connection\n" + ex.getMessage());
+            }
+    }
+    
     protected void informe() {
         //Informe ses observateurs, comme la vue
     }
