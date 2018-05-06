@@ -47,6 +47,7 @@ public class Tournoi {
     }
 
     public void commencerLeTournoi() throws BDAccessEx{
+        System.out.println("je suis dans commencer le tournoi");
         PreparationTour prep = new PreparationTour(false);
         prep.creeRencontre();
     }

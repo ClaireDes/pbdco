@@ -28,6 +28,7 @@ public class PreparationTour extends Organisation{
         switch(this.getTour()){
             case "qualif": 
                 this.loadAllJoueurs();
+                System.out.println("je vais creer les rencontres");
                 Set<Entry<Integer, Joueur>> setHM1 = this.getListJoueur().entrySet();
                 Set<Entry<Integer, Joueur>> setHM2 = this.getListJoueur().entrySet();
                 Iterator <Entry<Integer, Joueur>> it1 = setHM1.iterator();

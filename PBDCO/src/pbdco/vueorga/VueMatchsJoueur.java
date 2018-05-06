@@ -7,6 +7,7 @@ package pbdco.vueorga;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import pbdco.BDAccessEx;
 import pbdco.Code;
 import pbdco.tournois.Tournoi;
@@ -22,13 +23,7 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
      */
     public VueMatchsJoueur() throws BDAccessEx {
         initComponents();
-        Code codeJoueur = new Code(Integer.parseInt(numeroJoueur.getText()));
-        for(String[] joueur : new Tournoi().recupRencontresAJouer(codeJoueur)) {
-            joueursAAfronter.addItem(joueur[0]+joueur[1]); //Affiche nom et prénom dans le menu déroulant
-        }
-        for(String[] joueur : new Tournoi().recupRencontresDejaJouer(codeJoueur)) {
-            joueursAAfronter.addItem(joueur[0]+joueur[1]); //Affiche nom et prénom dans le menu déroulant
-        }
+        
     }
 
     /**
@@ -44,11 +39,12 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         numeroJoueur = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
+        okButton = new javax.swing.JButton();
+        aJouer = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         joueursAAfronter = new javax.swing.JComboBox<>();
         jouerMatch = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
+        joues = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         joueursAffrontes = new javax.swing.JComboBox<>();
         revoirMatch = new javax.swing.JButton();
@@ -64,6 +60,13 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
             }
         });
 
+        okButton.setText("OK");
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -72,7 +75,9 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(numeroJoueur, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                .addComponent(numeroJoueur, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(okButton)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -81,7 +86,8 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(numeroJoueur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(numeroJoueur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(okButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -102,25 +108,25 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout aJouerLayout = new javax.swing.GroupLayout(aJouer);
+        aJouer.setLayout(aJouerLayout);
+        aJouerLayout.setHorizontalGroup(
+            aJouerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(aJouerLayout.createSequentialGroup()
                 .addComponent(jLabel2)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(aJouerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(joueursAAfronter, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, aJouerLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jouerMatch)
                 .addGap(19, 19, 19))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        aJouerLayout.setVerticalGroup(
+            aJouerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(aJouerLayout.createSequentialGroup()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(joueursAAfronter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,31 +141,31 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
 
         revoirMatch.setText("Revoir le match");
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout jouesLayout = new javax.swing.GroupLayout(joues);
+        joues.setLayout(jouesLayout);
+        jouesLayout.setHorizontalGroup(
+            jouesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jouesLayout.createSequentialGroup()
                 .addComponent(jLabel3)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel4Layout.createSequentialGroup()
+            .addGroup(jouesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jouesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(joueursAffrontes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGroup(jouesLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(revoirMatch, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        jouesLayout.setVerticalGroup(
+            jouesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jouesLayout.createSequentialGroup()
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(joueursAffrontes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(revoirMatch)
-                .addGap(0, 7, Short.MAX_VALUE))
+                .addGap(0, 1, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -167,10 +173,10 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(aJouer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(joues, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -178,9 +184,9 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(aJouer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(joues, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -209,6 +215,26 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
     private void jouerMatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jouerMatchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jouerMatchActionPerformed
+
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
+        
+        Code codeJoueur = new Code(Integer.parseInt(numeroJoueur.getText()));
+        try {
+            String[][] rencontresAJouer = new Tournoi().recupRencontresAJouer(codeJoueur);
+            String[][] rencontresJouees = new Tournoi().recupRencontresDejaJouer(codeJoueur);
+            for(String[] joueur : new Tournoi().recupRencontresAJouer(codeJoueur)) {
+                joueursAAfronter.addItem(joueur[0]+joueur[1]); //Affiche nom et prénom dans le menu déroulant
+            }
+            for(String[] joueur : new Tournoi().recupRencontresDejaJouer(codeJoueur)) {
+                joueursAAfronter.addItem(joueur[0]+joueur[1]); //Affiche nom et prénom dans le menu déroulant
+            }
+        } catch (BDAccessEx ex) {
+            Logger.getLogger(VueMatchsJoueur.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Votre code joueur n'existe pas dans la bAAAse");
+        }
+        
+        
+    }//GEN-LAST:event_okButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -250,17 +276,18 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel aJouer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JButton jouerMatch;
+    private javax.swing.JPanel joues;
     private javax.swing.JComboBox<String> joueursAAfronter;
     private javax.swing.JComboBox<String> joueursAffrontes;
     private javax.swing.JTextField numeroJoueur;
+    private javax.swing.JButton okButton;
     private javax.swing.JButton revoirMatch;
     // End of variables declaration//GEN-END:variables
 }
