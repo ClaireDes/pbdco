@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import pbdco.BDAccessEx;
 import pbdco.Code;
 import pbdco.partie.ControleurPartie;
+import pbdco.partie.EtatsPartie;
 import pbdco.tournois.PreparationTour;
 import pbdco.tournois.Tournoi;
 
@@ -220,7 +221,7 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
         PreparationTour prep = new PreparationTour(false);
         String choix = (String) joueursAAfronter.getSelectedItem();
         String[] newString = choix.split(" ");
-        ControleurPartie controlePart = new ControleurPartie(new Code(Integer.parseInt(newString[0])), newString[2], newString[3]);
+        ControleurPartie controlePart = new ControleurPartie( newString[2], newString[3], new Code(Integer.parseInt(newString[0])), EtatsPartie.JOUER_RENCONTRE);
         controlePart.initPlateau(prep.getTour(), new Code(Integer.parseInt(newString[0])));
     }//GEN-LAST:event_jouerMatchActionPerformed
 
