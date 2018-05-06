@@ -25,7 +25,7 @@ public class ControleurPartie {
     private Joueur adversaire;
     private Joueur joueur;
     
-    private TablePositions tablePositions = new TablePositions();
+    private TablePositions tablePositions;
     private Position positionCourante = new Position(0,0);
 
     private EtatsPartie etat;
@@ -264,21 +264,20 @@ public class ControleurPartie {
     }
     
     public static void main(String[] args) {
-        ControleurPartie controleur = new ControleurPartie("Joueur 1", "Joueur 2", new Code(123456789), EtatsPartie.JOUER_RENCONTRE);
+        ControleurPartie controleur = new ControleurPartie("Premier joueur", "Second joueur", new Code(123456789), EtatsPartie.JOUER_RENCONTRE);
     }
     
     public ControleurPartie(String infoJoueur1, String infoJoueur2, Code codeRencontre, EtatsPartie affronterOuRejouer) {
         new JeuInterface(this).setVisible(true);
         etat = affronterOuRejouer;
+        tablePositions = new TablePositions();
         
         if(etat == EtatsPartie.REJOUER_PARTIE) System.out.println("Ce cas n'est pas traité");
         else if (etat == EtatsPartie.JOUER_RENCONTRE) {
             new VueJoueur(infoJoueur1, infoJoueur2).setVisible(true);
             etat = EtatsPartie.BLANC_JOUE;
         }
-        //new JeuInterface().setVisible(true);
-        
-        //new VueJoueur().setVisible(true);
+        new VueJoueur(infoJoueur1, infoJoueur2).setVisible(true);
 
     }
 }

@@ -27,7 +27,7 @@ public class Main {
         //TESTS MARCHENT
         
         new JeuInterface().setVisible(true);
-        new VueJoueur().setVisible(true);
+        //new VueJoueur().setVisible(true);
             
         
     }
