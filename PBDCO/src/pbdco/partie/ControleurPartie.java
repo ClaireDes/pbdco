@@ -254,7 +254,8 @@ public class ControleurPartie {
                 pstmt.setInt(1,codeJoueur2.getValue());
                 pstmt.setInt(2,codeRencontre.getValue());
                 pstmt.setString(3, codeTour);
-                pstmt.setInt(4, codeJoueur.getValue());
+                pstmt = conn.prepareStatement(trans2);
+                pstmt.setInt(1, codeJoueur.getValue());
                 
                 conn.commit();
                 conn.close();
