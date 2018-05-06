@@ -200,7 +200,7 @@ public class VueInscription extends javax.swing.JFrame {
             java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new VueCreation().setVisible(true);
+                    new VueCreation(codeCree.getValue()).setVisible(true);
                 } catch (BDAccessEx ex) {
                     Logger.getLogger(VueCreation.class.getName()).log(Level.SEVERE, null, ex);
             }
