@@ -194,8 +194,43 @@ public class FabriqueDeOrganisation {
         throw new UnsupportedOperationException("not supported yet");
     }
 
-    public int nbrRencontres(String codeTour) {
-        throw new UnsupportedOperationException("not supported yet");
+    public int nbrRencontres(String codeTour) throws BDAccessEx {
+        String requete = "SELECT COUNT(codeRencontre) FROM Rencontre WHERE codeTour=?";
+        ResultSet resultat;
+        int nbRencontres = 0;
+
+        // Connexion à la BD
+        try {
+            Connection conn = null;
+            conn = DriverManager.getConnection(URL, USER, PASSWD);
+            if (conn == null) {
+                throw new BDAccessEx("connexion échouée");
+            } else {
+                System.out.println("Connection ok");
+            }
+            try {
+                conn.setAutoCommit(false);
+                conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+
+                //préparation de la requète
+                PreparedStatement pstmt = conn.prepareStatement(requete);
+                pstmt.setString(1, codeTour);
+                resultat = pstmt.executeQuery();
+
+                nbRencontres = resultat.getInt(1);
+
+                conn.commit();
+                conn.close();
+                System.out.println("Le nombre de rencontres dans le tour "+codeTour+" est : " + nbRencontres);
+            } catch (SQLException ex) {//si la transaction echoue
+                conn.rollback();
+                conn.close();
+                System.err.println(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new BDAccessEx("nbrRencontres Raised SQLException during the connection\n" + ex.getMessage());
+        }
+        return nbRencontres;
     }
 
     public void creerTournois() {
