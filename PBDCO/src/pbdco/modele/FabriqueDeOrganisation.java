@@ -194,9 +194,7 @@ public class FabriqueDeOrganisation {
         throw new UnsupportedOperationException("not supported yet");
     }
 
-    public int nbrRencontres(String codeTour) {
-        throw new UnsupportedOperationException("not supported yet");
-    }
+   
 
     public void creerTournois() {
         Code codeTournois = new Code("qualif");
