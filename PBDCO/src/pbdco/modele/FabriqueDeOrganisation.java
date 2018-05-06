@@ -74,16 +74,42 @@ public class FabriqueDeOrganisation {
         return nbJoueurs;
     }
 
-    public String quelTour() {
-
-        //;;;;;
-        /*if pas de code correspondant , renvoie null ou exception
-                
-         sinon
+    public String quelTour() throws BDAccessEx{
+        String requete = "SELECT CASE\n" +
+"WHEN Count(CodeTour)=1 THEN 'qualif'\n" +
+"WHEN Count(CodeTour)=2 THEN 'quart'\n" +
+"WHEN Count(CodeTour)=3 THEN 'demi'\n" +
+"WHEN Count(CodeTour)=4 THEN 'finale'\n" +
+"END AS Tour_Courant\n" +
+"FROM Tour;";
+        ResultSet resultat;
+        String tour = "" ;
         
-         renvoie le tour correspondant au code courant*/
-        throw new UnsupportedOperationException("Not supported yet.");
+         // Connexion à la BD
+        try{
+             Connection conn = null;
+            conn = DriverManager.getConnection(URL, USER, PASSWD);
+            if (conn==null){throw new BDAccessEx("connexion échouée");}
+            else{ System.out.println("Connection ok");}
+             try{
+            //préparation de la requète
+            Statement stmt = conn.createStatement();
+            resultat = stmt.executeQuery(requete);
 
+            tour = resultat.getString(1);
+            
+            conn.commit();
+            conn.close();
+           System.out.println("Le tour actuel est : " + tour);         
+             }catch(  SQLException ex){//si la transaction echoue
+                 conn.rollback();
+                conn.close();
+                 System.err.println(ex.getMessage());
+             }
+        }catch(  SQLException ex){
+            throw new BDAccessEx("quelTour Raised SQLException during the connection\n"+ ex.getMessage());
+        }
+         return tour;
     }
 
     /**
@@ -197,21 +223,101 @@ public class FabriqueDeOrganisation {
         throw new UnsupportedOperationException("not supported yet");
     }
 
-    public int nbrRencontres(String codeTour) {
-        throw new UnsupportedOperationException("not supported yet");
+    public int nbrRencontres(String codeTour) throws BDAccessEx {
+        String requete = "SELECT COUNT(codeRencontre) FROM Rencontre WHERE codeTour=?";
+        ResultSet resultat;
+        int nbRencontres = 0;
+
+        // Connexion à la BD
+        try {
+            Connection conn = null;
+            conn = DriverManager.getConnection(URL, USER, PASSWD);
+            if (conn == null) {
+                throw new BDAccessEx("connexion échouée");
+            } else {
+                System.out.println("Connection ok");
+            }
+            try {
+                conn.setAutoCommit(false);
+                conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+
+                //préparation de la requète
+                PreparedStatement pstmt = conn.prepareStatement(requete);
+                pstmt.setString(1, codeTour);
+                resultat = pstmt.executeQuery();
+
+                nbRencontres = resultat.getInt(1);
+
+                conn.commit();
+                conn.close();
+                System.out.println("Le nombre de rencontres dans le tour " + codeTour + " est : " + nbRencontres);
+            } catch (SQLException ex) {//si la transaction echoue
+                conn.rollback();
+                conn.close();
+                System.err.println(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new BDAccessEx("nbrRencontres Raised SQLException during the connection\n" + ex.getMessage());
+        }
+        return nbRencontres;
     }
 
-    public void creerTournois() {
+    public void creerTournois() throws BDAccessEx {
         Code codeTournois = new Code("qualif");
         // doit supprimer tous les elements dans les tables (peut se faire en recreant les tables)
         //insert ... crée un tour qualif
+        String rViderCoup = "DELETE FROM Coup";
+        String rViderJoueur = "DELETE FROM Joueur";
+        String rViderPiece = "DELETE FROM Piece";
+        String rViderTour = "DELETE FROM Tour";
+        String rViderRencontre = "DELETE FROM Rencontre";
+        String rCreerQualif = "INSERT INTO TOUR VALUES('qualif')";
+
+        try {
+            Connection conn = null;
+            conn = DriverManager.getConnection(URL, USER, PASSWD);
+            if (conn == null) {
+                throw new BDAccessEx("connexion échouée");
+            } else {
+                System.out.println("Connection ok");
+            }
+            try {
+                conn.setAutoCommit(false);
+                conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+
+                //préparation de la requète
+                PreparedStatement pstmt = conn.prepareStatement(rViderCoup);
+                pstmt.executeUpdate();
+                pstmt = conn.prepareStatement(rViderPiece);
+                pstmt.executeUpdate();
+                pstmt = conn.prepareStatement(rViderRencontre);
+                pstmt.executeUpdate();
+                pstmt = conn.prepareStatement(rViderJoueur);
+                pstmt.executeUpdate();
+                pstmt = conn.prepareStatement(rViderTour);
+                pstmt.executeUpdate();
+                pstmt = conn.prepareStatement(rCreerQualif);
+                pstmt.executeUpdate();
+
+                pstmt.close();
+                conn.commit();
+                conn.close();
+            } catch (SQLException ex) {//si la transaction echoue
+                conn.rollback();
+                conn.close();
+                System.out.println(ex.getMessage());
+                throw new BDAccessEx("loadAllJoueur Raised SQLException during the Query" + ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new BDAccessEx("loadAllJoueur Raised SQLException during the connection");
+        }
     }
 
     public void setCodeTour(String codeTour) {
 
     }
 
-            //Pour l'instanciation dans organisation
+    //Pour l'instanciation dans organisation
     /*fabrique = new fabriqueDeOrganisation()
      fabrique.nbrDeJoueurs()*/
 }
