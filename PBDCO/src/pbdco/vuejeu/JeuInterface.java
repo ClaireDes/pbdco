@@ -7,6 +7,7 @@ package pbdco.vuejeu;/*
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import java.awt.*;
+import pbdco.partie.ControleurPartie;
 
 /**
  *
@@ -16,21 +17,24 @@ public class JeuInterface extends JFrame {
     
     JPanel p = new JPanel();
     BoutonCase boutons[] = new BoutonCase[64];
+    ControleurPartie controleurPartie;
     
     public static void main(String args[]) {
-        new JeuInterface();
+        //new JeuInterface();
     }
     
-    public JeuInterface() {
+    public JeuInterface(ControleurPartie controleur) {
         super("Jeu d'échecs");
+        this.controleurPartie = controleur;
         setSize(600,600);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         p.setLayout(new GridLayout(8,8));
         for(int i=0; i<64; i++) {
-            boutons[i] = new BoutonCase();
+            boutons[i] = new BoutonCase(controleurPartie, i);
             boutons[i].setFont(new Font("Arial", Font.PLAIN, 50));
             if (i%2==0) boutons[i].setBackground(Color.GRAY);
+            boutons[i].setPosition(i%8+1, 8-(i/8+1)+1);
             p.add(boutons[i]);
         }
 
