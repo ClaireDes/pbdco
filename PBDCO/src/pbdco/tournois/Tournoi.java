@@ -5,6 +5,7 @@
  */
 package pbdco.tournois;
 
+import static java.lang.String.valueOf;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,8 +53,9 @@ public class Tournoi {
     }
 
     public String[] recupererDetails(Code codeJoueur) throws BDAccessEx{
-        String[] details = new String[3];
+        String[] details;
         Inscription inscrit = new Inscription(false);
+        System.out.println("le codeJoueur est "+ valueOf(codeJoueur.getValue()));
         Joueur j = inscrit.getFabriqueJoueur().LoadFromBD(codeJoueur);
         details = j.getDetails();
         return details;
@@ -61,6 +63,8 @@ public class Tournoi {
 
     public Code[] recupererLesCodesRencontresAJouer(Code codeJoueur) throws BDAccessEx{
         Inscription inscrit = new Inscription(false);
+                System.out.println("le codeJoueur est "+ valueOf(codeJoueur.getValue()));
+
         Joueur j = inscrit.getFabriqueJoueur().LoadFromBD(codeJoueur);
         Code[] js = j.getRencontresAJouer();
         return js;
@@ -68,6 +72,8 @@ public class Tournoi {
 
     public Code[] recupererLesCodesRencontresDejaJouer(Code codeJoueur) throws BDAccessEx{
         Inscription inscrit = new Inscription(false);
+                        System.out.println("le codeJoueur est "+ valueOf(codeJoueur.getValue()));
+
         Joueur j = inscrit.getFabriqueJoueur().LoadFromBD(codeJoueur);        
         Code[] js = j.getRencontresJouees();
 
@@ -80,8 +86,8 @@ public class Tournoi {
 
         String[][] recup = new String[tabCode1.length][3];
                 
-        if(tabCode1[0] != null){
-            for(int i=0;i<=tabCode1.length-1;i++){
+        if(tabCode1 != null){
+            for(int i=0;i<tabCode1.length;i++){
                 recup[i][0] = this.recupererDetails(tabCode1[i])[0];
                 recup[i][1] = this.recupererDetails(tabCode1[i])[1];
                 recup[i][2] = this.recupererDetails(tabCode1[i])[2];
@@ -96,7 +102,7 @@ public class Tournoi {
         Code[] tabCode1 = this.recupererLesCodesRencontresDejaJouer(codeJoueur);
 
         String[][] recup = new String[tabCode1.length][3];
-        if(tabCode1[0] != null){
+        if(tabCode1 != null){
             for(int i=0;i<=tabCode1.length-1;i++){
                 recup[i][0] = this.recupererDetails(tabCode1[i])[0];
                 recup[i][1] = this.recupererDetails(tabCode1[i])[1];

@@ -26,7 +26,7 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
      */
     public VueMatchsJoueur() throws BDAccessEx {
         initComponents();
-        
+
     }
 
     /**
@@ -229,31 +229,34 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
     }//GEN-LAST:event_jouerMatchActionPerformed
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        
+
         Code codeJoueur = new Code(Integer.parseInt(numeroJoueur.getText()));
         try {
             Code[] codeAJouer = new Tournoi().recupererLesCodesRencontresAJouer(codeJoueur);
             Code[] codeJouer = new Tournoi().recupererLesCodesRencontresDejaJouer(codeJoueur);
-            
-            String[][] rencontresAJouer = new Tournoi().recupRencontresAJouer(codeJoueur);
-            String[][] rencontresJouees = new Tournoi().recupRencontresDejaJouer(codeJoueur);
-            if(codeAJouer[0] != null){
+
+            if(codeAJouer != null){
+                String[][] rencontresAJouer = new Tournoi().recupRencontresAJouer(codeJoueur);
+                System.out.println("le tableaux des joueurs a jouer "+ Arrays.deepToString(rencontresAJouer));
+                System.out.println("le tableaux des coderencontres "+ Arrays.toString(codeAJouer));
+
                 for(int i = 0;i<rencontresAJouer.length; i++) {
                     joueursAAfronter.addItem(String.valueOf(codeAJouer[i].getValue()) + " " + rencontresAJouer[i][0] + rencontresAJouer[i][1]); //Affiche nom et prénom dans le menu déroulant
                 }
             }
-            boolean vrai = codeJouer==null;
-            if(codeJouer[0] != null){
-                for(int i = 0;i<codeJouer.length; i++) {
-                    joueursAffrontes.addItem(String.valueOf(codeJouer[i].getValue()) + rencontresJouees[i][0] + rencontresJouees[i][1]); //Affiche nom et prénom dans le menu déroulant
+
+            if(codeJouer != null){
+                String[][] rencontresJouees = new Tournoi().recupRencontresDejaJouer(codeJoueur);
+                for(int i = 0;i<rencontresJouees.length; i++) {
+                    joueursAAfronter.addItem(String.valueOf(codeJouer[i].getValue()) + " " + rencontresJouees[i][0] + rencontresJouees[i][1]); //Affiche nom et prénom dans le menu déroulant
                 }
             }
         } catch (BDAccessEx ex) {
             Logger.getLogger(VueMatchsJoueur.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Votre code joueur n'existe pas dans la bAAAse");
         }
-        
-        
+
+
     }//GEN-LAST:event_okButtonActionPerformed
 
     /**
@@ -263,7 +266,7 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
