@@ -188,15 +188,19 @@ public class FabriqueDeRencontre extends FabriqueTransaction {
                 pstmt.setString(2, rencontre.getCodeTour());
                 pstmt.setInt(3, rencontre.getJoueurs()[0].getCode().getValue());
                 pstmt.setInt(4, rencontre.getJoueurs()[1].getCode().getValue());
+                System.out.println("avant le if");
                 if (rencontre.getBlanc() == 1) {
+                    System.out.println("dans le blanc = 1 ");
                     pstmt.setInt(5, rencontre.getJoueurs()[0].getCode().getValue());
+                    System.out.println("erreur 6");
                     pstmt.setInt(6, rencontre.getJoueurs()[1].getCode().getValue());
                 }
-                if (rencontre.getBlanc() == 2) {
+                else if (rencontre.getBlanc() == 2) {
+                    System.out.println("dans blanc = 2 ");
                     pstmt.setInt(5, rencontre.getJoueurs()[1].getCode().getValue());
                     pstmt.setInt(6, rencontre.getJoueurs()[0].getCode().getValue());
                 } else {
-                    throw new BDAccessEx("erreur lors de l'insertion de l'insertion d'une rencontre ");
+                    throw new BDAccessEx("erreur lors de l'insertion d'une rencontre ");
                 }
 
                 System.out.println("Mise a jour de la bd...");

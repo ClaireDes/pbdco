@@ -64,10 +64,12 @@ public class PreparationTour extends Organisation{
                 System.out.println("je vais creer les rencontres");
                 int j =0;
                 for(int i=1; i<(this.getNbrParticipants());i++){
+                    System.out.println("dans le for");
                     j=i+1;
-                    while(j<this.getNbrParticipants()){
-                        Joueur j1 = this.getFabriqueJoueur().LoadFromBD(this.getJoueur()[i]);
-                        Joueur j2 = this.getFabriqueJoueur().LoadFromBD(this.getJoueur()[j]);
+                    while(j<=this.getNbrParticipants()){
+                        
+                        Joueur j1 = this.getFabriqueJoueur().LoadFromBD(this.getJoueur()[i-1]);
+                        Joueur j2 = this.getFabriqueJoueur().LoadFromBD(this.getJoueur()[j-1]);
                         Rencontre renc = new Rencontre(j1, j2, this.getTour(), this.getFabriqueRencontre());
                         j = j+1;
                     }

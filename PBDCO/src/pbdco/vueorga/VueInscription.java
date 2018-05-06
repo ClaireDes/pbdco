@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 import pbdco.BDAccessEx;
 import pbdco.Code;
 import pbdco.tournois.Tournoi;
-import pbdco.vuejeu.VueJoueur;
+
 
 /**
  *
