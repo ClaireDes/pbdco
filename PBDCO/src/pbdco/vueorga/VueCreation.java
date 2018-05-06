@@ -148,7 +148,6 @@ public class VueCreation extends javax.swing.JFrame {
     }//GEN-LAST:event_nouveauParticipantActionPerformed
 
     private void commencerTournoisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commencerTournoisActionPerformed
-        System.out.println("je suis avant d'entrer dans le try");
         try {
             dispose();
             Tournoi tourn = new Tournoi();
