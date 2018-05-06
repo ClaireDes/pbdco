@@ -10,7 +10,15 @@ package pbdco.partie;
  * @author barbault
  */
 public class TablePositions {
-    private Position[] echiquier;
+    private Position[] echiquier = new Position[64];
+    
+    public Position getPosition(int number){
+        return this.echiquier[number];
+    }
+    
+    public Position[] getEchiquier(){
+        return this.echiquier;
+    }
     
     public void init(){
         // creation de la table des positions
