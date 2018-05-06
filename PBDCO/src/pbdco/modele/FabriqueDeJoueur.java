@@ -107,7 +107,8 @@ public class FabriqueDeJoueur extends FabriqueTransaction {
         Joueur J;
         int codeJoueur = code.getValue();
         String nom, prenom, adresse;
-        List rencontresAJouer, rencontresJouees;
+        Code rencontresAJouer[] = {};
+        Code rencontresJouees[] = {};
         int nbVictoires;
 
         String requete = "SELECT * FROM  joueur  WHERE codeJoueur=?";
@@ -145,12 +146,14 @@ public class FabriqueDeJoueur extends FabriqueTransaction {
 
                 resultat = pstmt.executeQuery();
 
-                rencontresAJouer = new ArrayList();
                 boolean resteResultat = resultat.next();
+                int i =0;
                 while (resteResultat) {
-                    rencontresAJouer.add(resultat.getInt(1));
+                    rencontresAJouer[i]= new Code(resultat.getInt(1));
                     resteResultat = resultat.next();
+                    i++;
                 }
+                i=0;
                 pstmt.close();
                 resultat.close();
                 
@@ -161,11 +164,11 @@ public class FabriqueDeJoueur extends FabriqueTransaction {
 
                 resultat = pstmt.executeQuery();
 
-                rencontresJouees = new ArrayList();
                 resteResultat = resultat.next();
                 while (resteResultat) {
-                    rencontresJouees.add(resultat.getInt(1));
+                    rencontresJouees[i] = new Code(resultat.getInt(1));
                     resteResultat = resultat.next();
+                     i++;
                 }
                 pstmt.close();
                 resultat.close();

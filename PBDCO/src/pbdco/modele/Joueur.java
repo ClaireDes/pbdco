@@ -14,8 +14,8 @@ public class Joueur implements Modele{
     private String prenom;
     private String adresse;
     private Code codeJoueur;
-    private List rencontresAJouer;
-    private List rencontresJouees;
+    private Code rencontresAJouer[] = {};
+    private Code rencontresJouees[] = {};
     int victoiresTournoisCourant;
     FabriqueDeJoueur fabJoueur;
     
@@ -35,7 +35,7 @@ public class Joueur implements Modele{
             String prenom,
             Code codeJoueur, 
             String adresse,
-            List rencontresJouees, List rencontresAJouer,
+            Code rencontresJouees[], Code rencontresAJouer[],
             int victoiresTournoisCourant,
             FabriqueDeJoueur fab){
         
@@ -79,8 +79,6 @@ public class Joueur implements Modele{
         this.nom = nom;
         this.prenom =prenom ;
         this.adresse = adresse;
-        this.rencontresAJouer = new ArrayList();
-        this.rencontresJouees = new ArrayList();
         this.victoiresTournoisCourant = 0;
 
         this.fabJoueur = fab;//
