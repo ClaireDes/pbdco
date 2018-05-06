@@ -46,7 +46,6 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="continuerTournois" max="32767" attributes="0"/>
                       <Component id="creerTournois" max="32767" attributes="0"/>
-                      <Component id="nouveauParticipantBouton" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="149" max="32767" attributes="0"/>
               </Group>
@@ -59,9 +58,7 @@
                   <Component id="continuerTournois" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="creerTournois" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="nouveauParticipantBouton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="104" max="32767" attributes="0"/>
+                  <EmptySpace pref="147" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -83,15 +80,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="creerTournoisActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="nouveauParticipantBouton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Nouveau participant"/>
-            <Property name="actionCommand" type="java.lang.String" value="nouveauParticipant"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nouveauParticipantBoutonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

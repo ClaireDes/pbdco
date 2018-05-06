@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import pbdco.BDAccessEx;
 import pbdco.Code;
 import pbdco.tournois.Tournoi;
+import pbdco.vuejeu.VueJoueur;
 
 /**
  *
@@ -40,9 +41,9 @@ public class VueInscription extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        nomJoueurField = new javax.swing.JTextField();
+        prenomJoueurField = new javax.swing.JTextField();
+        adresseField = new javax.swing.JTextField();
         terminer = new javax.swing.JButton();
         annuler = new javax.swing.JButton();
 
@@ -78,16 +79,16 @@ public class VueInscription extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTextField1.setText("nomJoueur");
+        nomJoueurField.setText("nomJoueur");
 
-        jTextField2.setText("prenomJoueur");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        prenomJoueurField.setText("prenomJoueur");
+        prenomJoueurField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                prenomJoueurFieldActionPerformed(evt);
             }
         });
 
-        jTextField3.setText("adresseJoueur");
+        adresseField.setText("adresseJoueur");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -98,21 +99,21 @@ public class VueInscription extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2))
+                            .addComponent(nomJoueurField)
+                            .addComponent(prenomJoueurField))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE))
+                    .addComponent(adresseField, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nomJoueurField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(prenomJoueurField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(adresseField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(74, Short.MAX_VALUE))
         );
 
@@ -174,9 +175,9 @@ public class VueInscription extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void prenomJoueurFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prenomJoueurFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_prenomJoueurFieldActionPerformed
 
     private void annulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerActionPerformed
         try {
@@ -189,11 +190,14 @@ public class VueInscription extends javax.swing.JFrame {
 
     private void terminerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminerActionPerformed
         dispose();
+        
         //TODO
         try {
             System.out.println("je vais ajouter");
             Tournoi tourn = new Tournoi();
-            Code codeCree = tourn.ajoutParticipant(jTextField1.getText(), jTextField2.getText(), jTextField3.getText());
+            Code codeCree = tourn.ajoutParticipant(nomJoueurField.getText(), prenomJoueurField.getText(), adresseField.getText());
+            //String infosJoueur = nomJoueurField.getText()+prenomJoueurField.getText()+" n°"+String.valueOf(codeCree.getValue());
+            new VueCodeJoueur(codeCree.getValue()).setVisible(true);
             java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -202,7 +206,7 @@ public class VueInscription extends javax.swing.JFrame {
                     Logger.getLogger(VueCreation.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            String message = "Notez votre code joueur :"+String.valueOf(codeCree.getValue());
+            //String message = "Notez votre code joueur :"+String.valueOf(codeCree.getValue());
             //JOptionPane.
             });
         } catch (BDAccessEx ex) {
@@ -246,6 +250,7 @@ public class VueInscription extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField adresseField;
     private javax.swing.JButton annuler;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -253,9 +258,8 @@ public class VueInscription extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField nomJoueurField;
+    private javax.swing.JTextField prenomJoueurField;
     private javax.swing.JButton terminer;
     // End of variables declaration//GEN-END:variables
 }
