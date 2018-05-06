@@ -31,7 +31,7 @@ public class JeuInterface extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         p.setLayout(new GridLayout(8,8));
         for(int i=0; i<64; i++) {
-            boutons[i] = new BoutonCase(controleurPartie);
+            boutons[i] = new BoutonCase(controleurPartie, i);
             boutons[i].setFont(new Font("Arial", Font.PLAIN, 50));
             if (i%2==0) boutons[i].setBackground(Color.GRAY);
             boutons[i].setPosition(i%8+1, 8-(i/8+1)+1);

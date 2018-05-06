@@ -17,18 +17,21 @@ import pbdco.partie.ControleurPartie;
  */
 public class BoutonCase extends JButton implements ActionListener {
     ImageIcon roiN, roiB, reineN, reineB; //Compléter
+    int noBouton;
     int posX, posY;
     ControleurPartie controleurPartie;
     
-    public BoutonCase(ControleurPartie controleur) {
+    public BoutonCase(ControleurPartie controleur, int noBouton) {
         addActionListener(this);
         this.controleurPartie = controleur;
+        this.noBouton = noBouton;
     }
     
-    public BoutonCase(int posX, int posY) {
+    public BoutonCase(int posX, int posY, int noBouton) {
         addActionListener(this);
         this.posX = posX;
         this.posY = posY;
+        this.noBouton = noBouton;
     }
     
     public void setPosition(int posX, int posY) {
@@ -38,7 +41,7 @@ public class BoutonCase extends JButton implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         System.out.println("Button pushed : "+ posX+" "+ posY);
-        //controleurPartie.pieceABouger();
+        controleurPartie.pieceABouger(noBouton);
         //TODO
     }
 }

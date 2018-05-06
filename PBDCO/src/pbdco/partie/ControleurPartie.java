@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import javafx.scene.control.TablePosition;
 
 import pbdco.modele.FabriqueTransaction;
 import pbdco.BDAccessEx;
@@ -23,6 +24,9 @@ public class ControleurPartie {
 
     private Joueur adversaire;
     private Joueur joueur;
+    
+    private TablePositions tablePositions = new TablePositions();
+    private Position positionCourante = new Position(0,0);
 
     private EtatsPartie etat;
     
@@ -242,8 +246,21 @@ public class ControleurPartie {
         //Informe ses observateurs, comme la vue
     }
     
-    public void pieceABouger(int position) {
-        
+    public void pieceABouger(int noBouton) {
+        if(etat == EtatsPartie.BLANC_JOUE && (1==tablePositions.caseOccupee(noBouton))) { //Clic pour sélectionner la pièce à bouger
+            positionCourante = caseToPosition(noBouton);
+            etat = EtatsPartie.BLANC_DEPLACE;
+        }
+        if(etat == EtatsPartie.BLANC_DEPLACE) {
+            
+        }
+        if(etat == EtatsPartie.NOIR_JOUE && tablePositions.caseOccupee(noBouton)==2) {
+            
+        }
+    }
+    
+    public Position caseToPosition(int noBouton) {
+        return new Position(noBouton%8+1, 8-(noBouton/8+1)+1);
     }
     
     public static void main(String[] args) {

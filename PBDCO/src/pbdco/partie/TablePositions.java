@@ -12,6 +12,10 @@ package pbdco.partie;
 public class TablePositions {
     private Position[] echiquier;
     
+    public TablePositions() {
+        init();
+    }
+    
     public void init(){
         // creation de la table des positions
         for (int lig=0; lig<8;lig++){
