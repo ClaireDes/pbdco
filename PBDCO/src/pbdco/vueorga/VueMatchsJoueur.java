@@ -5,11 +5,14 @@
  */
 package pbdco.vueorga;
 
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import pbdco.BDAccessEx;
 import pbdco.Code;
+import pbdco.partie.ControleurPartie;
+import pbdco.tournois.PreparationTour;
 import pbdco.tournois.Tournoi;
 
 /**
@@ -212,21 +215,34 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_joueursAAfronterActionPerformed
 
-    private void jouerMatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jouerMatchActionPerformed
+    private void jouerMatchActionPerformed(java.awt.event.ActionEvent evt) throws BDAccessEx {//GEN-FIRST:event_jouerMatchActionPerformed
         // TODO add your handling code here:
+        PreparationTour prep = new PreparationTour(false);
+        String choix = (String) joueursAAfronter.getSelectedItem();
+        String[] newString = choix.split(" ");
+        ControleurPartie controlePart = new ControleurPartie(new Code(Integer.parseInt(newString[0])), newString[2], newString[3]);
+        controlePart.initPlateau(prep.getTour(), new Code(Integer.parseInt(newString[0])));
     }//GEN-LAST:event_jouerMatchActionPerformed
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         
         Code codeJoueur = new Code(Integer.parseInt(numeroJoueur.getText()));
         try {
+            Code[] codeAJouer = new Tournoi().recupererLesCodesRencontresAJouer(codeJoueur);
+            Code[] codeJouer = new Tournoi().recupererLesCodesRencontresDejaJouer(codeJoueur);
+            
             String[][] rencontresAJouer = new Tournoi().recupRencontresAJouer(codeJoueur);
             String[][] rencontresJouees = new Tournoi().recupRencontresDejaJouer(codeJoueur);
-            for(String[] joueur : rencontresAJouer) {
-                joueursAAfronter.addItem(joueur[0]+joueur[1]); //Affiche nom et prénom dans le menu déroulant
+            if(codeAJouer[0] != null){
+                for(int i = 0;i<rencontresAJouer.length; i++) {
+                    joueursAAfronter.addItem(String.valueOf(codeAJouer[i].getValue()) + " " + rencontresAJouer[i][0] + rencontresAJouer[i][1]); //Affiche nom et prénom dans le menu déroulant
+                }
             }
-            for(String[] joueur : rencontresJouees) {
-                joueursAAfronter.addItem(joueur[0]+joueur[1]); //Affiche nom et prénom dans le menu déroulant
+            boolean vrai = codeJouer==null;
+            if(codeJouer[0] != null){
+                for(int i = 0;i<codeJouer.length; i++) {
+                    joueursAffrontes.addItem(String.valueOf(codeJouer[i].getValue()) + rencontresJouees[i][0] + rencontresJouees[i][1]); //Affiche nom et prénom dans le menu déroulant
+                }
             }
         } catch (BDAccessEx ex) {
             Logger.getLogger(VueMatchsJoueur.class.getName()).log(Level.SEVERE, null, ex);
