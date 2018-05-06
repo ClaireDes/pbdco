@@ -106,14 +106,13 @@ public class FabriqueDeJoueur extends FabriqueTransaction {
     public Joueur LoadFromBD(Code code) throws BDAccessEx {//remplace les données du joueur de code joueur.codeJoueur par celles de joueur
         Joueur J;
         int codeJoueur = code.getValue();
-        String nom;
-        String prenom;
-        String adresse;
-        List rencontres;
+        String nom, prenom, adresse;
+        List rencontresAJouer, rencontresJouees;
         int nbVictoires;
 
         String requete = "SELECT * FROM  joueur  WHERE codeJoueur=?";
-        String requete2 = "SELECT codeRencontre From rencontre WHERE joueur1 = ? OR joueur2 = ?";
+        String rRencontresAJouer = "SELECT codeRencontre From rencontre WHERE (joueur1 = ? OR joueur2 = ?) AND vainqueur=? ";
+        String rRencontresJouees = "SELECT codeRencontre From Rencontre WHERE (joueur1 = ? OR joueur 2 = ?) AND NOT(vainqueur = ?)";
         String requete3 = "SELECT COUNT(vainqueur) FROM rencontre where vainqueur= ?";
 
         ResultSet resultat;
@@ -139,16 +138,33 @@ public class FabriqueDeJoueur extends FabriqueTransaction {
                 pstmt.close();
                 resultat.close();
 
-                pstmt = conn.prepareStatement(requete2);
+                pstmt = conn.prepareStatement(rRencontresAJouer);
                 pstmt.setInt(1, codeJoueur);
                 pstmt.setInt(2, codeJoueur);
+                pstmt.setInt(3, 0);
 
                 resultat = pstmt.executeQuery();
 
-                rencontres = new ArrayList();
+                rencontresAJouer = new ArrayList();
                 boolean resteResultat = resultat.next();
                 while (resteResultat) {
-                    rencontres.add(resultat.getInt(1));
+                    rencontresAJouer.add(resultat.getInt(1));
+                    resteResultat = resultat.next();
+                }
+                pstmt.close();
+                resultat.close();
+                
+                pstmt = conn.prepareStatement(rRencontresJouees);
+                pstmt.setInt(1, codeJoueur);
+                pstmt.setInt(2, codeJoueur);
+                pstmt.setInt(3, 0);
+
+                resultat = pstmt.executeQuery();
+
+                rencontresJouees = new ArrayList();
+                resteResultat = resultat.next();
+                while (resteResultat) {
+                    rencontresJouees.add(resultat.getInt(1));
                     resteResultat = resultat.next();
                 }
                 pstmt.close();
@@ -163,7 +179,7 @@ public class FabriqueDeJoueur extends FabriqueTransaction {
                 pstmt.close();
                 resultat.close();
 
-                J = new Joueur(nom, prenom, code, adresse, rencontres, nbVictoires, this);
+                J = new Joueur(nom, prenom, code, adresse, rencontresJouees, rencontresAJouer, nbVictoires, this);
 
                 resultat.close();
                 pstmt.close();
