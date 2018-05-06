@@ -197,14 +197,13 @@ public class VueInscription extends javax.swing.JFrame {
             Tournoi tourn = new Tournoi();
             Code codeCree = tourn.ajoutParticipant(nomJoueurField.getText(), prenomJoueurField.getText(), adresseField.getText());
             //String infosJoueur = nomJoueurField.getText()+prenomJoueurField.getText()+" n°"+String.valueOf(codeCree.getValue());
-            new VueCodeJoueur(codeCree.getValue()).setVisible(true);
             java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
                     new VueCreation().setVisible(true);
                 } catch (BDAccessEx ex) {
                     Logger.getLogger(VueCreation.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            }
             }
             //String message = "Notez votre code joueur :"+String.valueOf(codeCree.getValue());
             //JOptionPane.
