@@ -221,7 +221,7 @@ public class FabriqueDeOrganisation {
 
                 conn.commit();
                 conn.close();
-                System.out.println("Le nombre de rencontres dans le tour "+codeTour+" est : " + nbRencontres);
+                System.out.println("Le nombre de rencontres dans le tour " + codeTour + " est : " + nbRencontres);
             } catch (SQLException ex) {//si la transaction echoue
                 conn.rollback();
                 conn.close();
@@ -233,17 +233,59 @@ public class FabriqueDeOrganisation {
         return nbRencontres;
     }
 
-    public void creerTournois() {
+    public void creerTournois() throws BDAccessEx {
         Code codeTournois = new Code("qualif");
         // doit supprimer tous les elements dans les tables (peut se faire en recreant les tables)
         //insert ... crée un tour qualif
+        String rViderTable = "DELETE FROM ?";
+        String rCreerQualif = "INSERT INTO TOUR VALUES('qualif')";
+
+        try {
+            Connection conn = null;
+            conn = DriverManager.getConnection(URL, USER, PASSWD);
+            if (conn == null) {
+                throw new BDAccessEx("connexion échouée");
+            } else {
+                System.out.println("Connection ok");
+            }
+            try {
+                conn.setAutoCommit(false);
+                conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+
+                //préparation de la requète
+                PreparedStatement pstmt = conn.prepareStatement(rViderTable);
+                pstmt.setString(1, "Coup");
+                pstmt.executeLargeUpdate();
+                pstmt.setString(1, "Piece");
+                pstmt.executeLargeUpdate();
+                pstmt.setString(1, "Rencontre");
+                pstmt.executeLargeUpdate();
+                pstmt.setString(1, "Joueur");
+                pstmt.executeUpdate();
+                pstmt.setString(1, "Tour");
+
+                pstmt = conn.prepareStatement(rCreerQualif);
+                pstmt.executeUpdate();
+
+                pstmt.close();
+                conn.commit();
+                conn.close();
+            } catch (SQLException ex) {//si la transaction echoue
+                conn.rollback();
+                conn.close();
+                System.out.println(ex.getMessage());
+                throw new BDAccessEx("loadAllJoueur Raised SQLException during the Query" + ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new BDAccessEx("loadAllJoueur Raised SQLException during the connection");
+        }
     }
 
     public void setCodeTour(String codeTour) {
 
     }
 
-            //Pour l'instanciation dans organisation
+    //Pour l'instanciation dans organisation
     /*fabrique = new fabriqueDeOrganisation()
      fabrique.nbrDeJoueurs()*/
 }
