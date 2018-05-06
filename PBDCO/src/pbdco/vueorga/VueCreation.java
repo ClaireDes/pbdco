@@ -22,6 +22,13 @@ public class VueCreation extends javax.swing.JFrame {
     public VueCreation() throws BDAccessEx {
         initComponents();
         nombreInscrits.setText(String.valueOf(new Tournoi().nbrInscrits()));
+        this.noJoueur.setText("profil non renseigné");
+    }
+    
+    public VueCreation(int codeJoueur) throws BDAccessEx {
+        initComponents();
+        nombreInscrits.setText(String.valueOf(new Tournoi().nbrInscrits()));
+        this.noJoueur.setText(String.valueOf(codeJoueur));
     }
 
     /**
@@ -39,6 +46,8 @@ public class VueCreation extends javax.swing.JFrame {
         nombreInscrits = new javax.swing.JLabel();
         nouveauParticipant = new javax.swing.JButton();
         commencerTournois = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        noJoueur = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,23 +86,38 @@ public class VueCreation extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Votre code joueur :");
+
+        noJoueur.setText("#");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(107, 107, 107)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(commencerTournois, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(nouveauParticipant, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(107, 107, 107)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(commencerTournois, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(nouveauParticipant, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(jLabel2)
+                        .addGap(27, 27, 27)
+                        .addComponent(noJoueur)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 82, 82)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(noJoueur))
+                .addGap(49, 49, 49)
                 .addComponent(nouveauParticipant)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(commencerTournois)
@@ -186,8 +210,10 @@ public class VueCreation extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton commencerTournois;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel noJoueur;
     private javax.swing.JLabel nombreInscrits;
     private javax.swing.JButton nouveauParticipant;
     // End of variables declaration//GEN-END:variables
