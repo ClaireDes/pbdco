@@ -5,6 +5,7 @@
  */
 package pbdco.vueorga;
 
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -220,13 +221,25 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
         
         Code codeJoueur = new Code(Integer.parseInt(numeroJoueur.getText()));
         try {
-            String[][] rencontresAJouer = new Tournoi().recupRencontresAJouer(codeJoueur);
-            String[][] rencontresJouees = new Tournoi().recupRencontresDejaJouer(codeJoueur);
-            for(String[] joueur : rencontresAJouer) {
-                joueursAAfronter.addItem(joueur[0]+joueur[1]); //Affiche nom et prénom dans le menu déroulant
+            Code[] codeAJouer = new Tournoi().recupererLesCodesRencontresAJouer(codeJoueur);
+            Code[] codeJouer = new Tournoi().recupererLesCodesRencontresDejaJouer(codeJoueur);
+            
+            
+            
+            
+            if(codeAJouer != null){
+                String[][] rencontresAJouer = new Tournoi().recupRencontresAJouer(codeJoueur);
+                System.out.println("le tableaux des joueurs a jouer "+ Arrays.deepToString(rencontresAJouer));
+                System.out.println("le tableaux des coderencontres "+ Arrays.toString(codeAJouer));
+                for(int i = 0;i<rencontresAJouer.length; i++) {
+                    joueursAAfronter.addItem(String.valueOf(codeAJouer[i].getValue()) + " " + rencontresAJouer[i][0] + rencontresAJouer[i][1]); //Affiche nom et prénom dans le menu déroulant
+                }
             }
-            for(String[] joueur : rencontresJouees) {
-                joueursAAfronter.addItem(joueur[0]+joueur[1]); //Affiche nom et prénom dans le menu déroulant
+            if(codeJouer != null){
+                String[][] rencontresJouees = new Tournoi().recupRencontresDejaJouer(codeJoueur);
+                for(int i = 0;i<rencontresJouees.length; i++) {
+                    joueursAAfronter.addItem(String.valueOf(codeJouer[i].getValue()) + " " + rencontresJouees[i][0] + rencontresJouees[i][1]); //Affiche nom et prénom dans le menu déroulant
+                }
             }
         } catch (BDAccessEx ex) {
             Logger.getLogger(VueMatchsJoueur.class.getName()).log(Level.SEVERE, null, ex);

@@ -109,9 +109,10 @@ public class FabriqueDeJoueur extends FabriqueTransaction {
         int codeJoueur = code.getValue();
         String nom, prenom, adresse;
         Inscription inscript = new Inscription(false);
-        int verif = inscript.getNbrRencontres();
+        int verif = inscript.getFabriqueJoueur().nbrRencontresAJouer(code);
+        int verif2 = inscript.getFabriqueJoueur().nbrRencontresJouer(code);
         Code[] rencontresAJouer = new Code[verif];
-        Code[] rencontresJouees = new Code[verif];
+        Code[] rencontresJouees = new Code[verif2];
         int nbVictoires;
 
         String requete = "SELECT * FROM  Joueur  WHERE codeJoueur=?";
@@ -203,6 +204,93 @@ public class FabriqueDeJoueur extends FabriqueTransaction {
         } catch (SQLException ex) {
             throw new BDAccessEx("LoadFromBD Joueur Raised SQLException during the connection" + ex.getMessage());
         }
+    }
+    
+    @SuppressWarnings("empty-statement")
+    public int nbrRencontresAJouer(Code codeJoueur) throws BDAccessEx {
+        int codeJoueur1 = codeJoueur.getValue();
+        String rRencontresAJouer = "SELECT COUNT(codeRencontre) From Rencontre WHERE (joueur1 = ? OR joueur2 = ?) AND vainqueur=?";
+        ResultSet resultat;
+        int nbRencontres = 0;
+
+        // Connexion à la BD
+        try {
+            Connection conn = null;
+            conn = DriverManager.getConnection(URL, USER, PASSWD);
+            if (conn == null) {
+                throw new BDAccessEx("connexion échouée");
+            } else {
+                System.out.println("Connection ok");
+            }
+            try {
+                conn.setAutoCommit(false);
+                conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+
+                //préparation de la requète
+                PreparedStatement pstmt = conn.prepareStatement(rRencontresAJouer);
+                pstmt.setInt(1, codeJoueur1);
+                pstmt.setInt(2, codeJoueur1);
+                pstmt.setInt(3, 0);
+
+                resultat = pstmt.executeQuery();
+                resultat.next();
+                nbRencontres = resultat.getInt(1);
+                
+                pstmt.close();
+                resultat.close();
+//                System.out.println("Le nombre de rencontres dans le tour " + codeTour + " est : " + nbRencontres);
+            } catch (SQLException ex) {//si la transaction echoue
+                conn.rollback();
+                conn.close();
+                System.err.println(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new BDAccessEx("nbrRencontres Raised SQLException during the connection\n" + ex.getMessage());
+        }
+        return nbRencontres;
+    }
+    
+    public int nbrRencontresJouer(Code codeJoueur) throws BDAccessEx {
+        int codeJoueur2 = codeJoueur.getValue();
+        String rRencontresJouees = "SELECT COUNT(codeRencontre) From Rencontre WHERE (joueur1 = ? OR joueur2 = ?) AND NOT(vainqueur =?)";
+        ResultSet resultat;
+        int nbRencontres = 0;
+
+        // Connexion à la BD
+        try {
+            Connection conn = null;
+            conn = DriverManager.getConnection(URL, USER, PASSWD);
+            if (conn == null) {
+                throw new BDAccessEx("connexion échouée");
+            } else {
+                System.out.println("Connection ok");
+            }
+            try {
+                conn.setAutoCommit(false);
+                conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+
+                //préparation de la requète
+                PreparedStatement pstmt = conn.prepareStatement(rRencontresJouees);
+                pstmt.setInt(1, codeJoueur2);
+                pstmt.setInt(2, codeJoueur2);
+                pstmt.setInt(3, 0);
+
+                resultat = pstmt.executeQuery();
+                resultat = pstmt.executeQuery();
+                resultat.next();
+                nbRencontres = resultat.getInt(1);
+                pstmt.close();
+                resultat.close();
+//                System.out.println("Le nombre de rencontres dans le tour " + codeTour + " est : " + nbRencontres);
+            } catch (SQLException ex) {//si la transaction echoue
+                conn.rollback();
+                conn.close();
+                System.err.println(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new BDAccessEx("nbrRencontres Raised SQLException during the connection\n" + ex.getMessage());
+        }
+        return nbRencontres;
     }
 
     public Code lastCodeBD() throws BDAccessEx {//renvoie le dernier code joueur utilisé dans la base pour pouvoiren creer un nouveau
