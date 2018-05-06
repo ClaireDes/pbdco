@@ -233,8 +233,40 @@ public class ControleurPartie {
 
 
 
-    public void procedureAbandon() {
-        //Fait recommencer le joueur qui utilise cette vue : "joueur"
+    public void procedureAbandon(Code codeRencontre, String codeTour) throws BDAccessEx {
+        //Fait abandonner le joueur qui utilise cette vue : "joueur"
+        String trans = "UPDATE Rencontre SET vainqueur=? WHERE codeRencontre=? AND codeTour=?";
+        String trans2 = "DELETE FROM Joueur WHERE codeJoueur=?";
+        Connection conn = null;
+        // Connexion à la BD
+        try {
+            conn = DriverManager.getConnection("jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1", "grelliel", "grelliel");
+            if (conn == null) {
+                throw new BDAccessEx("connexion échouée");
+            } else {
+                System.out.println("Connection ok");
+            }
+
+            try {
+                Code codeJoueur=this.joueur.getCodeJoueur();
+                Code codeJoueur2=this.adversaire.getCodeJoueur();
+                PreparedStatement pstmt = conn.prepareStatement(trans);
+                pstmt.setInt(1,codeJoueur2.getValue());
+                pstmt.setInt(2,codeRencontre.getValue());
+                pstmt.setString(3, codeTour);
+                pstmt.setInt(4, codeJoueur.getValue());
+                
+                conn.commit();
+                conn.close();
+                System.out.println("Abandon du joueur" + codeJoueur.getValue());
+            } catch (SQLException ex) {//si la transaction echoue
+                conn.rollback();
+                conn.close();
+                System.err.println(ex.getMessage());
+               }
+        } catch (SQLException ex) {
+            throw new BDAccessEx("procedureAbandon Raised SQLException during the connection\n" + ex.getMessage());
+            }
     }
 
     public void procedureRecommencer() {
@@ -265,14 +297,14 @@ public class ControleurPartie {
                 pstmt.setString(6, codeTour);
                 conn.commit();
                 conn.close();
-                System.out.println("enregistrement des différentes pieces dans la base");
+                System.out.println("deplacement de la piece : "+ piece.getNom());
             } catch (SQLException ex) {//si la transaction echoue
                 conn.rollback();
                 conn.close();
                 System.err.println(ex.getMessage());
                }
         } catch (SQLException ex) {
-            throw new BDAccessEx("initPlateau Raised SQLException during the connection\n" + ex.getMessage());
+            throw new BDAccessEx("coupSuivant Raised SQLException during the connection\n" + ex.getMessage());
             }
 
     }
