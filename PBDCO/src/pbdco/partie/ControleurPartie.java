@@ -270,9 +270,41 @@ public class ControleurPartie {
             }
     }
 
-    public void procedureRecommencer() {
+    public void procedureRecommencer(String codeTour, Code codeRencontre) throws BDAccessEx {
         //Fait recommencer le joueur qui utilise cette vue : "joueur"
+        String trans = "DELETE FROM Coup WHERE codeTour=? AND codeRencontre=?";
+        String trans2 = "DELETE FROM Piece WHERE codeTour=? AND codeRencontre=?";
+        Connection conn = null;
+        // Connexion à la BD
+        try {
+            conn = DriverManager.getConnection("jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1", "grelliel", "grelliel");
+            if (conn == null) {
+                throw new BDAccessEx("connexion échouée");
+            } else {
+                System.out.println("Connection ok");
+            }
+
+            try {
+                PreparedStatement pstmt = conn.prepareStatement(trans);
+                pstmt.setInt(2,codeRencontre.getValue());
+                pstmt.setString(1, codeTour);
+                pstmt = conn.prepareStatement(trans2);
+                pstmt.setString(1, codeTour);
+                pstmt.setInt(2, codeRencontre.getValue());
+                initPlateau(codeTour, codeRencontre);
+                conn.commit();
+                conn.close();
+                System.out.println("la rencontre "+codeRencontre.getValue()+" recommence");
+            } catch (SQLException ex) {//si la transaction echoue
+                conn.rollback();
+                conn.close();
+                System.err.println(ex.getMessage());
+               }
+        } catch (SQLException ex) {
+            throw new BDAccessEx("procedureRecommencer Raised SQLException during the connection\n" + ex.getMessage());
+            }
     }
+
 
     public void coupSuivant(Coup coup, Piece piece, String codeTour, Code codeRencontre) throws BDAccessEx { //Pour lire une partie
         //Joue le coup suivant de la partie en lecture
