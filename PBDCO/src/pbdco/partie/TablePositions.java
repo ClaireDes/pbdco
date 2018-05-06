@@ -36,6 +36,10 @@ public class TablePositions {
         }
     }
     
+    public Position getPosition(int number){
+        return echiquier[number];
+    }
+    
     public void init(){
         // creation de la table des positions
         for (int lig=0; lig<8;lig++){

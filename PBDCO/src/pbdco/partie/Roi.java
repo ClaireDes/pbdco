@@ -13,7 +13,7 @@ public class Roi extends Piece{
     private String nomPiece = "roi";
     private Boolean echec = false;
     
-    public Roi(Position position, Boolean c){
+    public Roi(Position position, int c){
         this.nomPiece="roi";
         this.updatePosition(position);
         this.setCouleur(c);
