@@ -70,6 +70,7 @@ public class Joueur implements Modele{
     }
     
     public Code[] getRencontresAJouer(){
+        System.out.println("JE SUIS DANS GET RENCONTRE A JOUER ");
         return this.rencontresAJouer;
     }
     

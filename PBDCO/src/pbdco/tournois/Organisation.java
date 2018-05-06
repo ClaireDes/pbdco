@@ -55,6 +55,8 @@ public abstract class Organisation {
             this.quelleTour();
             this.nbrParticipants = this.fabriqueOrga.nbrDeJoueurs();
             this.nbrRencontres = this.fabriqueOrga.nbrRencontres(tour);
+            this.loadJoueurs();
+
         }
         
         

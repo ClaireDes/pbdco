@@ -105,6 +105,7 @@ public class FabriqueDeJoueur extends FabriqueTransaction {
 
     public Joueur LoadFromBD(Code code) throws BDAccessEx {//remplace les données du joueur de code joueur.codeJoueur par celles de joueur
         Joueur J;
+        System.out.println("JE SUIS DANS LOAD FROM BD");
         int codeJoueur = code.getValue();
         String nom, prenom, adresse;
         Code rencontresAJouer[] = {};

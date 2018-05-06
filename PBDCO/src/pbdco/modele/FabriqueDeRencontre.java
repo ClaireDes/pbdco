@@ -167,7 +167,7 @@ public class FabriqueDeRencontre extends FabriqueTransaction {
 
     public void creerDansBD(Rencontre rencontre) throws BDAccessEx {
 
-        String requete = "INSERT INTO Rencontre(codeRencontre, codeTour,Joueur1,joueur2,Blanc,Noir) VALUES(?,?,?,?,?,?)";
+        String requete = "INSERT INTO Rencontre(codeRencontre, codeTour,joueur1,joueur2,blanc,noir, vainqueur) VALUES(?,?,?,?,?,?,?)";
         int nbModif;
         // Connexion à la BD
         try {

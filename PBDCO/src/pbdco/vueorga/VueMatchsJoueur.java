@@ -220,12 +220,14 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
         
         Code codeJoueur = new Code(Integer.parseInt(numeroJoueur.getText()));
         try {
+            System.out.println("j'ai appuyer sur ok");
             String[][] rencontresAJouer = new Tournoi().recupRencontresAJouer(codeJoueur);
             String[][] rencontresJouees = new Tournoi().recupRencontresDejaJouer(codeJoueur);
-            for(String[] joueur : new Tournoi().recupRencontresAJouer(codeJoueur)) {
+            for(String[] joueur : rencontresAJouer) {
+                System.out.println("j'affiche ce qui est a jouer");
                 joueursAAfronter.addItem(joueur[0]+joueur[1]); //Affiche nom et prénom dans le menu déroulant
             }
-            for(String[] joueur : new Tournoi().recupRencontresDejaJouer(codeJoueur)) {
+            for(String[] joueur : rencontresJouees) {
                 joueursAAfronter.addItem(joueur[0]+joueur[1]); //Affiche nom et prénom dans le menu déroulant
             }
         } catch (BDAccessEx ex) {
