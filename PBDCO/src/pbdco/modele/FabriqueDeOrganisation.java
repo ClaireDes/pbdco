@@ -74,16 +74,42 @@ public class FabriqueDeOrganisation {
         return nbJoueurs;
     }
 
-    public String quelTour() {
-
-        //;;;;;
-        /*if pas de code correspondant , renvoie null ou exception
-                
-         sinon
+    public String quelTour() throws BDAccessEx{
+        String requete = "SELECT CASE\n" +
+"WHEN Count(CodeTour)=1 THEN 'qualif'\n" +
+"WHEN Count(CodeTour)=2 THEN 'quart'\n" +
+"WHEN Count(CodeTour)=3 THEN 'demi'\n" +
+"WHEN Count(CodeTour)=4 THEN 'finale'\n" +
+"END AS Tour_Courant\n" +
+"FROM Tour;";
+        ResultSet resultat;
+        String tour = "" ;
         
-         renvoie le tour correspondant au code courant*/
-        throw new UnsupportedOperationException("Not supported yet.");
+         // Connexion à la BD
+        try{
+             Connection conn = null;
+            conn = DriverManager.getConnection(URL, USER, PASSWD);
+            if (conn==null){throw new BDAccessEx("connexion échouée");}
+            else{ System.out.println("Connection ok");}
+             try{
+            //préparation de la requète
+            Statement stmt = conn.createStatement();
+            resultat = stmt.executeQuery(requete);
 
+            tour = resultat.getString(1);
+            
+            conn.commit();
+            conn.close();
+           System.out.println("Le tour actuel est : " + tour);         
+             }catch(  SQLException ex){//si la transaction echoue
+                 conn.rollback();
+                conn.close();
+                 System.err.println(ex.getMessage());
+             }
+        }catch(  SQLException ex){
+            throw new BDAccessEx("quelTour Raised SQLException during the connection\n"+ ex.getMessage());
+        }
+         return tour;
     }
 
     /**
