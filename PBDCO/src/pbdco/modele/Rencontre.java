@@ -16,14 +16,14 @@ import pbdco.Code;
  */
 public class Rencontre implements Modele{
 
-    Joueur[] joueurs = {null,null};
-    String codeTour;
-    Code codeRencontre;
-    Code codeJoueur1,codeJoueur2;
-    int terminee; //0 = partie pas terminée,1= joueur[0] a gagné, 2= joueur[1]a gagné, 3=personne n'a gagné
-    int blanc ; // 1 => joueur 1 blanc, 2 => joueur2 blanc
-    int grille[][];
-    FabriqueDeRencontre fabRencontre;
+    private Joueur[] joueurs = {null,null};
+    private String codeTour;
+    private Code codeRencontre;
+    private Code codeJoueur1,codeJoueur2;
+    private int terminee; //0 = partie pas terminée,1= joueur[0] a gagné, 2= joueur[1]a gagné, 3=personne n'a gagné
+    private int blanc ; // 1 => joueur 1 blanc, 2 => joueur2 blanc
+    private int grille[][];
+    private FabriqueDeRencontre fabRencontre;
    
     
     /**
@@ -56,14 +56,54 @@ public class Rencontre implements Modele{
         this.fabRencontre = fabRencontre;
         this.joueurs[0]=joueur1;
         this.joueurs[1]=joueur2;
-        this.codeJoueur1=this.joueurs[0].codeJoueur;
-        this.codeJoueur2=this.joueurs[1].codeJoueur;
+        this.codeJoueur1=this.joueurs[0].getCode();
+        this.codeJoueur2=this.joueurs[1].getCode();
         this.codeTour = codeTour;
         this.codeRencontre = new Code(fabRencontre.lastCodeBD().getValue()+1);
         this.grille= new int[8][8];
         this.terminee = 0;
        choisitNoirBlanc();
        enregistreNouvelleRencontre();
+    }
+    
+    public int getBlanc(){
+        return this.blanc;
+    }
+    
+    public void setBlanc(int b){
+        this.blanc=b;
+    }
+    
+    public int getTerminee(){
+        return this.terminee;
+    }
+    
+    public void setTerminee(int t){
+        this.terminee=t;
+    }
+    
+    public Code getCodeRencontre(){
+        return this.codeRencontre;
+    }
+    
+    public String getCodeTour(){
+        return this.codeTour;
+    }
+    
+    public void setCodeTour(String code){
+        this.codeTour = code;
+    }
+    
+    public Joueur[] getJoueurs(){
+        return this.joueurs;
+    }
+    
+    public void setCodeJoueur1(Code code){
+        this.codeJoueur1=code;
+    }
+    
+    public void setCodeJoueur2(Code code){
+        this.codeJoueur2=code;
     }
     
     void enregistreNouvelleRencontre() throws BDAccessEx{
