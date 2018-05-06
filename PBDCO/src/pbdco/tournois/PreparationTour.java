@@ -27,6 +27,7 @@ public class PreparationTour extends Organisation{
     public void creeRencontre() throws BDAccessEx{
         switch(this.getTour()){
             case "qualif": 
+                this.loadAllJoueurs();
                 Set<Entry<Integer, Joueur>> setHM1 = this.getListJoueur().entrySet();
                 Set<Entry<Integer, Joueur>> setHM2 = this.getListJoueur().entrySet();
                 Iterator <Entry<Integer, Joueur>> it1 = setHM1.iterator();

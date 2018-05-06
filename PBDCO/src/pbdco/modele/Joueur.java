@@ -65,6 +65,14 @@ public class Joueur implements Modele{
         return this.adresse;
     }
     
+    public Code[] getRencontresJouees(){
+        return this.rencontresJouees;
+    }
+    
+    public Code[] getRencontresAJouer(){
+        return this.rencontresAJouer;
+    }
+    
     /**
      * 
      * @param nom

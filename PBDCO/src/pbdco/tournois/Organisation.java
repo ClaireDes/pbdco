@@ -43,7 +43,7 @@ public abstract class Organisation {
     
     public Organisation(boolean bool) throws BDAccessEx{
         // crée un nouveau tournoi
-        if(bool = true){
+        if(bool == true){
             this.fabriqueOrga = new FabriqueDeOrganisation();
             this.tour = "qualif";
             this.fabriqueOrga.creerTournois();
@@ -54,7 +54,6 @@ public abstract class Organisation {
             this.tour = this.fabriqueOrga.quelTour();
             this.nbrParticipants = this.fabriqueOrga.nbrDeJoueurs();
             this.nbrRencontres = this.fabriqueOrga.nbrRencontres(tour);
-            listeDesJoueurs = fabriqueOrga.loadAllJoueurs();
         }
         
         

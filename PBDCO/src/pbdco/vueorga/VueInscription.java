@@ -189,6 +189,7 @@ public class VueInscription extends javax.swing.JFrame {
         dispose();
         //TODO
         try {
+            System.out.println("je vais ajouter");
             Tournoi tourn = new Tournoi();
             tourn.ajoutParticipant(jTextField1.getText(), jTextField2.getText(), jTextField3.getText());
             java.awt.EventQueue.invokeLater(new Runnable() {
