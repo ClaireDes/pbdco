@@ -42,17 +42,17 @@ public class FabriqueDeJoueur extends FabriqueTransaction {
             try {
                 //préparation de la requète
                 PreparedStatement pstmt = conn.prepareStatement("insert into Joueur VALUES(?,?,?,?)");
-                pstmt.setInt(1, joueur.codeJoueur.getValue());
-                pstmt.setString(2, joueur.prenom);
-                pstmt.setString(3, joueur.nom);
-                pstmt.setString(4, joueur.adresse);
+                pstmt.setInt(1, joueur.getCodeJoueur().getValue());
+                pstmt.setString(2, joueur.getPrenom());
+                pstmt.setString(3, joueur.getNom());
+                pstmt.setString(4, joueur.getAdresse());
 
                 pstmt.executeQuery();
 
                 pstmt.close();
                 conn.close();
 
-                System.out.println("Enregistrement du joueur " + joueur.codeJoueur.getValue() + " effectué");
+                System.out.println("Enregistrement du joueur " + joueur.getCodeJoueur().getValue() + " effectué");
 
             } catch (SQLException ex) {//si la transaction echoue
                 conn.close();
@@ -65,7 +65,7 @@ public class FabriqueDeJoueur extends FabriqueTransaction {
 
     public void MAJBD(Joueur joueur) throws BDAccessEx {//remplace les données du joueur de code joueur.codeJoueur par celles de joueur
 
-        int codeJoueur = joueur.codeJoueur.getValue();
+        int codeJoueur = joueur.getCodeJoueur().getValue();
         String requete = "UPDATE joueurs Set nom = ?, prenom = ?, adresse = ? WHERE codeJoueur = ?";
         int champsModif;
         // Connexion à la BD
@@ -80,9 +80,9 @@ public class FabriqueDeJoueur extends FabriqueTransaction {
             try {
                 //préparation de la requète
                 PreparedStatement pstmt = conn.prepareStatement(requete);
-                pstmt.setString(1, joueur.nom);
-                pstmt.setString(2, joueur.prenom);
-                pstmt.setString(3, joueur.adresse);
+                pstmt.setString(1, joueur.getNom());
+                pstmt.setString(2, joueur.getPrenom());
+                pstmt.setString(3, joueur.getAdresse());
                 pstmt.setInt(3, codeJoueur);
 
                 champsModif = pstmt.executeUpdate();
@@ -93,10 +93,10 @@ public class FabriqueDeJoueur extends FabriqueTransaction {
                 pstmt.close();
                 conn.close();
 
-                System.out.println("MAJ du joueur " + joueur.codeJoueur.getValue() + "effectuée");
+                System.out.println("MAJ du joueur " + joueur.getCodeJoueur().getValue() + "effectuée");
             } catch (SQLException ex) {//si la transaction echoue
                 conn.close();
-                System.out.println("MAJ du joueur " + joueur.codeJoueur.getValue() + "échouée" + ex.getMessage());
+                System.out.println("MAJ du joueur " + joueur.getCodeJoueur().getValue() + "échouée" + ex.getMessage());
             }
         } catch (SQLException ex) {
             throw new BDAccessEx("MAJJoueur Raised SQLException during the connection");

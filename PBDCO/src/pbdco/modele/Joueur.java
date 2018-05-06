@@ -10,11 +10,12 @@ import pbdco.Code;
 
 
 public class Joueur implements Modele{
-    String nom;
-    String prenom;
-    String adresse;
-    Code codeJoueur;
-    List rencontresCourantes;
+    private String nom;
+    private String prenom;
+    private String adresse;
+    private Code codeJoueur;
+    private List rencontresAJouer;
+    private List rencontresJouees;
     int victoiresTournoisCourant;
     FabriqueDeJoueur fabJoueur;
     
@@ -34,7 +35,7 @@ public class Joueur implements Modele{
             String prenom,
             Code codeJoueur, 
             String adresse,
-            List rencontresCourantes,
+            List rencontresJouees, List rencontresAJouer,
             int victoiresTournoisCourant,
             FabriqueDeJoueur fab){
         
@@ -42,9 +43,26 @@ public class Joueur implements Modele{
         this.prenom =prenom ;
         this.adresse=adresse;
         this.codeJoueur = codeJoueur;
-        this.rencontresCourantes=rencontresCourantes;
+        this.rencontresJouees=rencontresJouees;
+        this.rencontresAJouer = rencontresAJouer;
         this.victoiresTournoisCourant=victoiresTournoisCourant;
         this.fabJoueur = fab;
+    }
+    
+    public Code getCode(){
+        return this.codeJoueur;
+    }
+    
+    public String getNom(){
+        return this.nom;
+    }
+    
+    public String getPrenom(){
+        return this.prenom;
+    }
+    
+    public String getAdresse(){
+        return this.adresse;
     }
     
     /**
@@ -61,7 +79,8 @@ public class Joueur implements Modele{
         this.nom = nom;
         this.prenom =prenom ;
         this.adresse = adresse;
-        this.rencontresCourantes = new ArrayList();
+        this.rencontresAJouer = new ArrayList();
+        this.rencontresJouees = new ArrayList();
         this.victoiresTournoisCourant = 0;
 
         this.fabJoueur = fab;//
