@@ -74,33 +74,37 @@ public class FabriqueDeOrganisation {
         return nbJoueurs;
     }
 
-    public String quelTour() throws BDAccessEx{
-        String requete = "SELECT CASE\n" +
-"WHEN Count(CodeTour)=1 THEN 'qualif'\n" +
-"WHEN Count(CodeTour)=2 THEN 'quart'\n" +
-"WHEN Count(CodeTour)=3 THEN 'demi'\n" +
-"WHEN Count(CodeTour)=4 THEN 'finale'\n" +
-"END AS Tour_Courant\n" +
-"FROM Tour;";
+    public int quelTour() throws BDAccessEx{
+        String requete = "SELECT Count(codeTour) FROM Tour";
         ResultSet resultat;
-        String tour = "" ;
-        
+        String tour = "";
+        int res=0;
+
          // Connexion à la BD
         try{
              Connection conn = null;
             conn = DriverManager.getConnection(URL, USER, PASSWD);
             if (conn==null){throw new BDAccessEx("connexion échouée");}
             else{ System.out.println("Connection ok");}
-             try{
+            try{
             //préparation de la requète
-            Statement stmt = conn.createStatement();
-            resultat = stmt.executeQuery(requete);
-
-            tour = resultat.getString(1);
+            PreparedStatement pstmt; 
+            pstmt = conn.prepareStatement(requete);
+            resultat = pstmt.executeQuery();
+            resultat.next();
             
+            res=resultat.getInt(1);
+//            if (res==1)
+//                tour = "qualif";
+//            else if (res==2)
+//                tour = "quart";
+//            else if(res==3)
+//                tour="demi";
+//            else
+//                tour="finale";
             conn.commit();
             conn.close();
-           System.out.println("Le tour actuel est : " + tour);         
+           System.out.println("Le tour actuel est : " + res);         
              }catch(  SQLException ex){//si la transaction echoue
                  conn.rollback();
                 conn.close();
@@ -109,7 +113,7 @@ public class FabriqueDeOrganisation {
         }catch(  SQLException ex){
             throw new BDAccessEx("quelTour Raised SQLException during the connection\n"+ ex.getMessage());
         }
-         return tour;
+         return res;
     }
 
     /**

@@ -51,7 +51,7 @@ public abstract class Organisation {
         }
         else{// charge le tournoi en cours
             this.fabriqueOrga = new FabriqueDeOrganisation();
-            this.tour = this.fabriqueOrga.quelTour();
+            this.quelleTour();
             this.nbrParticipants = this.fabriqueOrga.nbrDeJoueurs();
             this.nbrRencontres = this.fabriqueOrga.nbrRencontres(tour);
         }
@@ -116,4 +116,19 @@ public abstract class Organisation {
         listeDesJoueurs = fabriqueOrga.loadAllJoueurs();
     }
     
+    public void quelleTour() throws BDAccessEx{
+        int res = this.getFabriqueOrga().quelTour();
+        if (res==1){
+            this.tour = "qualif";
+        }
+        else if (res==2){
+            this.tour = "quart";
+        }
+        else if(res==3){
+            this.tour="demi";
+        }
+        else{
+            this.tour="finale";
+        }
+    }
 }
