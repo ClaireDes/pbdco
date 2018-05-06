@@ -17,12 +17,12 @@ public class TablePositions {
         for (int lig=0; lig<8;lig++){
             for (int col=0;col<8;col++){
                 if(lig < 2 || lig >5){ //cases occupées initialement
-                    this.echiquier[lig+col].setPosition(lig+1, col+1);
-                    this.echiquier[lig+col].setState(true);
+                    this.echiquier[8*lig+col].setPosition(lig+1, col+1);
+                    this.echiquier[8*lig+col].setState(true);
                 }
                 else { //cases libres
-                    this.echiquier[lig+col].setPosition(lig+1, col+1);
-                    this.echiquier[lig+col].setState(true);
+                    this.echiquier[8*lig+col].setPosition(lig+1, col+1);
+                    this.echiquier[8*lig+col].setState(false);
                 }
             }
         }      
