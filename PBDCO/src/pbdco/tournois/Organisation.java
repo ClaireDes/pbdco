@@ -24,11 +24,11 @@ public abstract class Organisation {
     private int nbrParticipants;
     private int nbrRencontres;
     private Map<Integer,Joueur> listeDesJoueurs;
-    private FabriqueDeOrganisation fabriqueOrga;
-    private FabriqueDeJoueur fabJoueur = new FabriqueDeJoueur();
-    private FabriqueDePiece fabPiece = new FabriqueDePiece();
-    private FabriqueDeCoups fabCoup = new FabriqueDeCoups();
-    private FabriqueDeRencontre fabRenc = new FabriqueDeRencontre(fabJoueur, fabPiece, fabCoup);
+    private final FabriqueDeOrganisation fabriqueOrga;
+    private final FabriqueDeJoueur fabJoueur = new FabriqueDeJoueur();
+    private final FabriqueDePiece fabPiece = new FabriqueDePiece();
+    private final FabriqueDeCoups fabCoup = new FabriqueDeCoups();
+    private final FabriqueDeRencontre fabRenc = new FabriqueDeRencontre(fabJoueur, fabPiece, fabCoup);
 
     
 //    public Organisation(Code codeTournoi){
