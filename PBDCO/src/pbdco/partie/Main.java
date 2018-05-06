@@ -6,7 +6,7 @@
 package pbdco.partie;
 
 import pbdco.vuejeu.JeuInterface;
-import pbdco.vuejeu.VueJoueur;
+//import pbdco.vuejeu.VueJoueur;
 
 /**
  *
@@ -27,7 +27,7 @@ public class Main {
         //TESTS MARCHENT
         
         new JeuInterface().setVisible(true);
-        new VueJoueur().setVisible(true);
+        //new VueJoueur().setVisible(true);
             
         
     }
