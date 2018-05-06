@@ -15,22 +15,6 @@ public class ControleurPartie {
 
     private EtatsPartie etat;
     
-    public void loadPositions(){
-        Position[] pos = new Position[64];
-        // creation de la table des positions
-        for (int lig=0; lig<8;lig++){
-            for (int col=0;col<8;col++){
-                if(lig < 2 || lig >5){ //cases occupées initialement
-                    pos[lig+col].setPosition(lig+1, col+1);
-                    pos[lig+col].setState(true);
-                }
-                else { //cases libres
-                    pos[lig+col].setPosition(lig+1, col+1);
-                    pos[lig+col].setState(true);
-                }
-            }
-        }      
-    }
     
     public void procedureAbandon() {
         //Fait recommencer le joueur qui utilise cette vue : "joueur"
@@ -48,16 +32,20 @@ public class ControleurPartie {
         //Informe ses observateurs, comme la vue
     }
     
+    public void pieceABouger(int position) {
+        
+    }
+    
     public static void main(String[] args) {
         ControleurPartie controleur = new ControleurPartie("Joueur 1", "Joueur 2", new Code(123456789), EtatsPartie.JOUER_RENCONTRE);
     }
     
     public ControleurPartie(String infoJoueur1, String infoJoueur2, Code codeRencontre, EtatsPartie affronterOuRejouer) {
-        new JeuInterface().setVisible(true);
+        new JeuInterface(this).setVisible(true);
         etat = affronterOuRejouer;
         
-        if(etat = EtatsPartie.REJOUER_PARTIE) System.out.println("Ce cas n'est pas traité");
-        else if (etat = EtatsPartie.JOUER_RENCONTRE) {
+        if(etat == EtatsPartie.REJOUER_PARTIE) System.out.println("Ce cas n'est pas traité");
+        else if (etat == EtatsPartie.JOUER_RENCONTRE) {
             new VueJoueur(infoJoueur1, infoJoueur2).setVisible(true);
             etat = EtatsPartie.BLANC_JOUE;
         }

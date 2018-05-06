@@ -12,7 +12,7 @@ package pbdco.partie;
 public class Position {
     private int x=1;
     private int y=1;
-    private Boolean state; //true pour case occupée, false sinon
+    private int state; //0 pour case vide, 1 pour case avec pièce blanche, 2 pour noir
     private Boolean echec = false;
     
     public int getX(){
@@ -23,7 +23,7 @@ public class Position {
         return this.y;
     }
  
-    public Boolean getState(){
+    public int getState(){
         return this.state;
     }
     
@@ -40,7 +40,7 @@ public class Position {
     public Piece getPiece(){
         // A FAIRE 
         // requete pour avoir piece a une position
-        Tour tour = new Tour(new Position(1,1,true),true);//à enlever ensuite une fois que c'est complété au dessus
+        Tour tour = new Tour(new Position(1,1, 1),true);//à enlever ensuite une fois que c'est complété au dessus
         return tour;//à enlever ensuite une fois que c'est complété au dessus
     }
     
@@ -57,7 +57,7 @@ public class Position {
         this.y = y;
     }
     
-    public void setState(Boolean state){
+    public void setState(int state){
         this.state = state;
     }
     
@@ -65,7 +65,7 @@ public class Position {
         this.echec = echec;
     }
     
-    public Position(int x, int y, Boolean state){
+    public Position(int x, int y, int state){
         this.x = x;
         this.y = y;
         this.state = state;
