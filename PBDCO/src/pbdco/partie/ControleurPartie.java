@@ -27,4 +27,8 @@ public class ControleurPartie {
     protected void informe() {
         //Informe ses observateurs, comme la vue
     }
+    
+    public static void main(String[] args) {
+        
+    }
 }

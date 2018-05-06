@@ -7,7 +7,9 @@ package pbdco.vueorga;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import pbdco.BDAccessEx;
+import pbdco.Code;
 import pbdco.tournois.Tournoi;
 
 /**
@@ -190,7 +192,7 @@ public class VueInscription extends javax.swing.JFrame {
         //TODO
         try {
             Tournoi tourn = new Tournoi();
-            tourn.ajoutParticipant(jTextField1.getText(), jTextField2.getText(), jTextField3.getText());
+            Code codeCree = tourn.ajoutParticipant(jTextField1.getText(), jTextField2.getText(), jTextField3.getText());
             java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -199,7 +201,9 @@ public class VueInscription extends javax.swing.JFrame {
                     Logger.getLogger(VueCreation.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        });
+            String message = "Notez votre code joueur :"+String.valueOf(codeCree.getValue());
+            //JOptionPane.
+            });
         } catch (BDAccessEx ex) {
             Logger.getLogger(VueInscription.class.getName()).log(Level.SEVERE, null, ex);
         }
