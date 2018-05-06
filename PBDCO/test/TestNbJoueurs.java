@@ -1,5 +1,8 @@
 
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import pbdco.BDAccessEx;
 import pbdco.modele.FabriqueDeOrganisation;
 
 /*
@@ -15,7 +18,13 @@ import pbdco.modele.FabriqueDeOrganisation;
 public class TestNbJoueurs {
     
         public static void main(String[] args) throws SQLException {
-            FabriqueDeOrganisation fabO = new FabriqueDeOrganisation();
+            try {
+                FabriqueDeOrganisation fabO = new FabriqueDeOrganisation();
+                int n = fabO.nbrDeJoueurs();
+                System.out.println("Nombre de joueurs : "+n);
+            } catch (BDAccessEx ex) {
+                Logger.getLogger(TestNbJoueurs.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
         }
     
