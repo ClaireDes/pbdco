@@ -6,7 +6,7 @@
 package pbdco.partie;
 
 import pbdco.vuejeu.JeuInterface;
-import pbdco.vuejeu.VueJoueur;
+//import pbdco.vuejeu.VueJoueur;
 
 /**
  *
