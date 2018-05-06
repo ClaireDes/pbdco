@@ -265,7 +265,6 @@ public class ControleurPartie {
             new VueJoueur(infoJoueur1, infoJoueur2).setVisible(true);
             etat = EtatsPartie.BLANC_JOUE;
         }
-        new VueJoueur(infoJoueur1, infoJoueur2).setVisible(true);
 
     }
 }
