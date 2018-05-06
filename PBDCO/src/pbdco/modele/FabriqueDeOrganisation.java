@@ -75,13 +75,7 @@ public class FabriqueDeOrganisation {
     }
 
     public String quelTour() throws BDAccessEx{
-        String requete = "SELECT CASE\n" +
-"WHEN Count(CodeTour)=1 THEN 'qualif'\n" +
-"WHEN Count(CodeTour)=2 THEN 'quart'\n" +
-"WHEN Count(CodeTour)=3 THEN 'demi'\n" +
-"WHEN Count(CodeTour)=4 THEN 'finale'\n" +
-"END AS Tour_Courant\n" +
-"FROM Tour;";
+        String requete = "SELECT Count(codeTour) FROM Tour;";
         ResultSet resultat;
         String tour = "" ;
         
@@ -95,9 +89,15 @@ public class FabriqueDeOrganisation {
             //préparation de la requète
             Statement stmt = conn.createStatement();
             resultat = stmt.executeQuery(requete);
-
-            tour = resultat.getString(1);
-            
+            int res=resultat.getInt(1);
+            if (res==1)
+                tour = "qualif";
+            else if (res==2)
+                tour = "quart";
+            else if(res==3)
+                tour="demi";
+            else
+                tour="finale";
             conn.commit();
             conn.close();
            System.out.println("Le tour actuel est : " + tour);         
