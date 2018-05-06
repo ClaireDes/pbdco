@@ -104,7 +104,6 @@ public class FabriqueDeOrganisation {
 //                tour="finale";
             conn.commit();
             conn.close();
-           System.out.println("Le tour actuel est : " + res);         
              }catch(  SQLException ex){//si la transaction echoue
                  conn.rollback();
                 conn.close();

@@ -111,7 +111,6 @@ public class FabriqueDeJoueur extends FabriqueTransaction {
         Inscription inscript = new Inscription(false);
         int verif = inscript.getNbrRencontres();
         Code[] rencontresAJouer = new Code[verif];
-        System.out.println(verif);
         Code[] rencontresJouees = new Code[verif];
         int nbVictoires;
 
