@@ -149,7 +149,6 @@ public class VueCreation extends javax.swing.JFrame {
 
     private void commencerTournoisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commencerTournoisActionPerformed
         try {
-            dispose();
             Tournoi tourn = new Tournoi();
             tourn.commencerLeTournoi();
             java.awt.EventQueue.invokeLater(new Runnable() {
@@ -161,6 +160,8 @@ public class VueCreation extends javax.swing.JFrame {
                     }
                 }
             });
+            dispose();
+
         } catch (BDAccessEx ex) {
             Logger.getLogger(VueCreation.class.getName()).log(Level.SEVERE, null, ex);
         }
