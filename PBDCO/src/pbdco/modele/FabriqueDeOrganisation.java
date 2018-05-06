@@ -53,7 +53,7 @@ public class FabriqueDeOrganisation {
 
                 //préparation de la requète
                 PreparedStatement pstmt;
-                
+
                 pstmt = conn.prepareStatement(requete);
                 resultat = pstmt.executeQuery();
 
@@ -74,26 +74,33 @@ public class FabriqueDeOrganisation {
         return nbJoueurs;
     }
 
-    public int quelTour() throws BDAccessEx{
+    public int quelTour() throws BDAccessEx {
         String requete = "SELECT Count(codeTour) FROM Tour";
         ResultSet resultat;
         String tour = "";
-        int res=0;
+        int res = 0;
 
-         // Connexion à la BD
-        try{
-             Connection conn = null;
+        // Connexion à la BD
+        try {
+            Connection conn = null;
             conn = DriverManager.getConnection(URL, USER, PASSWD);
-            if (conn==null){throw new BDAccessEx("connexion échouée");}
-            else{ System.out.println("Connection ok");}
-            try{
-            //préparation de la requète
-            PreparedStatement pstmt; 
-            pstmt = conn.prepareStatement(requete);
-            resultat = pstmt.executeQuery();
-            resultat.next();
-            
-            res=resultat.getInt(1);
+            if (conn == null) {
+                throw new BDAccessEx("connexion échouée");
+            } else {
+                System.out.println("Connection ok");
+            }
+            try {
+
+                conn.setAutoCommit(false);
+                conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+
+                //préparation de la requète
+                PreparedStatement pstmt;
+                pstmt = conn.prepareStatement(requete);
+                resultat = pstmt.executeQuery();
+                resultat.next();
+
+                res = resultat.getInt(1);
 //            if (res==1)
 //                tour = "qualif";
 //            else if (res==2)
@@ -102,17 +109,17 @@ public class FabriqueDeOrganisation {
 //                tour="demi";
 //            else
 //                tour="finale";
-            conn.commit();
-            conn.close();
-             }catch(  SQLException ex){//si la transaction echoue
-                 conn.rollback();
+                conn.commit();
                 conn.close();
-                 System.err.println(ex.getMessage());
-             }
-        }catch(  SQLException ex){
-            throw new BDAccessEx("quelTour Raised SQLException during the connection\n"+ ex.getMessage());
+            } catch (SQLException ex) {//si la transaction echoue
+                conn.rollback();
+                conn.close();
+                System.err.println(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new BDAccessEx("quelTour Raised SQLException during the connection\n" + ex.getMessage());
         }
-         return res;
+        return res;
     }
 
     /**
@@ -168,7 +175,7 @@ public class FabriqueDeOrganisation {
             throw new BDAccessEx("loadAllJoueur Raised SQLException during the connection");
         }
     }
-    
+
     public Code[] loadJoueurs() throws BDAccessEx {
         Code[] joueurs = new Code[this.nbrDeJoueurs()];
         FabriqueDeJoueur fabJoueur = new FabriqueDeJoueur();
@@ -190,7 +197,7 @@ public class FabriqueDeOrganisation {
                 PreparedStatement pstmt = conn.prepareStatement(requete);
                 resultat = pstmt.executeQuery();
                 while (resultat.next()) {//Ajoute les joueurs de la BD dans le Set avec la methode déjà écrite dans Fabrique de Joueur
-                    joueurs[resultat.getInt("codeJoueur")-1] = new Code(resultat.getInt("codeJoueur"));
+                    joueurs[resultat.getInt("codeJoueur") - 1] = new Code(resultat.getInt("codeJoueur"));
                 }
 
                 resultat.close();
@@ -266,7 +273,7 @@ public class FabriqueDeOrganisation {
     }
 
     public int nbrRencontres(String codeTour) throws BDAccessEx {
-        String requete = "SELECT COUNT(codeRencontre) FROM Rencontre WHERE codeTour='"+ codeTour +"'";
+        String requete = "SELECT COUNT(codeRencontre) FROM Rencontre WHERE codeTour='" + codeTour + "'";
         ResultSet resultat;
         int nbRencontres = 0;
 
@@ -284,12 +291,12 @@ public class FabriqueDeOrganisation {
                 conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
 
                 //préparation de la requète
-                PreparedStatement pstmt ;
+                PreparedStatement pstmt;
                 pstmt = conn.prepareStatement(requete);
                 resultat = pstmt.executeQuery();
 
                 resultat.next();
-                
+
                 nbRencontres = resultat.getInt(1);
 
                 conn.commit();
