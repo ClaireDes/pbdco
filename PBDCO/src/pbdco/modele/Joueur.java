@@ -14,8 +14,8 @@ public class Joueur implements Modele{
     private String prenom;
     private String adresse;
     private Code codeJoueur;
-    private Code rencontresAJouer[] = {};
-    private Code rencontresJouees[] = {};
+    private Code[] rencontresAJouer;
+    private Code[] rencontresJouees;
     int victoiresTournoisCourant;
     FabriqueDeJoueur fabJoueur;
     
@@ -24,10 +24,14 @@ public class Joueur implements Modele{
      * 
      * @param nom
      * @param prenom
-     * @param rencontresCourantes
+     * @param codeJoueur
+     * @param adresse
      * @param victoiresTournoisCourant
      *
      * Constructeur utilisé pour le chargement d'un joueur depuis la base de données à partir d'un code
+     * @param rencontresJouees
+     * @param fab
+     * @param rencontresAJouer
      * 
      * 
      * */
@@ -35,9 +39,10 @@ public class Joueur implements Modele{
             String prenom,
             Code codeJoueur, 
             String adresse,
-            Code rencontresJouees[], Code rencontresAJouer[],
+            Code[] rencontresJouees, Code[] rencontresAJouer,
             int victoiresTournoisCourant,
             FabriqueDeJoueur fab){
+        this.rencontresJouees = new Code[]{};
         
         this.nom = nom;
         this.prenom =prenom ;
@@ -70,7 +75,6 @@ public class Joueur implements Modele{
     }
     
     public Code[] getRencontresAJouer(){
-        System.out.println("JE SUIS DANS GET RENCONTRE A JOUER ");
         return this.rencontresAJouer;
     }
     
@@ -84,6 +88,7 @@ public class Joueur implements Modele{
      */
     public Joueur (String nom,
                 String prenom, String adresse, FabriqueDeJoueur fab) throws BDAccessEx{
+        this.rencontresJouees = new Code[]{};
         
         this.nom = nom;
         this.prenom =prenom ;

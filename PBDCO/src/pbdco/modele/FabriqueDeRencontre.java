@@ -89,10 +89,10 @@ public class FabriqueDeRencontre extends FabriqueTransaction {
                 conn.setAutoCommit(false);
                 conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
 
-                PreparedStatement stmt = conn.prepareStatement(requete1);
-                stmt.setInt(1, rencontre.getCodeRencontre().getValue());
+                PreparedStatement pstmt = conn.prepareStatement(requete1);
+                pstmt.setInt(1, rencontre.getCodeRencontre().getValue());
 
-                resultat = stmt.executeQuery(requete1);
+                resultat = pstmt.executeQuery();
 
                 rencontre.setCodeJoueur1( new Code(resultat.getInt("Joueur1")) );
                 rencontre.setCodeJoueur2( new Code(resultat.getInt("Joueur2")) );
@@ -101,7 +101,7 @@ public class FabriqueDeRencontre extends FabriqueTransaction {
                 rencontre.setTerminee(resultat.getInt("Vainqueur"));
                 rencontre.setBlanc(resultat.getInt("Blanc"));
 
-                stmt.close();
+                pstmt.close();
                 conn.commit();
                 conn.close();
 
@@ -188,20 +188,17 @@ public class FabriqueDeRencontre extends FabriqueTransaction {
                 pstmt.setString(2, rencontre.getCodeTour());
                 pstmt.setInt(3, rencontre.getJoueurs()[0].getCode().getValue());
                 pstmt.setInt(4, rencontre.getJoueurs()[1].getCode().getValue());
-                System.out.println("avant le if");
                 if (rencontre.getBlanc() == 1) {
-                    System.out.println("dans le blanc = 1 ");
                     pstmt.setInt(5, rencontre.getJoueurs()[0].getCode().getValue());
-                    System.out.println("erreur 6");
                     pstmt.setInt(6, rencontre.getJoueurs()[1].getCode().getValue());
                 }
                 else if (rencontre.getBlanc() == 2) {
-                    System.out.println("dans blanc = 2 ");
                     pstmt.setInt(5, rencontre.getJoueurs()[1].getCode().getValue());
                     pstmt.setInt(6, rencontre.getJoueurs()[0].getCode().getValue());
                 } else {
                     throw new BDAccessEx("erreur lors de l'insertion d'une rencontre ");
                 }
+                pstmt.setInt(7, 0);
 
                 System.out.println("Mise a jour de la bd...");
                 pstmt.executeUpdate();

@@ -47,7 +47,6 @@ public class Tournoi {
     }
 
     public void commencerLeTournoi() throws BDAccessEx{
-        System.out.println("je suis dans commencer le tournoi");
         PreparationTour prep = new PreparationTour(false);
         prep.creeRencontre();
     }
@@ -62,10 +61,8 @@ public class Tournoi {
 
     public Code[] recupererLesCodesRencontresAJouer(Code codeJoueur) throws BDAccessEx{
         Inscription inscrit = new Inscription(false);
-        System.out.println("JE SUIS DANS RECUP CODE A JOUER");
         Joueur j = inscrit.getFabriqueJoueur().LoadFromBD(codeJoueur);
         Code[] js = j.getRencontresAJouer();
-        System.out.println(Arrays.toString(js));
         return js;
     }
 
@@ -79,16 +76,16 @@ public class Tournoi {
 
     public String[][] recupRencontresAJouer(Code codeJoueur) throws BDAccessEx{
         PreparationTour prep = new PreparationTour(false);
-        System.out.println("JESUIS DANS RECUP A JOUER");
         Code[] tabCode1 = this.recupererLesCodesRencontresAJouer(codeJoueur);
 
         String[][] recup = new String[tabCode1.length][3];
-        System.out.println("J'AI TOUT JE METS DANS STRING");
-        
-        for(int i=0;i<=tabCode1.length-1;i++){
-            recup[i][0] = this.recupererDetails(tabCode1[i])[0];
-            recup[i][1] = this.recupererDetails(tabCode1[i])[1];
-            recup[i][2] = this.recupererDetails(tabCode1[i])[2];
+                
+        if(tabCode1[0] != null){
+            for(int i=0;i<=tabCode1.length-1;i++){
+                recup[i][0] = this.recupererDetails(tabCode1[i])[0];
+                recup[i][1] = this.recupererDetails(tabCode1[i])[1];
+                recup[i][2] = this.recupererDetails(tabCode1[i])[2];
+            }
         }
 
         return recup;
@@ -99,11 +96,12 @@ public class Tournoi {
         Code[] tabCode1 = this.recupererLesCodesRencontresDejaJouer(codeJoueur);
 
         String[][] recup = new String[tabCode1.length][3];
-
-        for(int i=0;i<=tabCode1.length-1;i++){
-            recup[i][0] = this.recupererDetails(tabCode1[i])[0];
-            recup[i][1] = this.recupererDetails(tabCode1[i])[1];
-            recup[i][2] = this.recupererDetails(tabCode1[i])[2];
+        if(tabCode1[0] != null){
+            for(int i=0;i<=tabCode1.length-1;i++){
+                recup[i][0] = this.recupererDetails(tabCode1[i])[0];
+                recup[i][1] = this.recupererDetails(tabCode1[i])[1];
+                recup[i][2] = this.recupererDetails(tabCode1[i])[2];
+            }
         }
 
         return recup;
