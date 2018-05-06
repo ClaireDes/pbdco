@@ -255,11 +255,11 @@ public class FabriqueDeOrganisation {
                 //préparation de la requète
                 PreparedStatement pstmt = conn.prepareStatement(rViderTable);
                 pstmt.setString(1, "Coup");
-                pstmt.executeLargeUpdate();
+                pstmt.executeUpdate();
                 pstmt.setString(1, "Piece");
-                pstmt.executeLargeUpdate();
+                pstmt.executeUpdate();
                 pstmt.setString(1, "Rencontre");
-                pstmt.executeLargeUpdate();
+                pstmt.executeUpdate();
                 pstmt.setString(1, "Joueur");
                 pstmt.executeUpdate();
                 pstmt.setString(1, "Tour");
