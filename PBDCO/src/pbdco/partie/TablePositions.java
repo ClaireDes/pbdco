@@ -19,27 +19,27 @@ public class TablePositions {
         else System.out.println("Pas nul"+echiquier[0]);
         for (int lig=0; lig<8;lig++){
             for (int col=0;col<8;col++){
-                echiquier[lig+col] = new Position();
+                echiquier[8*lig+col] = new Position();
                 if(lig < 2){ //cases occupées initialement
-                    echiquier[lig+col].setPosition(lig+1, col+1);
-                    this.echiquier[lig+col].setState(1);
+                    echiquier[8*lig+col].setPosition(lig+1, col+1);
+                    this.echiquier[8*lig+col].setState(2);
                 }
                 else if (lig > 5) {
-                    this.echiquier[lig+col].setPosition(lig+1, col+1);
-                    this.echiquier[lig+col].setState(2);
+                    this.echiquier[8*lig+col].setPosition(lig+1, col+1);
+                    this.echiquier[8*lig+col].setState(1);
                 }
                 else { //cases libres
-                    this.echiquier[lig+col].setPosition(lig+1, col+1);
-                    this.echiquier[lig+col].setState(0);
+                    this.echiquier[8*lig+col].setPosition(lig+1, col+1);
+                    this.echiquier[8*lig+col].setState(0);
                 }
             }
         }
     }
-    
+
     public Position getPosition(int number){
         return echiquier[number];
     }
-    
+
     public void init(){
         // creation de la table des positions
         for (int lig=0; lig<8;lig++){
@@ -57,12 +57,12 @@ public class TablePositions {
                     this.echiquier[8*lig+col].setState(2);
                 }
             }
-        }      
+        }
     }
 
     public int caseOccupee(int numeroCase) {
         System.out.println("numeroCase = "+ numeroCase+echiquier.toString()+echiquier[0].toString());
-        
+
         return echiquier[numeroCase].getState();
     }
 
