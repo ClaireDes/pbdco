@@ -19,7 +19,7 @@ import static pbdco.modele.FabriqueTransaction.*;
  *
  * @author milcenan
  */
-public class FabriqueDeOrganisation {
+public class FabriqueDeOrganisation extends FabriqueTransaction {
 
     public FabriqueDeOrganisation() throws BDAccessEx {
         try {// Chragement du Driver
