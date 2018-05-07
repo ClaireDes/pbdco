@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package pbdco.vueorga;
 
 import java.util.Arrays;
@@ -11,7 +12,12 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import pbdco.BDAccessEx;
 import pbdco.Code;
+
 //import pbdco.partie.ControleurPartie;
+
+import pbdco.partie.ControleurPartie;
+import pbdco.partie.EtatsPartie;
+
 import pbdco.tournois.PreparationTour;
 import pbdco.tournois.Tournoi;
 
@@ -224,8 +230,13 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
         PreparationTour prep = new PreparationTour(false);
         String choix = (String) joueursAAfronter.getSelectedItem();
         String[] newString = choix.split(" ");
+
         //ControleurPartie controlePart = new ControleurPartie(newString[2], newString[3], new Code(Integer.parseInt(newString[0])), EtatsPartie.JOUER_RENCONTRE);
         //controlePart.initPlateau(prep.getTour(), new Code(Integer.parseInt(newString[0])));
+
+        ControleurPartie controlePart = new ControleurPartie( newString[2], newString[3], new Code(Integer.parseInt(newString[0])), EtatsPartie.JOUER_RENCONTRE);
+        controlePart.initPlateau(prep.getTour(), new Code(Integer.parseInt(newString[0])));
+
     }//GEN-LAST:event_jouerMatchActionPerformed
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
@@ -249,6 +260,7 @@ public class VueMatchsJoueur extends javax.swing.JFrame {
                 String[][] rencontresJouees = new Tournoi().recupRencontresDejaJouer(codeJoueur);
                 for(int i = 0;i<rencontresJouees.length; i++) {
                     joueursAAfronter.addItem(String.valueOf(codeJouer[i].getValue()) + " " + rencontresJouees[i][0] + rencontresJouees[i][1]); //Affiche nom et prénom dans le menu déroulant
+
                 }
             }
         } catch (BDAccessEx ex) {

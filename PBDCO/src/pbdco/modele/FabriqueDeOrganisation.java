@@ -19,7 +19,7 @@ import static pbdco.modele.FabriqueTransaction.*;
  *
  * @author milcenan
  */
-public class FabriqueDeOrganisation {
+public class FabriqueDeOrganisation extends FabriqueTransaction {
 
     public FabriqueDeOrganisation() throws BDAccessEx {
         try {// Chragement du Driver
@@ -269,6 +269,7 @@ public class FabriqueDeOrganisation {
 
     public Map loadAllRencontres(String codeTour) {
         // construite sur le meme principe que load all joueurs pour garantir que les rencontres ne sont créees qu'une seule fois 
+        //pas forcement necessaire mais peut etre utile
         throw new UnsupportedOperationException("not supported yet");
     }
 
@@ -362,10 +363,6 @@ public class FabriqueDeOrganisation {
         } catch (SQLException ex) {
             throw new BDAccessEx("loadAllJoueur Raised SQLException during the connection");
         }
-    }
-
-    public void setCodeTour(String codeTour) {
-
     }
 
     //Pour l'instanciation dans organisation

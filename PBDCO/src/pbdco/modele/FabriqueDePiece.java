@@ -14,20 +14,20 @@ import static pbdco.modele.FabriqueTransaction.*;
  *
  * @author milcenan
  */
-public class FabriqueDePiece {
+public class FabriqueDePiece extends FabriqueTransaction {
 
     FabriqueDeCoups fabDeCoup;
 
-    public void fabriqueTransaction(String operation, Piece piece) {
-        switch (operation) {
-
-            //déplacement d'une pièce dans la base de données à l'occasiond'un coup
-            case "move":
-                System.out.println("enregistrement d'une pièce \"" + piece.getNom() + "\" dans la base");
-                break;
+    public FabriqueDePiece() throws BDAccessEx{
+                try {// Chragement du Driver
+            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+        } catch (SQLException ex) {
+            throw new BDAccessEx("nouvellePiece Raised classNotFound exception "
+                    + "during the driver loading" + ex.getMessage());
         }
+        System.out.println("Driver ok");
     }
-
+    
     //création d'une pièce correspondant à la pièce passée en parametre
     public void nouvellePiece(Piece piece, Code codeTour, Code codeRencontre) throws BDAccessEx {
 
@@ -35,14 +35,6 @@ public class FabriqueDePiece {
         String requete = "INSERT INTO Piece(ligneInit, colonneInit, "
                 + "ligneFin, colonneFin, typePiece, couleur, codeRencontre, codeTour)"
                 + "VALUES ?,?,?,?,?,?,?,?";
-
-        try {// Chragement du Driver
-            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-        } catch (SQLException ex) {
-            throw new BDAccessEx("nouvellePiece Raised classNotFound exception "
-                    + "during the driver loading" + ex.getMessage());
-        }
-        System.out.println("Driver ok");
 
         // Connexion à la BD
         try {

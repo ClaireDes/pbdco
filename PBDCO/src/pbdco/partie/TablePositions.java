@@ -61,6 +61,8 @@ public class TablePositions {
     }
 
     public int caseOccupee(int numeroCase) {
+        System.out.println("numeroCase = "+ numeroCase+echiquier.toString()+echiquier[0].toString());
+        
         return echiquier[numeroCase].getState();
     }
 

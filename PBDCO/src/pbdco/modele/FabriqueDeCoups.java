@@ -15,7 +15,7 @@ import static pbdco.modele.FabriqueTransaction.*;
  *
  * @author milcenan
  */
-public class FabriqueDeCoups/* extends FabriqueTransaction*/ {
+public class FabriqueDeCoups extends FabriqueTransaction {
 
     public Code lastCodeBD() throws BDAccessEx {
         Code code;
@@ -57,23 +57,4 @@ public class FabriqueDeCoups/* extends FabriqueTransaction*/ {
         }
 
     }
-
-    public void fabriqueRequete(String operation, Coup coup) {
-
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    ;    
-
-
-    public void fabriqueTransaction(String operation, Coup coup) {
-        switch (operation) {
-            case "new"://création d'un coup 
-                System.out.println("enregistrement d'un nouveau joueur dans la base");
-                break;
-
-        }
-
-    }
-
 }

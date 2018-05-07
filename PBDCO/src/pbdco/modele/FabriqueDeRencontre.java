@@ -119,13 +119,6 @@ public class FabriqueDeRencontre extends FabriqueTransaction {
 
         String requete = "UPDATE Rencontre SET Vainqueur=? WHERE codeTour=? AND codeRencontre=?";
 
-        //Chargement du driver
-        try {
-            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-        } catch (SQLException ex) {
-            throw new BDAccessEx("MajBD Raised classNotFound exception during the driver loading");
-        }
-
         //Connexion bd
         try {
             Connection conn = null;
@@ -218,69 +211,5 @@ public class FabriqueDeRencontre extends FabriqueTransaction {
         }
     }
 
-//    //@Override
-//    public void fabriqueTransaction(String operation, Rencontre renc) throws BDAccessEx {
-//        try {
-//            // Chargement driver
-//            System.out.print("Loading Oracle driver... "); 
-//            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-//            System.out.println("loaded");
-//
-//            
-//            // Connexion à la BDD
-//            System.out.println("Connexion à la base de données...");
-//            Connection conn = DriverManager.getConnection(URL, USER, PASSWD);
-//            System.out.println("connecté.");
-//            
-//            conn.setAutoCommit(false);
-//            conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
-//            
-//            PreparedStatement pstmt;
-//                    switch (operation) {
-//                        
-//                        // création d'une nouvelle rencontre
-//                        case "new":
-//                            pstmt = conn.prepareStatement("INSERT INTO Rencontre(codeTour, codeRencontre, JoueurBlanc, JoueurNoir) VALUES (?,?,?,?)");
-//                            pstmt.setInt(1,renc.codeTour.getValue());
-//                            pstmt.setInt(2, renc.codeRencontre.getValue());
-//                            pstmt.setInt(3, renc.joueurs[0].codeJoueur.getValue());
-//                            pstmt.setInt(4, renc.joueurs[1].codeJoueur.getValue());  
-//                            
-//                            pstmt.executeUpdate();
-//                            // chargement d'une rencontre avec la base de données
-//                            break;
-//                        
-//                        // enregistrement du résultat d'une rencontre    
-//                        case "fini":
-//                            pstmt = conn.prepareStatement("UPDATE Rencontre SET Vainqueur=? WHERE codeTour=?, codeRencontre=?");
-//                            if(renc.terminee==1){
-//                                pstmt.setInt(1,renc.joueurs[0].codeJoueur.getValue());
-//                            }
-//                            if(renc.terminee==2){
-//                                pstmt.setInt(1, renc.joueurs[1].codeJoueur.getValue());
-//                            }
-//                            
-//                            pstmt.setInt(2,renc.codeTour.getValue());
-//                            pstmt.setInt(3, renc.codeRencontre.getValue());
-//                            pstmt.executeUpdate();
-//                            
-//                            break;
-//                          
-//                        // chargement d'une rencontre avec la base de données    
-//                        case "load":
-//                            //a recuperer : les deux joueurs, terminee?, la grille
-//                            pstmt =  conn.prepareStatement("SELECT ");
-//                            //A COMPLETER                                                        
-//                            break;
-//                            
-//                        case "lastCodeRencontre":// le dernier code rencontre utilisé (pour en generer un nouveau)
-//                            
-//                            break;
-//                            
-//                    }
-//                    
-//                conn.close();
-//        } catch (SQLException ex) {
-//throw new BDAccessEx("lastCodeJoueur() Raised SQLException during the connection"+ex.getMessage());        }
-// }
+
 }

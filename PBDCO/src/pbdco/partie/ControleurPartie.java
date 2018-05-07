@@ -9,8 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import javafx.scene.control.TablePosition;
-
+//import javafx.scene.control.TablePosition;
 import pbdco.modele.FabriqueTransaction;
 import pbdco.BDAccessEx;
 import pbdco.Code;
@@ -31,9 +30,9 @@ public class ControleurPartie {
     private Position positionCourante = new Position(0,0);
 
     private EtatsPartie etat;
-    
 
-    public void initPlateau(Code codeTour, Code codeRencontre) throws BDAccessEx {
+
+     public void initPlateau(String codeTour, Code codeRencontre) throws BDAccessEx {
         //on commence par effacer le plateau
         String requete1 = "DELETE FROM Coup WHERE codeRencontre = ?";
         String requete2 = "DELETE FROM Piece WHERE codeRencontre = ?";
@@ -57,13 +56,13 @@ public class ControleurPartie {
         "VALUES (7,1,7,null,null,'cavalier','blanc',?,?)";
         String requete10 = "INSERT INTO Piece\n" +
         "VALUES (8,1,8,null,null,'tour','blanc',?,?)";
-        String requete11 = "INSERT INTO Piece\n" + 
+        String requete11 = "INSERT INTO Piece\n" +
         "VALUES (9,2,1,null,null,'pion','blanc',?,?)";
         String requete12 = "INSERT INTO Piece\n" +
         "VALUES (10,2,2,null,null,'pion','blanc',?,?)";
-        String requete13 = "INSERT INTO Piece\n" + 
+        String requete13 = "INSERT INTO Piece\n" +
         "VALUES (11,2,3,null,null,'pion','blanc',?,?)";
-        String requete14 = "INSERT INTO Piece\n" + 
+        String requete14 = "INSERT INTO Piece\n" +
         "VALUES (12,2,4,null,null,'pion','blanc',?,?)";
         String requete15 = "INSERT INTO Piece\n" +
         "VALUES (13,2,5,null,null,'pion','blanc',?,?)";
@@ -90,13 +89,13 @@ public class ControleurPartie {
         "VALUES (7,1,7,null,null,'cavalier','noir',?,?)";
         String requete26 = "INSERT INTO Piece\n" +
         "VALUES (8,1,8,null,null,'tour','noir',?,?)";
-        String requete27 = "INSERT INTO Piece\n" + 
+        String requete27 = "INSERT INTO Piece\n" +
         "VALUES (9,2,1,null,null,'pion','noir',?,?)";
         String requete28 = "INSERT INTO Piece\n" +
         "VALUES (10,2,2,null,null,'pion','noir',?,?)";
-        String requete29 = "INSERT INTO Piece\n" + 
+        String requete29 = "INSERT INTO Piece\n" +
         "VALUES (11,2,3,null,null,'pion','noir',?,?)";
-        String requete30 = "INSERT INTO Piece\n" + 
+        String requete30 = "INSERT INTO Piece\n" +
         "VALUES (12,2,4,null,null,'pion','noir',?,?)";
         String requete31 = "INSERT INTO Piece\n" +
         "VALUES (13,2,5,null,null,'pion','noir',?,?)";
@@ -122,102 +121,102 @@ public class ControleurPartie {
                 pstmt = conn.prepareStatement(requete2);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete3);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete4);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete5);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete6);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete7);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete8);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete9);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete10);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete11);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete12);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete13);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete14);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete15);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete16);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete17);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete18);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete19);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete20);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete21);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete22);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete23);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete24);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete25);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete26);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete27);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete28);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete29);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete30);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete31);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete32);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete33);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
                 pstmt = conn.prepareStatement(requete34);
-                pstmt.setString(2,codeTour.getName());
+                pstmt.setString(2,codeTour);
                 pstmt.setInt(1, codeRencontre.getValue());
-                
+
                 conn.commit();
                 conn.close();
                 System.out.println("enregistrement des différentes pieces dans la base");
@@ -230,17 +229,83 @@ public class ControleurPartie {
             throw new BDAccessEx("initPlateau Raised SQLException during the connection\n" + ex.getMessage());
             }
     }
-   
 
-    public void procedureAbandon() {
-        //Fait recommencer le joueur qui utilise cette vue : "joueur"
+
+
+    public void procedureAbandon(Code codeRencontre, String codeTour) throws BDAccessEx {
+        //Fait abandonner le joueur qui utilise cette vue : "joueur"
+        String trans = "UPDATE Rencontre SET vainqueur=? WHERE codeRencontre=? AND codeTour=?";
+        String trans2 = "DELETE FROM Joueur WHERE codeJoueur=?";
+        Connection conn = null;
+        // Connexion à la BD
+        try {
+            conn = DriverManager.getConnection("jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1", "grelliel", "grelliel");
+            if (conn == null) {
+                throw new BDAccessEx("connexion échouée");
+            } else {
+                System.out.println("Connection ok");
+            }
+
+            try {
+                Code codeJoueur=this.joueur.getCodeJoueur();
+                Code codeJoueur2=this.adversaire.getCodeJoueur();
+                PreparedStatement pstmt = conn.prepareStatement(trans);
+                pstmt.setInt(1,codeJoueur2.getValue());
+                pstmt.setInt(2,codeRencontre.getValue());
+                pstmt.setString(3, codeTour);
+                pstmt = conn.prepareStatement(trans2);
+                pstmt.setInt(1, codeJoueur.getValue());
+                
+                conn.commit();
+                conn.close();
+                System.out.println("Abandon du joueur" + codeJoueur.getValue());
+            } catch (SQLException ex) {//si la transaction echoue
+                conn.rollback();
+                conn.close();
+                System.err.println(ex.getMessage());
+               }
+        } catch (SQLException ex) {
+            throw new BDAccessEx("procedureAbandon Raised SQLException during the connection\n" + ex.getMessage());
+            }
     }
 
-    public void procedureRecommencer() {
+    public void procedureRecommencer(String codeTour, Code codeRencontre) throws BDAccessEx {
         //Fait recommencer le joueur qui utilise cette vue : "joueur"
+        String trans = "DELETE FROM Coup WHERE codeTour=? AND codeRencontre=?";
+        String trans2 = "DELETE FROM Piece WHERE codeTour=? AND codeRencontre=?";
+        Connection conn = null;
+        // Connexion à la BD
+        try {
+            conn = DriverManager.getConnection("jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1", "grelliel", "grelliel");
+            if (conn == null) {
+                throw new BDAccessEx("connexion échouée");
+            } else {
+                System.out.println("Connection ok");
+            }
+
+            try {
+                PreparedStatement pstmt = conn.prepareStatement(trans);
+                pstmt.setInt(2,codeRencontre.getValue());
+                pstmt.setString(1, codeTour);
+                pstmt = conn.prepareStatement(trans2);
+                pstmt.setString(1, codeTour);
+                pstmt.setInt(2, codeRencontre.getValue());
+                initPlateau(codeTour, codeRencontre);
+                conn.commit();
+                conn.close();
+                System.out.println("la rencontre "+codeRencontre.getValue()+" recommence");
+            } catch (SQLException ex) {//si la transaction echoue
+                conn.rollback();
+                conn.close();
+                System.err.println(ex.getMessage());
+               }
+        } catch (SQLException ex) {
+            throw new BDAccessEx("procedureRecommencer Raised SQLException during the connection\n" + ex.getMessage());
+            }
     }
 
-    public void coupSuivant() { //Pour lire une partie
+
+    public void coupSuivant(Coup coup, Piece piece, String codeTour, Code codeRencontre) throws BDAccessEx { //Pour lire une partie
         //Joue le coup suivant de la partie en lecture
         String trans = "UPDATE Piece SET ligneInit=?, colonneInit=? WHERE ligneInit=? AND colonneInit=? AND codeRencontre=?\n" +
                 " AND codeTour=?";
@@ -258,28 +323,29 @@ public class ControleurPartie {
                 PreparedStatement pstmt = conn.prepareStatement(trans);
                 pstmt.setInt(3,coup.getPreviousY(piece));
                 pstmt.setInt(4,coup.getPreviousX(piece));
-                pstmt.setInt(1,coup.getCurrentY(piece));
-                pstmt.setInt(2,coup.getCurrentX(piece));
+                //pstmt.setInt(1,coup.getCurrentY(piece));
+                //pstmt.setInt(2,coup.getCurrentX(piece));
                 pstmt.setInt(5,codeRencontre.getValue());
-                pstmt.setString(6, codeTour.getName());
+                pstmt.setString(6, codeTour);
                 conn.commit();
                 conn.close();
-                System.out.println("enregistrement des différentes pieces dans la base");
+                System.out.println("deplacement de la piece : "+ piece.getNom());
             } catch (SQLException ex) {//si la transaction echoue
                 conn.rollback();
                 conn.close();
                 System.err.println(ex.getMessage());
                }
         } catch (SQLException ex) {
-            throw new BDAccessEx("initPlateau Raised SQLException during the connection\n" + ex.getMessage());
+            throw new BDAccessEx("coupSuivant Raised SQLException during the connection\n" + ex.getMessage());
             }
 
     }
 
+
     protected void informe() {
         //Informe ses observateurs, comme la vue
     }
-    
+
     public void pieceABouger(int noBouton) {
         if(etat == EtatsPartie.BLANC_JOUE && (1==tablePositions.caseOccupee(noBouton))) { //Clic pour sélectionner la pièce à bouger
             positionCourante = caseToPosition(noBouton);
@@ -305,13 +371,12 @@ public class ControleurPartie {
         new JeuInterface(this).setVisible(true);
         etat = affronterOuRejouer;
         tablePositions = new TablePositions();
-        
+
         if(etat == EtatsPartie.REJOUER_PARTIE) System.out.println("Ce cas n'est pas traité");
         else if (etat == EtatsPartie.JOUER_RENCONTRE) {
             new VueJoueur(infoJoueur1, infoJoueur2).setVisible(true);
             etat = EtatsPartie.BLANC_JOUE;
         }
-        new VueJoueur(infoJoueur1, infoJoueur2).setVisible(true);
 
     }
 }
